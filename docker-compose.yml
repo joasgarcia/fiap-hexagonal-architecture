@@ -3,7 +3,6 @@ services:
   fiap-restaurant-app:
     container_name: fiap-restaurant-app
     build:
-      #      context: poc-spring-boot
       dockerfile: Dockerfile
     image: fiap-restaurant-app:latest
     ports:
