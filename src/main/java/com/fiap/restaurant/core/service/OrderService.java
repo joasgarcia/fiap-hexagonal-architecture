@@ -1,8 +1,7 @@
 package com.fiap.restaurant.core.service;
 
-import com.fiap.restaurant.core.dto.OrderDTO;
+import com.fiap.restaurant.core.model.Order;
 import com.fiap.restaurant.core.repository.IOrderRepository;
-import jdk.swing.interop.LightweightContentWrapper;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public List<OrderDTO> list() {
+    public List<Order> list() {
         return orderRepository.list();
     }
 }

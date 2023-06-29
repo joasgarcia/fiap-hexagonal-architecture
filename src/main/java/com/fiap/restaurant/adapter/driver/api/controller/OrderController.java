@@ -1,6 +1,6 @@
 package com.fiap.restaurant.adapter.driver.api.controller;
 
-import com.fiap.restaurant.core.dto.OrderDTO;
+import com.fiap.restaurant.core.model.Order;
 import com.fiap.restaurant.core.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping("/")
-    public List<OrderDTO> list() {
+    public List<Order> list() {
         return orderService.list();
     }
 }

@@ -1,22 +1,25 @@
 package com.fiap.restaurant.adapter.driven.data.repository;
 
-import com.fiap.restaurant.core.dto.OrderDTO;
+import com.fiap.restaurant.adapter.driven.data.entity.OrderEntity;
+import com.fiap.restaurant.adapter.driven.data.mapper.OrderMapper;
 import com.fiap.restaurant.core.model.Order;
 import com.fiap.restaurant.core.repository.IOrderRepository;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+@Component
 public class OrderRepository implements IOrderRepository {
 
+    private final OrderJpaRepository orderJpaRepository;
+
+    public OrderRepository(OrderJpaRepository orderJpaRepository) {
+        this.orderJpaRepository = orderJpaRepository;
+    }
+
     @Override
-    public List<OrderDTO> list() {
-        OrderDTO orderDTO = new OrderDTO(1L, new Date());
-
-        List<OrderDTO> list = new ArrayList<>();
-        list.add(orderDTO);
-
-        return list;
+    public List<Order> list() {
+        List<OrderEntity> list = this.orderJpaRepository.findAll();
+        return OrderMapper.toOrderList(list);
     }
 }

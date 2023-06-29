@@ -17,4 +17,24 @@ public class OrderEntity {
 
     @Column(name = "date_created")
     private Date dateCreated;
+
+    public Long getId() {
+        return id;
+    }
+
+    public CustomerEntity getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomerEntity customer) {
+        this.customer = customer;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 }
