@@ -1,10 +1,8 @@
 package com.fiap.restaurant.core.repository;
 
-import com.fiap.restaurant.adapter.driven.data.entity.CustomerEntity;
-
-import java.util.Optional;
+import com.fiap.restaurant.core.model.Customer;
 
 public interface ICustomerRepository {
 
-    Optional<CustomerEntity> findByCpf(String cpf);
+    Customer findByCpf(String cpf);
 }

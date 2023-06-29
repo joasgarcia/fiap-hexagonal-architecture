@@ -1,11 +1,7 @@
 package com.fiap.restaurant.core.service;
 
-import com.fiap.restaurant.adapter.driven.data.entity.CustomerEntity;
-import com.fiap.restaurant.adapter.driven.data.mapper.CustomerMapper;
 import com.fiap.restaurant.core.model.Customer;
 import com.fiap.restaurant.core.repository.ICustomerRepository;
-
-import java.util.Optional;
 
 public class CustomerService {
 
@@ -15,11 +11,11 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Optional<Customer> findByCpf(String cpf) {
-        Optional<CustomerEntity> customerEntity = customerRepository.findByCpf(cpf);
+    public void save(Customer customer) {
 
-        if (customerEntity.isEmpty()) return Optional.empty();
+    }
 
-        return Optional.of(CustomerMapper.toCustomer(customerEntity.get()));
+    public Customer findByCpf(String cpf) {
+        return customerRepository.findByCpf(cpf);
     }
 }

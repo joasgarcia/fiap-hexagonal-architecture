@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
@@ -16,16 +14,17 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping(path = "/{cpf}")
-    public ResponseEntity<Optional<Customer>> getByCpf(@PathVariable String cpf) {
-        Optional<Customer> customer = customerService.findByCpf(cpf);
+    public ResponseEntity<Customer> getByCpf(@PathVariable String cpf) {
+        Customer customer = customerService.findByCpf(cpf);
 
-        if (!customer.isPresent()) return ResponseEntity.noContent().build();
+        if (customer == null) return ResponseEntity.noContent().build();
 
         return ResponseEntity.ok().body(customer);
     }
 
-    @PostMapping("/")
+    @PostMapping(path = "/")
     public ResponseEntity<Customer> save(@RequestBody Customer customer) {
+
         return ResponseEntity.noContent().build();
     }
 }
