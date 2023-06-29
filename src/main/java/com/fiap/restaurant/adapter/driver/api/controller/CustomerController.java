@@ -24,7 +24,10 @@ public class CustomerController {
 
     @PostMapping(path = "/")
     public ResponseEntity<Customer> save(@RequestBody Customer customer) {
+        customer = this.customerService.save(customer);
 
-        return ResponseEntity.noContent().build();
+        if (customer == null) return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok().body(customer);
     }
 }

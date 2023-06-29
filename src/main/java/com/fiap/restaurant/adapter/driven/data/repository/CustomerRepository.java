@@ -16,6 +16,16 @@ public class CustomerRepository implements ICustomerRepository {
     }
 
     @Override
+    public Customer save(Customer customer) {
+        CustomerEntity customerEntity = CustomerMapper.toCustomerEntity(customer);
+        customerEntity = this.customerJpaRepository.save(customerEntity);
+
+        if (customerEntity == null) return null;
+
+        return CustomerMapper.toCustomer(customerEntity);
+    }
+
+    @Override
     public Customer findByCpf(String cpf) {
         CustomerEntity customerEntity = this.customerJpaRepository.findByCpf(cpf);
 

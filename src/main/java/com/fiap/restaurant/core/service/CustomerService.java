@@ -11,11 +11,11 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public void save(Customer customer) {
-
+    public Customer save(Customer customer) {
+        return this.customerRepository.save(customer);
     }
 
     public Customer findByCpf(String cpf) {
-        return customerRepository.findByCpf(cpf);
+        return this.customerRepository.findByCpf(cpf);
     }
 }
