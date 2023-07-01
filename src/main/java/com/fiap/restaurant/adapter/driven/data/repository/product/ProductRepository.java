@@ -4,6 +4,7 @@ import com.fiap.restaurant.adapter.driven.data.entity.product.ProductEntity;
 import com.fiap.restaurant.adapter.driven.data.mapper.ProductMapper;
 import com.fiap.restaurant.core.model.Product;
 import com.fiap.restaurant.core.repository.IProductRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,14 +20,17 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public Product save(Product product) {
-        ProductEntity productEntity = ProductMapper.toProductEntity(product);
+        ProductEntity productEntity = ProductMapper.INSTANCE.toProductEntity(product);
         productEntity = this.productJpaRepository.save(productEntity);
-        return ProductMapper.toProduct(productEntity);
+        return ProductMapper.INSTANCE.toProduct(productEntity);
     }
 
     @Override
-    public Product update(Product product) {
-        return null;
+    public Product update(Long id, Product product) {
+        ProductEntity productEntity = this.productJpaRepository.getReferenceById(id);
+        BeanUtils.copyProperties(product, productEntity, "id");
+        productEntity = this.productJpaRepository.save(productEntity);
+        return ProductMapper.INSTANCE.toProduct(productEntity);
     }
 
     @Override
@@ -38,6 +42,11 @@ public class ProductRepository implements IProductRepository {
     @Override
     public List<Product> list() {
         List<ProductEntity> list = this.productJpaRepository.findAll();
-        return ProductMapper.toProductList(list);
+        return ProductMapper.INSTANCE.toProductList(list);
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return this.productJpaRepository.existsById(id);
     }
 }

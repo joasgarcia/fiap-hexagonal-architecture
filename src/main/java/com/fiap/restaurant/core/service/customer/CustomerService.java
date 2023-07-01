@@ -1,4 +1,4 @@
-package com.fiap.restaurant.core.service;
+package com.fiap.restaurant.core.service.customer;
 
 import com.fiap.restaurant.core.model.Customer;
 import com.fiap.restaurant.core.repository.ICustomerRepository;

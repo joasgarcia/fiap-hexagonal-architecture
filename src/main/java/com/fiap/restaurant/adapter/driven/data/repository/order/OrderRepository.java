@@ -20,6 +20,6 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public List<Order> list() {
         List<OrderEntity> list = this.orderJpaRepository.findAll();
-        return OrderMapper.toOrderList(list);
+        return OrderMapper.INSTANCE.toOrderList(list);
     }
 }

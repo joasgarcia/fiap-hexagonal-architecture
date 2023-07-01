@@ -1,34 +1,24 @@
 package com.fiap.restaurant.adapter.driven.data.mapper;
 
+
 import com.fiap.restaurant.adapter.driven.data.entity.order.OrderEntity;
 import com.fiap.restaurant.core.model.Order;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderMapper {
+@Mapper
+public interface OrderMapper {
 
-    public static List<Order> toOrderList(List<OrderEntity> orderEntityList) {
+    OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
+
+    Order toOrder(OrderEntity orderEntity);
+
+    default List<Order> toOrderList(List<OrderEntity> orderEntityList) {
         List<Order> orderList = new ArrayList<>();
-
-        for (OrderEntity orderEntity : orderEntityList) {
-            orderList.add(toOrder(orderEntity));
-        }
-
+        orderEntityList.forEach(orderEntity -> orderList.add(toOrder(orderEntity)));
         return orderList;
     }
-
-    public static Order toOrder(OrderEntity orderEntity) {
-        Order order = new Order();
-        order.setId(orderEntity.getId());
-        if (orderEntity.getCustomer() != null) order.setCustomer(CustomerMapper.toCustomer(orderEntity.getCustomer()));
-        order.setDateCreated(orderEntity.getDateCreated());
-
-//        for (OrderItemEntity orderItemEntity : orderEntity.getItems()) {
-//            order.getItems().add(ProductMapper.toProduct(orderItemEntity.getItem()));
-//        }
-
-        return order;
-    }
-
 }

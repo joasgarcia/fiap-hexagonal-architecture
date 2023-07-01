@@ -1,14 +1,14 @@
 package com.fiap.restaurant.adapter.driver.api.controller;
 
 import com.fiap.restaurant.core.model.Product;
-import com.fiap.restaurant.core.service.ProductService;
+import com.fiap.restaurant.core.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/item")
+@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
@@ -25,8 +25,8 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public Product update(@RequestBody Product product, @PathVariable Long id) {
-        return null;
+    public Product update(@PathVariable Long id, @RequestBody Product product) {
+        return this.productService.update(id, product);
     }
 
     @DeleteMapping("/{id}")

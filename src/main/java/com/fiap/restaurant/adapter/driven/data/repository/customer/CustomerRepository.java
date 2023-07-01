@@ -17,12 +17,12 @@ public class CustomerRepository implements ICustomerRepository {
 
     @Override
     public Customer save(Customer customer) {
-        CustomerEntity customerEntity = CustomerMapper.toCustomerEntity(customer);
+        CustomerEntity customerEntity = CustomerMapper.INSTANCE.toCustomerEntity(customer);
         customerEntity = this.customerJpaRepository.save(customerEntity);
 
         if (customerEntity == null) return null;
 
-        return CustomerMapper.toCustomer(customerEntity);
+        return CustomerMapper.INSTANCE.toCustomer(customerEntity);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class CustomerRepository implements ICustomerRepository {
 
         if (customerEntity == null) return null;
 
-        return CustomerMapper.toCustomer(customerEntity);
+        return CustomerMapper.INSTANCE.toCustomer(customerEntity);
     }
 }

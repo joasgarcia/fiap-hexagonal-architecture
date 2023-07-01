@@ -2,23 +2,16 @@ package com.fiap.restaurant.adapter.driven.data.mapper;
 
 import com.fiap.restaurant.adapter.driven.data.entity.customer.CustomerEntity;
 import com.fiap.restaurant.core.model.Customer;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-public class CustomerMapper {
+@Mapper
+public interface CustomerMapper {
 
-    public static Customer toCustomer(CustomerEntity customerEntity) {
-        Customer customer = new Customer();
-        customer.setId(customerEntity.getId());
-        customer.setName(customerEntity.getName());
-        customer.setCpf(customerEntity.getCpf());
+    CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
 
-        return customer;
-    }
+    Customer toCustomer(CustomerEntity customerEntity);
 
-    public static CustomerEntity toCustomerEntity(Customer customer) {
-        CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setName(customer.getName());
-        customerEntity.setCpf(customer.getCpf());
+    CustomerEntity toCustomerEntity(Customer customer);
 
-        return customerEntity;
-    }
 }
