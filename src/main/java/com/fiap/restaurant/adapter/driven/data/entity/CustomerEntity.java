@@ -12,8 +12,11 @@ public class CustomerEntity {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "cpf")
     private String cpf;
@@ -28,6 +31,14 @@ public class CustomerEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getCpf() {

@@ -3,6 +3,7 @@ package com.fiap.restaurant.adapter.driven.data.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "`order`")
 public class OrderEntity {
@@ -17,6 +18,9 @@ public class OrderEntity {
 
     @Column(name = "date_created")
     private Date dateCreated;
+
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    private List<OrderItemEntity> items;
 
     public Long getId() {
         return id;
@@ -36,5 +40,9 @@ public class OrderEntity {
 
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public List<OrderItemEntity> getItems() {
+        return items;
     }
 }

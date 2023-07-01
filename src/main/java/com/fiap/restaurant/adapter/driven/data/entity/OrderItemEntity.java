@@ -16,4 +16,12 @@ public class OrderItemEntity {
     @ManyToOne
     @JoinColumn(name = "item_id")
     private ItemEntity item;
+
+    public OrderEntity getOrder() {
+        return order;
+    }
+
+    public ItemEntity getItem() {
+        return item;
+    }
 }

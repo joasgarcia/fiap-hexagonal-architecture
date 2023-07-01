@@ -1,10 +1,10 @@
 package com.fiap.restaurant;
 
 import com.fiap.restaurant.adapter.driven.data.repository.CustomerRepository;
-import com.fiap.restaurant.adapter.driven.data.repository.ItemRepository;
+import com.fiap.restaurant.adapter.driven.data.repository.ProductRepository;
 import com.fiap.restaurant.adapter.driven.data.repository.OrderRepository;
 import com.fiap.restaurant.core.service.CustomerService;
-import com.fiap.restaurant.core.service.ItemService;
+import com.fiap.restaurant.core.service.ProductService;
 import com.fiap.restaurant.core.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +20,7 @@ public class BeanConfiguration {
     private OrderRepository orderRepository;
 
     @Autowired
-    private ItemRepository itemRepository;
+    private ProductRepository productRepository;
 
     @Bean
     public OrderService orderService() {
@@ -33,7 +33,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public ItemService itemService() {
-        return new ItemService(this.itemRepository);
+    public ProductService productService() {
+        return new ProductService(this.productRepository);
     }
 }
