@@ -1,8 +1,8 @@
 package com.fiap.restaurant;
 
-import com.fiap.restaurant.adapter.driven.data.repository.CustomerRepository;
-import com.fiap.restaurant.adapter.driven.data.repository.ProductRepository;
-import com.fiap.restaurant.adapter.driven.data.repository.OrderRepository;
+import com.fiap.restaurant.adapter.driven.data.repository.customer.CustomerRepository;
+import com.fiap.restaurant.adapter.driven.data.repository.product.ProductRepository;
+import com.fiap.restaurant.adapter.driven.data.repository.order.OrderRepository;
 import com.fiap.restaurant.core.service.CustomerService;
 import com.fiap.restaurant.core.service.ProductService;
 import com.fiap.restaurant.core.service.OrderService;

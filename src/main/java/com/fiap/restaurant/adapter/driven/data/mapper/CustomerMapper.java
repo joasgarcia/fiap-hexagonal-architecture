@@ -1,6 +1,6 @@
 package com.fiap.restaurant.adapter.driven.data.mapper;
 
-import com.fiap.restaurant.adapter.driven.data.entity.CustomerEntity;
+import com.fiap.restaurant.adapter.driven.data.entity.customer.CustomerEntity;
 import com.fiap.restaurant.core.model.Customer;
 
 public class CustomerMapper {

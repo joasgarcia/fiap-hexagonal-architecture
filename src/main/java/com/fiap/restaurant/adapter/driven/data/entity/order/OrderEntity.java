@@ -1,5 +1,6 @@
-package com.fiap.restaurant.adapter.driven.data.entity;
+package com.fiap.restaurant.adapter.driven.data.entity.order;
 
+import com.fiap.restaurant.adapter.driven.data.entity.customer.CustomerEntity;
 import jakarta.persistence.*;
 
 import java.util.Date;

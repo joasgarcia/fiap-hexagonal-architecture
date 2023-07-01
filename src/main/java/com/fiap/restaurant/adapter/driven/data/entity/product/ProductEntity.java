@@ -1,4 +1,4 @@
-package com.fiap.restaurant.adapter.driven.data.entity;
+package com.fiap.restaurant.adapter.driven.data.entity.product;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

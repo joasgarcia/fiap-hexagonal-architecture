@@ -1,5 +1,6 @@
-package com.fiap.restaurant.adapter.driven.data.entity;
+package com.fiap.restaurant.adapter.driven.data.entity.product;
 
+import com.fiap.restaurant.adapter.driven.data.entity.order.ItemEntity;
 import jakarta.persistence.*;
 
 @Entity(name = "image")
@@ -13,10 +14,10 @@ public class ImageEntity {
     private String src;
 
     @ManyToOne
-    @JoinColumn(name = "product_id"/*, table = "product"*/)
+    @JoinColumn(name = "product_id")
     private ProductEntity product;
 
     @ManyToOne
-    @JoinColumn(name = "item_id"/*, table = "item"*/)
+    @JoinColumn(name = "item_id")
     private ItemEntity item;
 }

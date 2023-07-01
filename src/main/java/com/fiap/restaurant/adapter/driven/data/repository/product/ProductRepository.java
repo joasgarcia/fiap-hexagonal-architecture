@@ -1,6 +1,6 @@
-package com.fiap.restaurant.adapter.driven.data.repository;
+package com.fiap.restaurant.adapter.driven.data.repository.product;
 
-import com.fiap.restaurant.adapter.driven.data.entity.ProductEntity;
+import com.fiap.restaurant.adapter.driven.data.entity.product.ProductEntity;
 import com.fiap.restaurant.adapter.driven.data.mapper.ProductMapper;
 import com.fiap.restaurant.core.model.Product;
 import com.fiap.restaurant.core.repository.IProductRepository;

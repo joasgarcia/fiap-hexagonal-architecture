@@ -1,6 +1,6 @@
 package com.fiap.restaurant.adapter.driven.data.mapper;
 
-import com.fiap.restaurant.adapter.driven.data.entity.ProductEntity;
+import com.fiap.restaurant.adapter.driven.data.entity.product.ProductEntity;
 import com.fiap.restaurant.core.model.Product;
 
 import java.util.ArrayList;

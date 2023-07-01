@@ -1,4 +1,4 @@
-package com.fiap.restaurant.adapter.driven.data.entity;
+package com.fiap.restaurant.adapter.driven.data.entity.order;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

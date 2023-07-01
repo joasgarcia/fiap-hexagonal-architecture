@@ -1,7 +1,6 @@
 package com.fiap.restaurant.adapter.driven.data.mapper;
 
-import com.fiap.restaurant.adapter.driven.data.entity.OrderEntity;
-import com.fiap.restaurant.adapter.driven.data.entity.OrderItemEntity;
+import com.fiap.restaurant.adapter.driven.data.entity.order.OrderEntity;
 import com.fiap.restaurant.core.model.Order;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package com.fiap.restaurant.adapter.driven.data.repository;
+package com.fiap.restaurant.adapter.driven.data.repository.order;
 
-import com.fiap.restaurant.adapter.driven.data.entity.OrderEntity;
+import com.fiap.restaurant.adapter.driven.data.entity.order.OrderEntity;
 import com.fiap.restaurant.adapter.driven.data.mapper.OrderMapper;
 import com.fiap.restaurant.core.model.Order;
 import com.fiap.restaurant.core.repository.IOrderRepository;
