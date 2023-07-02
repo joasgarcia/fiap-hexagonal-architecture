@@ -1,7 +1,7 @@
 package com.fiap.restaurant.core.service.order;
 
-import com.fiap.restaurant.core.model.Order;
-import com.fiap.restaurant.core.repository.IOrderRepository;
+import com.fiap.restaurant.core.model.order.Order;
+import com.fiap.restaurant.core.repository.order.IOrderRepository;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package com.fiap.restaurant.core.repository;
+package com.fiap.restaurant.core.repository.customer;
 
-import com.fiap.restaurant.core.model.Customer;
+import com.fiap.restaurant.core.model.customer.Customer;
 
 public interface ICustomerRepository {
 

@@ -1,7 +1,7 @@
-package com.fiap.restaurant.adapter.driven.data.mapper;
+package com.fiap.restaurant.adapter.driven.data.mapper.customer;
 
 import com.fiap.restaurant.adapter.driven.data.entity.customer.CustomerEntity;
-import com.fiap.restaurant.core.model.Customer;
+import com.fiap.restaurant.core.model.customer.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

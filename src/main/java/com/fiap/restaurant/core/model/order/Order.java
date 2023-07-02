@@ -1,4 +1,7 @@
-package com.fiap.restaurant.core.model;
+package com.fiap.restaurant.core.model.order;
+
+import com.fiap.restaurant.core.model.customer.Customer;
+import com.fiap.restaurant.core.model.product.Product;
 
 import java.util.ArrayList;
 import java.util.Date;

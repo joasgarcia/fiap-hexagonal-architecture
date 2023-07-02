@@ -1,9 +1,8 @@
 package com.fiap.restaurant.core.service.product;
 
 import com.fiap.restaurant.core.exception.ResourceNotFoundException;
-import com.fiap.restaurant.core.model.Product;
-import com.fiap.restaurant.core.repository.IProductRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.fiap.restaurant.core.model.product.Product;
+import com.fiap.restaurant.core.repository.product.IProductRepository;
 
 import java.util.List;
 

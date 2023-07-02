@@ -1,6 +1,6 @@
-package com.fiap.restaurant.adapter.driver.api.controller;
+package com.fiap.restaurant.adapter.driver.api.controller.order;
 
-import com.fiap.restaurant.core.model.Order;
+import com.fiap.restaurant.core.model.order.Order;
 import com.fiap.restaurant.core.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

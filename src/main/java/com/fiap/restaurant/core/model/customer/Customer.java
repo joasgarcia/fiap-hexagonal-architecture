@@ -1,4 +1,4 @@
-package com.fiap.restaurant.core.model;
+package com.fiap.restaurant.core.model.customer;
 
 public class Customer {
 

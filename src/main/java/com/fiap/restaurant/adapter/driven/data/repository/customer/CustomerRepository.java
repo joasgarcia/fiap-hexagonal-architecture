@@ -1,9 +1,9 @@
 package com.fiap.restaurant.adapter.driven.data.repository.customer;
 
 import com.fiap.restaurant.adapter.driven.data.entity.customer.CustomerEntity;
-import com.fiap.restaurant.adapter.driven.data.mapper.CustomerMapper;
-import com.fiap.restaurant.core.model.Customer;
-import com.fiap.restaurant.core.repository.ICustomerRepository;
+import com.fiap.restaurant.adapter.driven.data.mapper.customer.CustomerMapper;
+import com.fiap.restaurant.core.model.customer.Customer;
+import com.fiap.restaurant.core.repository.customer.ICustomerRepository;
 import org.springframework.stereotype.Component;
 
 @Component

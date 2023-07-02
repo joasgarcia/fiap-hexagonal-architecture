@@ -1,9 +1,9 @@
 package com.fiap.restaurant.adapter.driven.data.repository.product;
 
 import com.fiap.restaurant.adapter.driven.data.entity.product.ProductEntity;
-import com.fiap.restaurant.adapter.driven.data.mapper.ProductMapper;
-import com.fiap.restaurant.core.model.Product;
-import com.fiap.restaurant.core.repository.IProductRepository;
+import com.fiap.restaurant.adapter.driven.data.mapper.product.ProductMapper;
+import com.fiap.restaurant.core.model.product.Product;
+import com.fiap.restaurant.core.repository.product.IProductRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 

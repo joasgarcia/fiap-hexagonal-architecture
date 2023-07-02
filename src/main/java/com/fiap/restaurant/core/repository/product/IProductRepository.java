@@ -1,6 +1,6 @@
-package com.fiap.restaurant.core.repository;
+package com.fiap.restaurant.core.repository.product;
 
-import com.fiap.restaurant.core.model.Product;
+import com.fiap.restaurant.core.model.product.Product;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package com.fiap.restaurant.adapter.driver.api.controller;
+package com.fiap.restaurant.adapter.driver.api.controller.customer;
 
-import com.fiap.restaurant.core.model.Customer;
+import com.fiap.restaurant.core.model.customer.Customer;
 import com.fiap.restaurant.core.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,8 +1,8 @@
-package com.fiap.restaurant.adapter.driven.data.mapper;
+package com.fiap.restaurant.adapter.driven.data.mapper.order;
 
 
 import com.fiap.restaurant.adapter.driven.data.entity.order.OrderEntity;
-import com.fiap.restaurant.core.model.Order;
+import com.fiap.restaurant.core.model.order.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -18,4 +18,24 @@ public class ItemProductEntity {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private ProductEntity product;
+
+    public Long getId() {
+        return id;
+    }
+
+    public ItemEntity getItem() {
+        return item;
+    }
+
+    public void setItem(ItemEntity item) {
+        this.item = item;
+    }
+
+    public ProductEntity getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductEntity product) {
+        this.product = product;
+    }
 }
