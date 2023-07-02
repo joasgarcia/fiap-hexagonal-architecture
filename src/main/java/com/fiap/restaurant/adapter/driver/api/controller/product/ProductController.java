@@ -24,6 +24,11 @@ public class ProductController {
         return productService.list();
     }
 
+    @GetMapping("/listByCategory/{category}")
+    public List<Product> listByCategory(@PathVariable("category") String category) {
+        return productService.listByCategory(category);
+    }
+
     @PostMapping("/")
     public ProductFacade save(@RequestBody ProductFacade productFacade) {
         return this.productFacadeService.save(productFacade);

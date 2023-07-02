@@ -10,5 +10,6 @@ public interface IProductRepository {
     Product update(Long id, Product product);
     void delete(Long id);
     List<Product> list();
+    List<Product> listByCategory(String category);
     boolean existsById(Long id);
 }

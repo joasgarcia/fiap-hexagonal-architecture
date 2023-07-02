@@ -44,6 +44,11 @@ public class ProductRepository implements IProductRepository {
         List<ProductEntity> list = this.productJpaRepository.findAll();
         return ProductMapper.INSTANCE.toProductList(list);
     }
+    @Override
+    public List<Product> listByCategory(String category) {
+        List<ProductEntity> list = this.productJpaRepository.findAllByCategory(category);
+        return ProductMapper.INSTANCE.toProductList(list);
+    }
 
     @Override
     public boolean existsById(Long id) {

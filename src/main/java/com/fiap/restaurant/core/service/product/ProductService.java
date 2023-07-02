@@ -32,4 +32,7 @@ public class ProductService {
         return this.productRepository.list();
     }
 
+    public List<Product> listByCategory(String category) {
+        return this.productRepository.listByCategory(category);
+    }
 }
