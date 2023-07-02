@@ -28,4 +28,8 @@ public class ImageService {
     public List<Image> findAllByProductId(Long productId) {
         return this.imageRepository.findAllByProductId(productId);
     }
+
+    public List<Image> findAllByItemId(Long itemId) {
+        return this.imageRepository.findAllByItemId(itemId);
+    }
 }

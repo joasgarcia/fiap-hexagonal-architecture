@@ -21,4 +21,9 @@ public class ImageController {
     public List<Image> findAllByProduct(@PathVariable Long productId) {
         return imageService.findAllByProductId(productId);
     }
+
+    @GetMapping("/itemId={itemId}")
+    public List<Image> findAllByItem(@PathVariable Long itemId) {
+        return imageService.findAllByItemId(itemId);
+    }
 }

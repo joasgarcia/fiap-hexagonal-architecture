@@ -4,7 +4,6 @@ import com.fiap.restaurant.adapter.driven.data.entity.product.ImageEntity;
 import com.fiap.restaurant.adapter.driven.data.entity.product.ProductEntity;
 import com.fiap.restaurant.adapter.driven.data.mapper.product.ImageMapper;
 import com.fiap.restaurant.core.model.product.Image;
-import com.fiap.restaurant.core.model.product.Product;
 import com.fiap.restaurant.core.repository.product.IImageRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -52,6 +51,12 @@ public class ImageRepository implements IImageRepository {
     @Override
     public List<Image> findAllByProductId(Long productId) {
         List<ImageEntity> imageEntityList = this.imageJpaRepository.findAllByProductId(productId);
+        return ImageMapper.INSTANCE.toImageList(imageEntityList);
+    }
+
+    @Override
+    public List<Image> findAllByItemId(Long itemId) {
+        List<ImageEntity> imageEntityList = this.imageJpaRepository.findAllByItemId(itemId);
         return ImageMapper.INSTANCE.toImageList(imageEntityList);
     }
 }
