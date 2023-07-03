@@ -1,12 +1,10 @@
 package com.fiap.restaurant.adapter.driver.api.controller.product;
 
 import com.fiap.restaurant.core.model.product.Image;
+import com.fiap.restaurant.core.model.product.Product;
 import com.fiap.restaurant.core.service.product.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +23,20 @@ public class ImageController {
     @GetMapping("/itemId={itemId}")
     public List<Image> findAllByItem(@PathVariable Long itemId) {
         return imageService.findAllByItemId(itemId);
+    }
+
+    @PostMapping("/")
+    public Image save(@RequestBody Image image) {
+        return imageService.save(image);
+    }
+
+    @PutMapping("/{id}")
+    public Image update(@PathVariable Long id, @RequestBody Image image) {
+        return imageService.update(id, image);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        this.imageService.delete(id);
     }
 }

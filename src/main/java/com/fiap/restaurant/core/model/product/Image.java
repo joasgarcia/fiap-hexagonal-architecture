@@ -4,9 +4,18 @@ import com.fiap.restaurant.core.model.order.Item;
 
 public class Image {
 
+    private Long id;
     private String src;
     private Product product;
     private Item item;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getSrc() {
         return src;
