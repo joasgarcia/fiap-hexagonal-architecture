@@ -13,4 +13,4 @@ services:
       MYSQL_DATABASE: techchallenge
       MYSQL_ROOT_PASSWORD: senha
     volumes:
-      - /tmp/mysql/techchallenge:/var/lib/mysql
+      - /tmp/fiap-restaurant-app/mysql:/var/lib/mysql
