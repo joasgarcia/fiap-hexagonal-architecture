@@ -9,8 +9,24 @@ services:
     ports:
       - 3307:3306
       - 33070:33060
+    expose:
+      - 3306
+      - 33060
     environment:
       MYSQL_DATABASE: techchallenge
       MYSQL_ROOT_PASSWORD: senha
     volumes:
       - /tmp/mysql/techchallenge:/var/lib/mysql
+
+  app:
+    container_name: fiap-restaurant-app
+    depends_on:
+      - database
+    build:
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/techchallenge
+    volumes:
+      - /tmp/fiap-restaurant-app/app:/var/html/fiap-restaurant-app
