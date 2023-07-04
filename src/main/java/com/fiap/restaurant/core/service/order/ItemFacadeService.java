@@ -11,10 +11,12 @@ import com.fiap.restaurant.core.service.product.ImageService;
 import com.fiap.restaurant.core.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class ItemFacadeService {
 
     @Autowired

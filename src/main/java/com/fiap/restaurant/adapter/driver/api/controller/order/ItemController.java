@@ -1,7 +1,6 @@
 package com.fiap.restaurant.adapter.driver.api.controller.order;
 
 import com.fiap.restaurant.core.model.order.ItemFacade;
-import com.fiap.restaurant.core.model.product.ProductFacade;
 import com.fiap.restaurant.core.service.order.ItemFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
