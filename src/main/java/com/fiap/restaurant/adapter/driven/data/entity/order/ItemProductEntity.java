@@ -1,14 +1,18 @@
 package com.fiap.restaurant.adapter.driven.data.entity.order;
 
-
 import com.fiap.restaurant.adapter.driven.data.entity.product.ProductEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity(name = "item_product")
 public class ItemProductEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
