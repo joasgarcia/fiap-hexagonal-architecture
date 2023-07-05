@@ -19,7 +19,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
@@ -27,6 +26,3 @@ dependencies {
     runtimeOnly 'com.mysql:mysql-connector-j:8.0.33'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
-}
