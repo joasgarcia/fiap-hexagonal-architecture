@@ -4,12 +4,13 @@ package com.fiap.restaurant.adapter.driven.data.mapper.order;
 import com.fiap.restaurant.adapter.driven.data.entity.order.OrderEntity;
 import com.fiap.restaurant.core.model.order.Order;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface OrderMapper {
 
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
