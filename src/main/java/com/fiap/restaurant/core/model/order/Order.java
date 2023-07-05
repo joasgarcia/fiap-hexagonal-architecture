@@ -2,7 +2,6 @@ package com.fiap.restaurant.core.model.order;
 
 import com.fiap.restaurant.core.enums.OrderStatus;
 import com.fiap.restaurant.core.model.customer.Customer;
-import com.fiap.restaurant.core.model.product.Product;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,10 +15,10 @@ public class Order {
 
     private String status;
 
-    private List<Product> items;
+    private List<OrderItem> items;
 
     public Order() {
-        this.items = new ArrayList<>();
+        this.setItems(new ArrayList<>());
     }
 
     public Long getId() {
@@ -46,9 +45,7 @@ public class Order {
         this.dateCreated = dateCreated;
     }
 
-    public List<Product> getItems() {
-        return items;
-    }
+
 
     public String getStatus() {
         return status;
@@ -60,5 +57,13 @@ public class Order {
 
     public void transmitToKitchen() {
         this.setStatus(OrderStatus.TRANSMITED_TO_KITCHEN.toString());
+    }
+
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
+
+    public List<OrderItem> getItems() {
+        return this.items;
     }
 }

@@ -2,7 +2,9 @@ package com.fiap.restaurant.adapter.driven.data.mapper.order;
 
 
 import com.fiap.restaurant.adapter.driven.data.entity.order.OrderEntity;
+import com.fiap.restaurant.adapter.driven.data.entity.order.OrderItemEntity;
 import com.fiap.restaurant.core.model.order.Order;
+import com.fiap.restaurant.core.model.order.OrderItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -16,7 +18,7 @@ public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     Order toOrder(OrderEntity orderEntity);
-    Order toOrderEntity(Order order);
+    OrderEntity toOrderEntity(Order order);
     Order toOrder(Optional<OrderEntity> orderEntity);
 
     default List<Order> toOrderList(List<OrderEntity> orderEntityList) {
@@ -24,4 +26,6 @@ public interface OrderMapper {
         orderEntityList.forEach(orderEntity -> orderList.add(toOrder(orderEntity)));
         return orderList;
     }
+
+    OrderItemEntity map(OrderItem orderItem);
 }

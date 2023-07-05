@@ -32,7 +32,7 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
-    public Order save(Order order) {
-        return this.orderJpaRepository.save(Order);
+    public void save(Order order) {
+        this.orderJpaRepository.save(OrderMapper.INSTANCE.toOrderEntity(order));
     }
 }

@@ -15,7 +15,7 @@ public class OrderItemEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_id", insertable=false, updatable=false)
     private OrderEntity order;
 
     @ManyToOne

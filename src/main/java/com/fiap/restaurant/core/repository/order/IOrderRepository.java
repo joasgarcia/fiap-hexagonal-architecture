@@ -8,6 +8,6 @@ public interface IOrderRepository {
 
     List<Order> list();
     Order findById(Long id);
-    Order save(Order order);
+    void save(Order order);
 
 }
