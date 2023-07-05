@@ -20,6 +20,8 @@ public class OrderEntity {
     @Column(name = "date_created")
     private Date dateCreated;
 
+    private String status;
+
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderItemEntity> items;
 
@@ -45,5 +47,13 @@ public class OrderEntity {
 
     public List<OrderItemEntity> getItems() {
         return items;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

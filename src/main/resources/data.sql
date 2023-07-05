@@ -20,8 +20,8 @@ insert into item_product(id, item_id, product_id) values (4, 4, 1)
 insert into item_product(id, item_id, product_id) values (5, 4, 2)
 insert into item_product(id, item_id, product_id) values (6, 4, 3)
 
-insert into "order"(id, customer_id, date_created) values (1, 3, TIMESTAMP '2023-06-28 10.00.00')
-insert into "order"(id, date_created) values (2, TIMESTAMP '2023-06-28 10.00.00')
+insert into "order"(id, customer_id, date_created, status) values (1, 3, TIMESTAMP '2023-06-28 10.00.00', 'PENDING')
+insert into "order"(id, date_created, status) values (2, TIMESTAMP '2023-06-28 10.00.00', 'PENDING')
 
 insert into order_item(id, order_id, item_id) values (1, 1, 1)
 insert into order_item(id, order_id, item_id) values (2, 1, 2)

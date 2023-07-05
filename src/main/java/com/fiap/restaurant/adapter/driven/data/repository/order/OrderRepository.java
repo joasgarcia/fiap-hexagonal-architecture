@@ -7,6 +7,7 @@ import com.fiap.restaurant.core.repository.order.IOrderRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class OrderRepository implements IOrderRepository {
@@ -21,5 +22,17 @@ public class OrderRepository implements IOrderRepository {
     public List<Order> list() {
         List<OrderEntity> list = this.orderJpaRepository.findAll();
         return OrderMapper.INSTANCE.toOrderList(list);
+    }
+
+    @Override
+    public Order findById(Long id) {
+        Optional<OrderEntity> orderEntity = this.orderJpaRepository.findById(id);
+
+        return OrderMapper.INSTANCE.toOrder(orderEntity);
+    }
+
+    @Override
+    public Order save(Order order) {
+        return this.orderJpaRepository.save(Order);
     }
 }

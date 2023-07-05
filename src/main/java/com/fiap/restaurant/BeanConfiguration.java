@@ -1,5 +1,6 @@
 package com.fiap.restaurant;
 
+import com.fiap.restaurant.adapter.driven.data.MercadoPagoGatewayAdapter;
 import com.fiap.restaurant.adapter.driven.data.repository.customer.CustomerRepository;
 import com.fiap.restaurant.adapter.driven.data.repository.order.ItemProductRepository;
 import com.fiap.restaurant.adapter.driven.data.repository.order.ItemRepository;
@@ -37,9 +38,12 @@ public class BeanConfiguration {
     @Autowired
     private ImageRepository imageRepository;
 
+    @Autowired
+    private MercadoPagoGatewayAdapter mercadoPagoGateway;
+
     @Bean
     public OrderService orderService() {
-        return new OrderService(this.orderRepository);
+        return new OrderService(this.orderRepository, this.mercadoPagoGateway);
     }
 
     @Bean

@@ -8,6 +8,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface OrderMapper {
@@ -15,6 +16,8 @@ public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     Order toOrder(OrderEntity orderEntity);
+    Order toOrderEntity(Order order);
+    Order toOrder(Optional<OrderEntity> orderEntity);
 
     default List<Order> toOrderList(List<OrderEntity> orderEntityList) {
         List<Order> orderList = new ArrayList<>();

@@ -1,5 +1,6 @@
 package com.fiap.restaurant.core.model.order;
 
+import com.fiap.restaurant.core.enums.OrderStatus;
 import com.fiap.restaurant.core.model.customer.Customer;
 import com.fiap.restaurant.core.model.product.Product;
 
@@ -12,6 +13,8 @@ public class Order {
     private Long id;
     private Customer customer;
     private Date dateCreated;
+
+    private String status;
 
     private List<Product> items;
 
@@ -45,5 +48,17 @@ public class Order {
 
     public List<Product> getItems() {
         return items;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void transmitToKitchen() {
+        this.setStatus(OrderStatus.TRANSMITED_TO_KITCHEN.toString());
     }
 }

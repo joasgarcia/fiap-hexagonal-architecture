@@ -3,9 +3,7 @@ package com.fiap.restaurant.adapter.driver.api.controller.order;
 import com.fiap.restaurant.core.model.order.Order;
 import com.fiap.restaurant.core.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,11 @@ public class OrderController {
     @GetMapping("/")
     public List<Order> list() {
         return orderService.list();
+    }
+
+    @PostMapping("/pay/{id}")
+    public Boolean pay(@PathVariable("id") Long id) {
+        System.out.println("IDDDDDDDDDDD :" + id);
+        return orderService.pay(id);
     }
 }
