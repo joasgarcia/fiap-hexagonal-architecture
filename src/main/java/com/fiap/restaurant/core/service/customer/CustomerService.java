@@ -2,7 +2,9 @@ package com.fiap.restaurant.core.service.customer;
 
 import com.fiap.restaurant.core.model.customer.Customer;
 import com.fiap.restaurant.core.repository.customer.ICustomerRepository;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class CustomerService {
 
     private final ICustomerRepository customerRepository;

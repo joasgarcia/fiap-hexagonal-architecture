@@ -18,6 +18,7 @@ public interface ImageMapper {
         if (imageEntity == null) return null;
 
         Image image = new Image();
+        image.setId(imageEntity.getId());
         image.setSrc(imageEntity.getSrc());
         return image;
     }

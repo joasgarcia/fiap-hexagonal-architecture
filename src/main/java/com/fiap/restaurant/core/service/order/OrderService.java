@@ -4,9 +4,11 @@ import com.fiap.restaurant.core.drivenport.PaymentGatewayPort;
 import com.fiap.restaurant.core.enums.OrderStatus;
 import com.fiap.restaurant.core.model.order.Order;
 import com.fiap.restaurant.core.repository.order.IOrderRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 public class OrderService {
 
     private final IOrderRepository orderRepository;

@@ -1,9 +1,32 @@
 version: '2'
+
 services:
-  fiap-restaurant-app:
+  database:
+    container_name: database
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3307:3306
+      - 33070:33060
+    expose:
+      - 3306
+      - 33060
+    environment:
+      MYSQL_DATABASE: techchallenge
+      MYSQL_ROOT_PASSWORD: senha
+    volumes:
+      - /tmp/fiap-restaurant-app/mysql:/var/lib/mysql
+
+  app:
     container_name: fiap-restaurant-app
+    depends_on:
+      - database
     build:
-      dockerfile: Dockerfile
-    image: fiap-restaurant-app:latest
+      dockerfile: ./Dockerfile
     ports:
       - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/techchallenge
+    volumes:
+      - /tmp/fiap-restaurant-app/app:/var/html/fiap-restaurant-app

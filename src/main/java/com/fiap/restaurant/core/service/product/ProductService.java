@@ -3,9 +3,11 @@ package com.fiap.restaurant.core.service.product;
 import com.fiap.restaurant.core.exception.ResourceNotFoundException;
 import com.fiap.restaurant.core.model.product.Product;
 import com.fiap.restaurant.core.repository.product.IProductRepository;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
+@Transactional
 public class ProductService {
 
     private final IProductRepository productRepository;

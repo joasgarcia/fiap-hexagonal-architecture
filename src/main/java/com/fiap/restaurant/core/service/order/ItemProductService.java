@@ -2,7 +2,9 @@ package com.fiap.restaurant.core.service.order;
 
 import com.fiap.restaurant.core.model.order.ItemProduct;
 import com.fiap.restaurant.core.repository.order.IItemProductRepository;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class ItemProductService {
 
     private final IItemProductRepository itemProductRepository;

@@ -2,9 +2,11 @@ package com.fiap.restaurant.core.service.product;
 
 import com.fiap.restaurant.core.model.product.Image;
 import com.fiap.restaurant.core.repository.product.IImageRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 public class ImageService {
 
     private final IImageRepository imageRepository;
