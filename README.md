@@ -1,15 +1,11 @@
 # fiap-hexagonal-architecture
-Projeto prático desenvolvido durante a Postech Software Architecture
+Projeto prático desenvolvido durante a Postech FIAP (Software Architecture).
 
-# TODO
-* [ ] Cliente
-  * [ ] Cadastro do cliente (ID, nome, CPF)
-  * [ ] Consulta via CPF
-* [ ] Produto
-  * [ ] Criação
-  * [ ] Edição
-  * [ ] Remoção
-  * [ ] Buscar por categoria
-* [ ] Checkout (fake)
-* [ ] Pedidos
-  * [ ] Listar
+## Documentação da API
+
+A documentação da API foi gerada a partir da utilização da biblioteca [Springdoc (OpenAPI)](https://springdoc.org/).
+
+Após iniciar a aplicação, a documentação pode ser acessada através do endereço:
+
+http://localhost:8080/swagger-ui/index.html
+
