@@ -18,4 +18,8 @@ public class OrderItemService {
     public OrderItem save(OrderItem orderItem) {
         return this.orderItemRepository.save(orderItem);
     }
+
+    public void delete(Long orderId, Long itemId) {
+        this.orderItemRepository.delete(orderId, itemId);
+    }
 }

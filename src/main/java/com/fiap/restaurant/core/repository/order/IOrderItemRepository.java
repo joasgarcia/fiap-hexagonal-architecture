@@ -5,4 +5,5 @@ import com.fiap.restaurant.core.model.order.OrderItem;
 public interface IOrderItemRepository {
 
     OrderItem save(OrderItem orderItem);
+    void delete(Long orderId, Long itemId);
 }

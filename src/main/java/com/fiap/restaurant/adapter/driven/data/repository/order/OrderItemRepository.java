@@ -20,4 +20,9 @@ public class OrderItemRepository implements IOrderItemRepository {
         OrderItemEntity orderItemEntity = this.orderItemJpaRepository.save(OrderItemMapper.INSTANCE.toOrderItemEntity(orderItem));
         return OrderItemMapper.INSTANCE.toOrderItem(orderItemEntity);
     }
+
+    @Override
+    public void delete(Long orderId, Long itemId) {
+        this.orderItemJpaRepository.deleteByOrderIdAndItemId(orderId, itemId);
+    }
 }

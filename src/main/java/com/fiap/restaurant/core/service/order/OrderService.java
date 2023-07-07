@@ -47,6 +47,10 @@ public class OrderService {
         order.addItem(orderItem);
     }
 
+    public void removeItem(Long orderId, Long itemId) {
+        this.orderItemService.delete(orderId, itemId);
+    }
+
     public Boolean pay(Long orderId) {
         Order order = orderRepository.findById(orderId);
 

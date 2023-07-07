@@ -26,6 +26,12 @@ public class OrderController {
         return ResponseEntity.ok(true);
     }
 
+    @DeleteMapping("/{id}/item/{itemId}")
+    public ResponseEntity<Boolean> removeItem(@PathVariable("id") Long orderId, @PathVariable("itemId") Long itemId) {
+        this.orderService.removeItem(orderId, itemId);
+        return ResponseEntity.ok(true);
+    }
+
     @PostMapping("/pay/{id}")
     public Boolean pay(@PathVariable("id") Long id) {
         System.out.println("IDDDDDDDDDDD :" + id);
