@@ -66,4 +66,8 @@ public class Order {
     public List<OrderItem> getItems() {
         return this.items;
     }
+
+    public void addItem(OrderItem orderItem) {
+        this.items.add(orderItem);
+    }
 }
