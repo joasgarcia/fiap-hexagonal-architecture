@@ -1,6 +1,7 @@
 package com.fiap.restaurant.adapter.driven.data.entity.order;
 
 import com.fiap.restaurant.adapter.driven.data.entity.customer.CustomerEntity;
+import com.fiap.restaurant.core.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -20,7 +21,7 @@ public class OrderEntity {
     @Column(name = "date_created")
     private Date dateCreated;
 
-    private String status;
+    private OrderStatus status;
 
     @OneToMany(targetEntity = OrderItemEntity.class, mappedBy = "order", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     private List<OrderItemEntity> items;
@@ -49,11 +50,11 @@ public class OrderEntity {
         return items;
     }
 
-    public String getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 }

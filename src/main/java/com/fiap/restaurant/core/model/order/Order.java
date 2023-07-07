@@ -13,7 +13,7 @@ public class Order {
     private Customer customer;
     private Date dateCreated;
 
-    private String status;
+    private OrderStatus status;
 
     private List<OrderItem> items;
 
@@ -47,16 +47,16 @@ public class Order {
 
 
 
-    public String getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 
     public void transmitToKitchen() {
-        this.setStatus(OrderStatus.TRANSMITED_TO_KITCHEN.toString());
+        this.setStatus(OrderStatus.TRANSMITED_TO_KITCHEN);
     }
 
     public void setItems(List<OrderItem> items) {
