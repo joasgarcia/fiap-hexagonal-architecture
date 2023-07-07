@@ -21,13 +21,4 @@ public class CustomerController {
 
         return ResponseEntity.ok().body(customer);
     }
-
-    @PostMapping(path = "/")
-    public ResponseEntity<Customer> save(@RequestBody Customer customer) {
-        customer = this.customerService.save(customer);
-
-        if (customer == null) return ResponseEntity.noContent().build();
-
-        return ResponseEntity.ok().body(customer);
-    }
 }

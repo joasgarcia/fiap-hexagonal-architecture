@@ -27,6 +27,13 @@ public class OrderService {
         this.orderItemService = orderItemService;
     }
 
+    public Order save(Customer customer) {
+        Order order = new Order();
+        order.setCustomer(customer);
+        order.setStatus(OrderStatus.PENDING);
+        return this.orderRepository.save(order);
+    }
+
     public List<Order> list() {
         return orderRepository.list();
     }
