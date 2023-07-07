@@ -20,7 +20,7 @@ public class OrderController {
         return orderService.list();
     }
 
-    @PostMapping("/{id}/addItem")
+    @PostMapping("/{id}/item")
     public ResponseEntity<Boolean> addItem(@PathVariable("id") Long orderId, Long itemId) {
         this.orderService.addItem(orderId, itemId);
         return ResponseEntity.ok(true);
