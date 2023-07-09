@@ -51,7 +51,7 @@ public class OrderService {
         orderItem.setItem(item);
         orderItem.setObservation(observation);
 
-        order.addItem(orderItem);
+        this.orderItemService.save(orderItem);
     }
 
     public void removeItem(Long orderId, Long itemId) {
