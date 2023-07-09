@@ -15,6 +15,8 @@ import com.fiap.restaurant.core.service.order.OrderItemService;
 import com.fiap.restaurant.core.service.order.OrderService;
 import com.fiap.restaurant.core.service.product.ImageService;
 import com.fiap.restaurant.core.service.product.ProductService;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -79,5 +81,14 @@ public class BeanConfiguration {
     @Bean
     public ImageService imageService() {
         return new ImageService(this.imageRepository);
+    }
+
+    @Bean
+    public OpenAPI api() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("Tech Challenge - FIAP")
+                        .description("Documentação da API utilizada na construção da solução ao desafio técnico proposto na Postech FIAP (Software Architecture)")
+                        .version("1.0"));
     }
 }

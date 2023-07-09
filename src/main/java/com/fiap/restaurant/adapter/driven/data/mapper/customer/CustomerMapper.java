@@ -3,9 +3,10 @@ package com.fiap.restaurant.adapter.driven.data.mapper.customer;
 import com.fiap.restaurant.adapter.driven.data.entity.customer.CustomerEntity;
 import com.fiap.restaurant.core.model.customer.Customer;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CustomerMapper {
 
     CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
