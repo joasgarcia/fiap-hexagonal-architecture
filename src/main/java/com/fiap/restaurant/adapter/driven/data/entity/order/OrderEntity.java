@@ -21,6 +21,8 @@ public class OrderEntity {
     @Column(name = "date_created")
     private Date dateCreated;
 
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
     @OneToMany(targetEntity = OrderItemEntity.class, mappedBy = "order", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
