@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "018aeee5-8fda-4b01-af51-1ec65df94d5f",
+		"name": "FIAP - Aplicativo de Restaurante",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "13874439"
+	},
+	"item": [
+		{
+			"name": "Preparação - Criação dos itens",
+			"item": [
+				{
+					"name": "Produto - Criação (bebida)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Suco de laranja\",\n    \"price\": 6.00,\n    \"description\": \"Del Valle com 451mL\",\n    \"category\": \"Bebidas\",\n    \"imageList\": [\n        { \"src\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH4O68icPYO8FALa-_M9ll_8YuuOM8DJyeSwNF0zMK-n3c3x08kgSj-9Z3FbtVA-s4Z0s&usqp=CAU\" }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/product/"
+					},
+					"response": []
+				},
+				{
+					"name": "Produto - Criação (sanduíche)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Sanduíche especial Kelson\",\n    \"price\": 12.00,\n    \"description\": \"Pão caseiro, hambúrguer 156g e maionese caseira\",\n    \"category\": \"Lanches\",\n    \"imageList\": [\n        { \"src\": \"https://sachefmio.blob.core.windows.net/fotos/x-burguer-73517.jpg\" }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/product/"
+					},
+					"response": []
+				},
+				{
+					"name": "Produto - Edição",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Sanduíche caseiro do Kelson\",\n    \"price\": 15.00,\n    \"description\": \"Pão caseiro brioche, hambúrguer artesenal 156g e maionese caseirinha\",\n    \"category\": \"Lanches\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/product/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Produto - Remoção",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/product/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Produto - Buscar por categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/product/listByCategory/lanches"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cliente - Cadastrar novo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Ada Lovelace\",\n    \"email\": \"ada.lovelace@email.com\",\n    \"cpf\": \"80712021000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{host}}/customer/"
+			},
+			"response": []
+		},
+		{
+			"name": "Cliente - Buscar por CPF",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{host}}/customer/80712021000"
+			},
+			"response": []
+		},
+		{
+			"name": "Pedido - Iniciar novo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{host}}/order"
+			},
+			"response": []
+		},
+		{
+			"name": "Pedido - Adicionar item ao pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"itemId\": 2,\n    \"observation\": \"Sem cebola\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{host}}/order/1/item"
+			},
+			"response": []
+		},
+		{
+			"name": "Pedido - Remover item",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{host}}/order/1/item/2"
+			},
+			"response": []
+		},
+		{
+			"name": "Pedido - Checkout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "{{host}}/order/1/pay"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8080"
+		}
+	]
+}
