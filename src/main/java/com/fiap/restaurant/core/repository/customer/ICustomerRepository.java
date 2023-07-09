@@ -6,4 +6,5 @@ public interface ICustomerRepository {
 
     Customer save(Customer customer);
     Customer findByCpf(String cpf);
+    Customer findByCpfOrEmail(String cpf, String email);
 }

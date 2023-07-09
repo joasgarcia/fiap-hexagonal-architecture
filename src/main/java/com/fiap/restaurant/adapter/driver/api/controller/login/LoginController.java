@@ -26,7 +26,7 @@ public class LoginController {
     @PostMapping("/")
     public ResponseEntity<Order> login(@RequestBody Optional<Customer> customer) {
         Customer loggedCustomer = null;
-        if (customer.isPresent()) loggedCustomer = customerService.save(customer.get());
+        if (customer.isPresent()) loggedCustomer = customerService.findOrCreate(customer.get());
 
         Order order = this.orderService.save(loggedCustomer);
         return ResponseEntity.ok(order);

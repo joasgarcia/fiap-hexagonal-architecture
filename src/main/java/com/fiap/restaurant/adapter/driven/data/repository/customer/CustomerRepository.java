@@ -33,4 +33,12 @@ public class CustomerRepository implements ICustomerRepository {
 
         return CustomerMapper.INSTANCE.toCustomer(customerEntity);
     }
+
+    @Override
+    public Customer findByCpfOrEmail(String cpf, String email) {
+        CustomerEntity customerEntity = this.customerJpaRepository.findByCpfOrEmail(cpf, email);
+        if (customerEntity == null) return null;
+
+        return CustomerMapper.INSTANCE.toCustomer(customerEntity);
+    }
 }
