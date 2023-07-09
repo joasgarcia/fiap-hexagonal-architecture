@@ -6,6 +6,8 @@ import com.fiap.restaurant.core.model.order.Item;
 import com.fiap.restaurant.core.repository.order.IItemRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class ItemRepository implements IItemRepository {
 
@@ -20,5 +22,12 @@ public class ItemRepository implements IItemRepository {
         ItemEntity itemEntity = ItemMapper.INSTANCE.toItemEntity(item);
         itemEntity = this.itemJpaRepository.save(itemEntity);
         return ItemMapper.INSTANCE.toItem(itemEntity);
+    }
+
+    @Override
+    public Item findById(Long id) {
+        Optional<ItemEntity> itemEntity = this.itemJpaRepository.findById(id);
+        if (itemEntity.isEmpty()) return null;
+        return ItemMapper.INSTANCE.toItem(itemEntity.get());
     }
 }

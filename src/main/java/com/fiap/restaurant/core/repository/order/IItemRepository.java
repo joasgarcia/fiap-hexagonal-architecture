@@ -5,4 +5,6 @@ import com.fiap.restaurant.core.model.order.Item;
 public interface IItemRepository {
 
     Item save(Item item);
+
+    Item findById(Long id);
 }

@@ -13,18 +13,15 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @PostMapping(path = "/")
+    public ResponseEntity<Customer> save(@RequestBody Customer customer) {
+        customer = this.customerService.findOrCreate(customer);
+        return ResponseEntity.ok(customer);
+    }
+
     @GetMapping(path = "/{cpf}")
     public ResponseEntity<Customer> getByCpf(@PathVariable String cpf) {
         Customer customer = customerService.findByCpf(cpf);
-
-        if (customer == null) return ResponseEntity.noContent().build();
-
-        return ResponseEntity.ok().body(customer);
-    }
-
-    @PostMapping(path = "/")
-    public ResponseEntity<Customer> save(@RequestBody Customer customer) {
-        customer = this.customerService.save(customer);
 
         if (customer == null) return ResponseEntity.noContent().build();
 

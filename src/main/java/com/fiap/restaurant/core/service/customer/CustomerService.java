@@ -13,8 +13,15 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer save(Customer customer) {
+    public Customer findOrCreate(Customer customer) {
+        Customer existentCustomer = this.customerRepository.findByCpfOrEmail(customer.getCpf(), customer.getEmail());
+        if (existentCustomer != null) return existentCustomer;
+
         return this.customerRepository.save(customer);
+    }
+
+    public Customer findById(Long id) {
+        return this.customerRepository.findById(id);
     }
 
     public Customer findByCpf(String cpf) {
