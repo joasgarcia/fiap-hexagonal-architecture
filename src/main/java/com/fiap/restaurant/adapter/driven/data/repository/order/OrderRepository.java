@@ -5,6 +5,7 @@ import com.fiap.restaurant.adapter.driven.data.entity.order.OrderEntity;
 import com.fiap.restaurant.adapter.driven.data.mapper.order.OrderMapper;
 import com.fiap.restaurant.adapter.driven.data.repository.customer.CustomerJpaRepository;
 import com.fiap.restaurant.core.exception.ResourceNotFoundException;
+import com.fiap.restaurant.core.model.customer.Customer;
 import com.fiap.restaurant.core.model.order.Order;
 import com.fiap.restaurant.core.repository.order.IOrderRepository;
 import org.springframework.stereotype.Component;
@@ -41,10 +42,12 @@ public class OrderRepository implements IOrderRepository {
     public Order save(Order order) {
         OrderEntity orderEntity = OrderMapper.INSTANCE.toOrderEntity(order);
 
-        Long customerId = order.getCustomer().getId();
-        Optional<CustomerEntity> customerEntity = this.customerJpaRepository.findById(customerId);
-        if (customerEntity.isEmpty()) throw new ResourceNotFoundException("Cliente [" + customerId + "] não encontrado");
-        orderEntity.setCustomer(customerEntity.get());
+        Customer customer = order.getCustomer();
+        if (customer != null) {
+            Optional<CustomerEntity> customerEntity = this.customerJpaRepository.findById(customer.getId());
+            if (customerEntity.isEmpty()) throw new ResourceNotFoundException("Cliente [" + customer.getId() + "] não encontrado");
+            orderEntity.setCustomer(customerEntity.get());
+        }
 
         orderEntity = this.orderJpaRepository.save(orderEntity);
         return OrderMapper.INSTANCE.toOrder(orderEntity);
