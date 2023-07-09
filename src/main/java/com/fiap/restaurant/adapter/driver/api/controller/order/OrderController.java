@@ -49,7 +49,7 @@ public class OrderController {
         return ResponseEntity.ok(true);
     }
 
-    @PostMapping("/pay/{id}")
+    @PostMapping("/{id}/pay")
     public Boolean pay(@PathVariable("id") Long id) {
         return orderService.pay(id);
     }
