@@ -6,6 +6,8 @@ import com.fiap.restaurant.core.model.customer.Customer;
 import com.fiap.restaurant.core.repository.customer.ICustomerRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class CustomerRepository implements ICustomerRepository {
 
@@ -23,6 +25,13 @@ public class CustomerRepository implements ICustomerRepository {
         if (customerEntity == null) return null;
 
         return CustomerMapper.INSTANCE.toCustomer(customerEntity);
+    }
+
+    @Override
+    public Customer findById(Long id) {
+        Optional<CustomerEntity> customerEntity = this.customerJpaRepository.findById(id);
+        if (customerEntity.isEmpty()) return null;
+        return CustomerMapper.INSTANCE.toCustomer(customerEntity.get());
     }
 
     @Override

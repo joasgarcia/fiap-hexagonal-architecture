@@ -20,6 +20,10 @@ public class CustomerService {
         return this.customerRepository.save(customer);
     }
 
+    public Customer findById(Long id) {
+        return this.customerRepository.findById(id);
+    }
+
     public Customer findByCpf(String cpf) {
         return this.customerRepository.findByCpf(cpf);
     }
