@@ -25,7 +25,7 @@ public class OrderItemRepository implements IOrderItemRepository {
     }
 
     @Override
-    public OrderItem save(OrderItem orderItem) {
+    public void save(OrderItem orderItem) {
         OrderItemEntity orderItemEntity = OrderItemMapper.INSTANCE.toOrderItemEntity(orderItem);
 
         Long orderId = orderItem.getOrder().getId();
@@ -40,8 +40,6 @@ public class OrderItemRepository implements IOrderItemRepository {
         orderItemEntity.setItem(itemEntity.get());
         orderItemEntity.setObservation(orderItem.getObservation());
         orderItemEntity = this.orderItemJpaRepository.save(orderItemEntity);
-
-        return OrderItemMapper.INSTANCE.toOrderItem(orderItemEntity);
     }
 
     @Override

@@ -14,8 +14,8 @@ public class OrderItemService {
         this.orderItemRepository = orderItemRepository;
     }
 
-    public OrderItem save(OrderItem orderItem) {
-        return this.orderItemRepository.save(orderItem);
+    public void save(OrderItem orderItem) {
+        this.orderItemRepository.save(orderItem);
     }
 
     public void delete(Long orderId, Long itemId) {
