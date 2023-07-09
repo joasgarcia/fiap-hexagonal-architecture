@@ -64,6 +64,15 @@
 					"response": []
 				},
 				{
+					"name": "Produto - Buscar por categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/product/listByCategory/lanches"
+					},
+					"response": []
+				},
+				{
 					"name": "Produto - Remoção",
 					"request": {
 						"method": "DELETE",
@@ -78,15 +87,6 @@
 							}
 						},
 						"url": "{{host}}/product/3"
-					},
-					"response": []
-				},
-				{
-					"name": "Produto - Buscar por categoria",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{host}}/product/listByCategory/lanches"
 					},
 					"response": []
 				}
@@ -133,7 +133,7 @@
 						}
 					}
 				},
-				"url": "{{host}}/order"
+				"url": "{{host}}/order/"
 			},
 			"response": []
 		},
@@ -152,6 +152,27 @@
 					}
 				},
 				"url": "{{host}}/order/1/item"
+			},
+			"response": []
+		},
+		{
+			"name": "Pedido - Listar pedidos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"itemId\": 2,\n    \"observation\": \"Sem cebola\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{host}}/order/"
 			},
 			"response": []
 		},

@@ -1,7 +1,7 @@
 # fiap-hexagonal-architecture
 Projeto prático desenvolvido durante a Postech FIAP (Software Architecture).
 
-## Evento Storming
+## Event Storming
 https://www.figma.com/file/ad4YsYUo9lsNxWB75KuXWH/Event-Storm---Sistema-para-lanchonete?type=whiteboard&node-id=0%3A1&t=NtciJNRj0z2uN9YQ-1
 
 ## Dicionário linguagem ubiqua
@@ -16,9 +16,32 @@ https://www.figma.com/file/ad4YsYUo9lsNxWB75KuXWH/Event-Storm---Sistema-para-lan
 
 ## Documentação da API
 
-A documentação da API foi gerada a partir da utilização da biblioteca [Springdoc (OpenAPI)](https://springdoc.org/).
+O repositório conta com uma [collection do Postman](./FIAP%20-%20Aplicativo%20de%20Restaurante.postman_collection.json) para facilitar os testes em ambiente local.
 
-Após iniciar a aplicação, a documentação pode ser acessada através do endereço:
+Para iniciar o projeto, é necessário inicializar o banco:
 
-http://localhost:8080/swagger-ui/index.html
+```shell
+docker compose up database --build -d
+```
+
+O banco ficará disponível na porta `3307`, a fim de evitar conflitos com outros bancos locais. Para conectar via MySQL Workbench (ou outra ferramenta), basta usar os seguintes dados:
+
+- Host: `localhost:3307/techchallenge`
+- Usuário: `root`
+- Senha: `senha`
+
+É necessário criar um Schema com o nome `techchallenge`:
+```sql
+CREATE SCHEMA techchallenge;
+```
+
+Por fim, basta rodar a aplicação:
+
+```shell
+docker compose up app --build
+```
+
+Isso fará a aplicação subir na porta `8080`.
+
+
 
