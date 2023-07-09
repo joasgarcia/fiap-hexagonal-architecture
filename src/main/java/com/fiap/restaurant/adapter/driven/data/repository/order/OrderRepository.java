@@ -32,8 +32,9 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public Order findById(Long id) {
         Optional<OrderEntity> orderEntity = this.orderJpaRepository.findById(id);
+        if (orderEntity.isEmpty()) return null;
 
-        return OrderMapper.INSTANCE.toOrder(orderEntity);
+        return OrderMapper.INSTANCE.toOrder(orderEntity.get());
     }
 
     @Override
