@@ -1,7 +1,9 @@
 package com.fiap.restaurant.core.model.order;
 
-public class OrderItem {
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+public class OrderItem {
+    @JsonIgnore
     private Order order;
 
     private Item item;

@@ -3,6 +3,7 @@ package com.fiap.restaurant.adapter.driven.data.repository.order;
 import com.fiap.restaurant.adapter.driven.data.entity.customer.CustomerEntity;
 import com.fiap.restaurant.adapter.driven.data.entity.order.OrderEntity;
 import com.fiap.restaurant.adapter.driven.data.mapper.order.OrderMapper;
+import com.fiap.restaurant.adapter.driven.data.mapper.order.EntityToOrderMapper;
 import com.fiap.restaurant.adapter.driven.data.repository.customer.CustomerJpaRepository;
 import com.fiap.restaurant.core.exception.ResourceNotFoundException;
 import com.fiap.restaurant.core.model.customer.Customer;
@@ -27,7 +28,7 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public List<Order> list() {
         List<OrderEntity> list = this.orderJpaRepository.findAll();
-        return OrderMapper.INSTANCE.toOrderList(list);
+        return EntityToOrderMapper.INSTANCE.toOrderList(list);
     }
 
     @Override
@@ -35,7 +36,7 @@ public class OrderRepository implements IOrderRepository {
         Optional<OrderEntity> orderEntity = this.orderJpaRepository.findById(id);
         if (orderEntity.isEmpty()) return null;
 
-        return OrderMapper.INSTANCE.toOrder(orderEntity.get());
+        return EntityToOrderMapper.INSTANCE.toOrder(orderEntity.get());
     }
 
     @Override

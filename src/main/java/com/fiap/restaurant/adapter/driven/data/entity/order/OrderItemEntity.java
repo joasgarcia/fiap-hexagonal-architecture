@@ -1,5 +1,6 @@
 package com.fiap.restaurant.adapter.driven.data.entity.order;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity(name = "order_item")
