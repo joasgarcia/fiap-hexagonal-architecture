@@ -34,7 +34,6 @@ public class OrderController {
 
     @PostMapping("/pay/{id}")
     public Boolean pay(@PathVariable("id") Long id) {
-        System.out.println("IDDDDDDDDDDD :" + id);
         return orderService.pay(id);
     }
 }
