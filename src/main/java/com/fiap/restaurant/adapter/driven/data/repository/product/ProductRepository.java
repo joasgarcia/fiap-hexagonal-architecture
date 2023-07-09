@@ -16,9 +16,12 @@ public class ProductRepository implements IProductRepository {
     private final ProductJpaRepository productJpaRepository;
     private final ItemProductJpaRepository itemProductJpaRepository;
 
-    public ProductRepository(ProductJpaRepository productJpaRepository, ItemProductJpaRepository itemProductJpaRepository) {
+    private final ImageJpaRepository imageJpaRepository;
+
+    public ProductRepository(ProductJpaRepository productJpaRepository, ItemProductJpaRepository itemProductJpaRepository, ImageJpaRepository imageJpaRepository) {
         this.productJpaRepository = productJpaRepository;
         this.itemProductJpaRepository = itemProductJpaRepository;
+        this.imageJpaRepository = imageJpaRepository;
     }
 
     @Override
@@ -39,6 +42,7 @@ public class ProductRepository implements IProductRepository {
     @Override
     public void delete(Long id) {
         this.itemProductJpaRepository.deleteByProductId(id);
+        this.imageJpaRepository.deleteByProductId(id);
 
         ProductEntity productEntity = this.productJpaRepository.getReferenceById(id);
         this.productJpaRepository.delete(productEntity);
