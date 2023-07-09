@@ -2,6 +2,7 @@ package com.fiap.restaurant.adapter.driven.data.repository.product;
 
 import com.fiap.restaurant.adapter.driven.data.entity.product.ProductEntity;
 import com.fiap.restaurant.adapter.driven.data.mapper.product.ProductMapper;
+import com.fiap.restaurant.adapter.driven.data.repository.order.ItemProductJpaRepository;
 import com.fiap.restaurant.core.model.product.Product;
 import com.fiap.restaurant.core.repository.product.IProductRepository;
 import org.springframework.beans.BeanUtils;
@@ -13,9 +14,11 @@ import java.util.List;
 public class ProductRepository implements IProductRepository {
 
     private final ProductJpaRepository productJpaRepository;
+    private final ItemProductJpaRepository itemProductJpaRepository;
 
-    public ProductRepository(ProductJpaRepository productJpaRepository) {
+    public ProductRepository(ProductJpaRepository productJpaRepository, ItemProductJpaRepository itemProductJpaRepository) {
         this.productJpaRepository = productJpaRepository;
+        this.itemProductJpaRepository = itemProductJpaRepository;
     }
 
     @Override
@@ -35,6 +38,8 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public void delete(Long id) {
+        this.itemProductJpaRepository.deleteByProductId(id);
+
         ProductEntity productEntity = this.productJpaRepository.getReferenceById(id);
         this.productJpaRepository.delete(productEntity);
     }
