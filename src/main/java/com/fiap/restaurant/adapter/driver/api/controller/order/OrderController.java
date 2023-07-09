@@ -1,8 +1,8 @@
 package com.fiap.restaurant.adapter.driver.api.controller.order;
 
 import com.fiap.restaurant.adapter.driver.api.controller.order.dto.OrderAddItemDTO;
+import com.fiap.restaurant.adapter.driver.api.controller.order.dto.OrderStartVO;
 import com.fiap.restaurant.core.model.customer.Customer;
-import com.fiap.restaurant.core.model.order.Item;
 import com.fiap.restaurant.core.model.order.Order;
 import com.fiap.restaurant.core.service.customer.CustomerService;
 import com.fiap.restaurant.core.service.order.OrderService;
@@ -28,10 +28,13 @@ public class OrderController {
         return orderService.list();
     }
 
-    @PostMapping("/start")
-    public ResponseEntity<Order> start(@RequestBody Optional<Customer> customer) {
+    @PostMapping("/")
+    public ResponseEntity<Order> start(@RequestBody Optional<OrderStartVO> dto) {
         Customer loggedCustomer = null;
-        if (customer.isPresent()) loggedCustomer = customerService.findOrCreate(customer.get());
+        if (dto.isPresent()) {
+            Long customerId = dto.get().getCustomerId();
+            if (customerId != null) loggedCustomer = customerService.findById(customerId);
+        }
 
         Order order = this.orderService.save(loggedCustomer);
         return ResponseEntity.ok(order);

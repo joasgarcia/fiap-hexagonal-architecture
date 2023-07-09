@@ -13,6 +13,12 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @PostMapping(path = "/")
+    public ResponseEntity<Customer> save(@RequestBody Customer customer) {
+        customer = this.customerService.findOrCreate(customer);
+        return ResponseEntity.ok(customer);
+    }
+
     @GetMapping(path = "/{cpf}")
     public ResponseEntity<Customer> getByCpf(@PathVariable String cpf) {
         Customer customer = customerService.findByCpf(cpf);
