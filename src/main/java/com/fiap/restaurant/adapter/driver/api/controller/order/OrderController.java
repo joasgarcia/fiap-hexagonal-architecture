@@ -38,8 +38,8 @@ public class OrderController {
     }
 
     @PostMapping("/{id}/item")
-    public ResponseEntity<Boolean> addItem(@PathVariable("id") Long orderId, Long itemId) {
-        this.orderService.addItem(orderId, itemId);
+    public ResponseEntity<Boolean> addItem(@PathVariable("id") Long orderId, @RequestBody OrderAddItemDTO dto) {
+        this.orderService.addItem(orderId, dto.getItemId(), dto.getObservation());
         return ResponseEntity.ok(true);
     }
 

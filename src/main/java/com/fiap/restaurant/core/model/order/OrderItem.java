@@ -6,6 +6,8 @@ public class OrderItem {
 
     private Item item;
 
+    private String observation;
+
     public Order getOrder() {
         return order;
     }
@@ -20,5 +22,13 @@ public class OrderItem {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
     }
 }

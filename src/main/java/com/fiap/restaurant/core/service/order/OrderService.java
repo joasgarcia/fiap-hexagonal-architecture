@@ -38,7 +38,7 @@ public class OrderService {
         return orderRepository.list();
     }
 
-    public void addItem(Long orderId, Long itemId) {
+    public void addItem(Long orderId, Long itemId, String observation) {
         Order order = this.orderRepository.findById(orderId);
         if (order == null) throw new ResourceNotFoundException("Pedido [" + orderId + "] não encontrado");
 
@@ -49,7 +49,7 @@ public class OrderService {
         OrderItem orderItem = new OrderItem();
         orderItem.setOrder(order);
         orderItem.setItem(item);
-        orderItem = this.orderItemService.save(orderItem);
+        orderItem.setObservation(observation);
 
         order.addItem(orderItem);
     }
