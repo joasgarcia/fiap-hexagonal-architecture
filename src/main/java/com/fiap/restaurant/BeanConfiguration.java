@@ -8,6 +8,7 @@ import com.fiap.restaurant.adapter.driven.data.repository.order.OrderItemReposit
 import com.fiap.restaurant.adapter.driven.data.repository.order.OrderRepository;
 import com.fiap.restaurant.adapter.driven.data.repository.product.ImageRepository;
 import com.fiap.restaurant.adapter.driven.data.repository.product.ProductRepository;
+import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.ICustomerDbConnection;
 import com.fiap.restaurant.core.service.customer.CustomerService;
 import com.fiap.restaurant.core.service.order.ItemProductService;
 import com.fiap.restaurant.core.service.order.ItemService;
@@ -91,4 +92,7 @@ public class BeanConfiguration {
                         .description("Documentação da API utilizada na construção da solução ao desafio técnico proposto na Postech FIAP (Software Architecture)")
                         .version("1.0"));
     }
+
+    @Autowired
+    public ICustomerDbConnection customerDbConnection;
 }
