@@ -1,6 +1,6 @@
-package com.fiap.restaurant.cleanarchitecture.gateway;
+package com.fiap.restaurant.cleanarchitecture.gateway.customer;
 
-import com.fiap.restaurant.cleanarchitecture.entity.Customer;
+import com.fiap.restaurant.cleanarchitecture.entity.customer.Customer;
 
 public interface ICustomerGateway {
 
