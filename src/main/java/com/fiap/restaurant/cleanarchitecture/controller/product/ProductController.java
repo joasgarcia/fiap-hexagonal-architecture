@@ -25,4 +25,9 @@ public class ProductController {
         IProductGateway productGateway = new ProductGateway(productDatabaseConnection);
         return ProductUseCase.findAllByCategory(category, productGateway);
     }
+
+    public static void delete(Long id, ProductDatabaseConnection productDatabaseConnection) {
+        IProductGateway productGateway = new ProductGateway(productDatabaseConnection);
+        ProductUseCase.delete(id, productGateway);
+    }
 }
