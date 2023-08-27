@@ -31,7 +31,7 @@ public class CustomerRestController {
 
     @GetMapping(path = "/{cpf}")
     public ResponseEntity<Customer> getByCpf(@PathVariable String cpf) {
-        Customer customer = CustomerController.findByCpf(cpf, this.customerJpaRepositoryConnection);
+        Customer customer = CustomerController.findByCpf(cpf, this.customerDatabaseConnection);
 
         if (customer == null) return ResponseEntity.noContent().build();
 

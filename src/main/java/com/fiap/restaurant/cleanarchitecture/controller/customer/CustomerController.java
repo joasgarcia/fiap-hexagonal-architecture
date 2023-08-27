@@ -13,8 +13,8 @@ public class CustomerController {
         CustomerUseCase.save(saveCustomerDTO, customerGateway);
     }
 
-    public static Customer findByCpf(String cpf, CustomerJpaRepositoryConnection customerJpaRepositoryConnection) {
-        CustomerGateway customerGateway = new CustomerGateway(customerJpaRepositoryConnection);
+    public static Customer findByCpf(String cpf, CustomerDatabaseConnection customerDatabaseConnection) {
+        CustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
         return CustomerUseCase.findByCpf(cpf, customerGateway);
     }
 }
