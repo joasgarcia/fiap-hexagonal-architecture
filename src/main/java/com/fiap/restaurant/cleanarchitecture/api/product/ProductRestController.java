@@ -42,6 +42,18 @@ public class ProductRestController {
         }
     }
 
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+        try {
+            ProductController.update(id, productDTO, this.productDatabaseConnection);
+            return ResponseEntity.ok().body(true);
+        } catch (ResourceNotFoundException resourceNotFoundException) {
+            return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (BusinessException businessException) {
+            return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {
         try {

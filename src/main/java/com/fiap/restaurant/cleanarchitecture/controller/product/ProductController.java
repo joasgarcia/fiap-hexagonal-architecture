@@ -16,6 +16,11 @@ public class ProductController {
         ProductUseCase.save(productDTO, productGateway);
     }
 
+    public static void update(Long id, ProductDTO productDTO, ProductDatabaseConnection productDatabaseConnection) {
+        IProductGateway productGateway = new ProductGateway(productDatabaseConnection);
+        ProductUseCase.update(id, productDTO, productGateway);
+    }
+
     public static List<Product> list(ProductDatabaseConnection productDatabaseConnection) {
         IProductGateway productGateway = new ProductGateway(productDatabaseConnection);
         return ProductUseCase.list(productGateway);
