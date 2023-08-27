@@ -1,8 +1,8 @@
 package com.fiap.restaurant.cleanarchitecture.usecase.customer;
 
-import com.fiap.restaurant.cleanarchitecture.entity.Customer;
-import com.fiap.restaurant.cleanarchitecture.gateway.ICustomerGateway;
-import com.fiap.restaurant.cleanarchitecture.types.dto.SaveCustomerDTO;
+import com.fiap.restaurant.cleanarchitecture.entity.customer.Customer;
+import com.fiap.restaurant.cleanarchitecture.gateway.customer.ICustomerGateway;
+import com.fiap.restaurant.cleanarchitecture.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
 
 public class CustomerUseCase {

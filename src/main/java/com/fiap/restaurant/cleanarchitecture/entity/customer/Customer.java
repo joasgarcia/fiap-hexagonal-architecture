@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.entity;
+package com.fiap.restaurant.cleanarchitecture.entity.customer;
 
 public class Customer {
 
