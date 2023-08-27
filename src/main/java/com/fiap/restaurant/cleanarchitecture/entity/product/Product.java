@@ -1,22 +1,37 @@
 package com.fiap.restaurant.cleanarchitecture.entity.product;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Product {
 
+    private Long id;
     private String name;
     private String description;
     private Double price;
     private String category;
 
-    private List<Image> imageList;
-
-    public Product() {
-        this.imageList = new ArrayList<>();
+    public Product(String name, String description, Double price, String category) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
     }
 
-    public void addImage(Image image) {
-        this.imageList.add(image);
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }
