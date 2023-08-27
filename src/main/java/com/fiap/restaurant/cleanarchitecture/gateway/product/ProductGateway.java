@@ -3,6 +3,10 @@ package com.fiap.restaurant.cleanarchitecture.gateway.product;
 import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
 import com.fiap.restaurant.cleanarchitecture.external.db.product.ProductJpa;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
+import com.fiap.restaurant.cleanarchitecture.types.mapper.product.ProductMapper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("unchecked")
 public class ProductGateway implements IProductGateway {
@@ -22,5 +26,29 @@ public class ProductGateway implements IProductGateway {
         productJpa.setCategory(product.getCategory());
 
         this.productDatabaseConnection.save(productJpa);
+    }
+
+    @Override
+    public List<Product> list() {
+        List<ProductJpa> productJpaList = this.productDatabaseConnection.list();
+        List<Product> productList = new ArrayList<>();
+
+        for (ProductJpa productJpa : productJpaList) {
+            productList.add(ProductMapper.INSTANCE.toProduct(productJpa));
+        }
+
+        return productList;
+    }
+
+    @Override
+    public List<Product> findAllByCategory(String category) {
+        List<ProductJpa> productJpaList = this.productDatabaseConnection.findAllByCategory(category);
+        List<Product> productList = new ArrayList<>();
+
+        for (ProductJpa productJpa : productJpaList) {
+            productList.add(ProductMapper.INSTANCE.toProduct(productJpa));
+        }
+
+        return productList;
     }
 }

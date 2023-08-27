@@ -1,15 +1,15 @@
 package com.fiap.restaurant.cleanarchitecture.api.product;
 
 import com.fiap.restaurant.cleanarchitecture.controller.product.ProductController;
+import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
 import com.fiap.restaurant.cleanarchitecture.types.dto.product.SaveProductDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/ca/product")
@@ -19,6 +19,16 @@ public class ProductRestController {
 
     public ProductRestController(ProductDatabaseConnection productDatabaseConnection) {
         this.productDatabaseConnection = productDatabaseConnection;
+    }
+
+    @GetMapping("/")
+    public List<Product> list() {
+        return ProductController.list(this.productDatabaseConnection);
+    }
+
+    @GetMapping("/listByCategory/{category}")
+    public List<Product> listByCategory(@PathVariable("category") String category) {
+        return ProductController.findAllByCategory(category, this.productDatabaseConnection);
     }
 
     @PostMapping(path = "/")
