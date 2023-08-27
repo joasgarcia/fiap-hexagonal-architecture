@@ -1,10 +1,10 @@
 package com.fiap.restaurant.cleanarchitecture.external.db.customer;
 
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.customer.CustomerJpaRepositoryConnection;
+import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.customer.CustomerDatabaseConnection;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomerJpaConnection implements CustomerJpaRepositoryConnection {
+public class CustomerJpaConnection implements CustomerDatabaseConnection<CustomerJpa> {
 
     private final CleanCustomerJpaRepository customerJpaRepository;
 

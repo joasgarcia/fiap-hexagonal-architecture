@@ -2,14 +2,15 @@ package com.fiap.restaurant.cleanarchitecture.gateway.customer;
 
 import com.fiap.restaurant.cleanarchitecture.external.db.customer.CustomerJpa;
 import com.fiap.restaurant.cleanarchitecture.entity.customer.Customer;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.customer.CustomerJpaRepositoryConnection;
+import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.customer.CustomerDatabaseConnection;
 
+@SuppressWarnings("unchecked")
 public class CustomerGateway implements ICustomerGateway {
 
-    private final CustomerJpaRepositoryConnection customerJpaRepositoryConnection;
+    private final CustomerDatabaseConnection customerDatabaseConnection;
 
-    public CustomerGateway(CustomerJpaRepositoryConnection customerJpaRepositoryConnection) {
-        this.customerJpaRepositoryConnection = customerJpaRepositoryConnection;
+    public CustomerGateway(CustomerDatabaseConnection customerDatabaseConnection) {
+        this.customerDatabaseConnection = customerDatabaseConnection;
     }
 
     @Override
@@ -19,12 +20,12 @@ public class CustomerGateway implements ICustomerGateway {
         customerJpa.setEmail(customer.getEmail());
         customerJpa.setCpf(customer.getCpf());
 
-        this.customerJpaRepositoryConnection.save(customerJpa);
+        this.customerDatabaseConnection.save(customerJpa);
     }
 
     @Override
     public Customer findByEmail(String email) {
-        CustomerJpa customerJpa = this.customerJpaRepositoryConnection.findByEmail(email);
+        CustomerJpa customerJpa = (CustomerJpa) this.customerDatabaseConnection.findByEmail(email);
         if (customerJpa == null) return null;
 
         return new Customer(customerJpa.getName(), customerJpa.getEmail(), customerJpa.getCpf());
@@ -32,7 +33,7 @@ public class CustomerGateway implements ICustomerGateway {
 
     @Override
     public Customer findByCpf(String cpf) {
-        CustomerJpa customerJpa = this.customerJpaRepositoryConnection.findByCpf(cpf);
+        CustomerJpa customerJpa = (CustomerJpa) this.customerDatabaseConnection.findByCpf(cpf);
         if (customerJpa == null) return null;
 
         return new Customer(customerJpa.getName(), customerJpa.getEmail(), customerJpa.getCpf());
