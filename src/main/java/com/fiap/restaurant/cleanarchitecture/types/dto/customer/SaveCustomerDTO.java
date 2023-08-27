@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.types.dto;
+package com.fiap.restaurant.cleanarchitecture.types.dto.customer;
 
 public class SaveCustomerDTO {
 
