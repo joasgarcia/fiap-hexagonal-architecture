@@ -5,6 +5,7 @@ import com.fiap.restaurant.cleanarchitecture.entity.customer.Customer;
 import com.fiap.restaurant.cleanarchitecture.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.customer.CustomerDatabaseConnection;
+import com.fiap.restaurant.core.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,11 +31,12 @@ public class CustomerRestController {
     }
 
     @GetMapping(path = "/{cpf}")
-    public ResponseEntity<Customer> getByCpf(@PathVariable String cpf) {
-        Customer customer = CustomerController.findByCpf(cpf, this.customerDatabaseConnection);
-
-        if (customer == null) return ResponseEntity.noContent().build();
-
-        return ResponseEntity.ok().body(customer);
+    public ResponseEntity<Object> getByCpf(@PathVariable String cpf) {
+        try {
+            Customer customer = CustomerController.findByCpf(cpf, this.customerDatabaseConnection);
+            return ResponseEntity.ok().body(customer);
+        } catch (ResourceNotFoundException resourceNotFoundException) {
+            return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 }

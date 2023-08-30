@@ -4,6 +4,7 @@ import com.fiap.restaurant.cleanarchitecture.entity.customer.Customer;
 import com.fiap.restaurant.cleanarchitecture.gateway.customer.ICustomerGateway;
 import com.fiap.restaurant.cleanarchitecture.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
+import com.fiap.restaurant.core.exception.ResourceNotFoundException;
 
 public class CustomerUseCase {
 
@@ -18,6 +19,9 @@ public class CustomerUseCase {
     }
 
     public static Customer findByCpf(String cpf, ICustomerGateway customerGateway) {
-        return customerGateway.findByCpf(cpf);
+        Customer customer = customerGateway.findByCpf(cpf);
+        if (customer == null) throw new ResourceNotFoundException("Cliente não encontrado");
+
+        return customer;
     }
 }
