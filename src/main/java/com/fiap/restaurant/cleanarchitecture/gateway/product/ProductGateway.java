@@ -51,4 +51,12 @@ public class ProductGateway implements IProductGateway {
 
         return productList;
     }
+
+    @Override
+    public Product getById(Long id) {
+        ProductJpa productJpa = (ProductJpa) this.productDatabaseConnection.getById(id);
+        if (productJpa == null) return null;
+
+        return ProductMapper.INSTANCE.toProduct(productJpa);
+    }
 }

@@ -28,4 +28,9 @@ public class ProductJpaConnection implements ProductDatabaseConnection<ProductJp
     public List<ProductJpa> findAllByCategory(String category) {
         return this.productJpaRepository.findAllByCategory(category);
     }
+
+    @Override
+    public ProductJpa getById(Long id) {
+        return this.productJpaRepository.getReferenceById(id);
+    }
 }

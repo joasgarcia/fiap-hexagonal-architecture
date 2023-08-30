@@ -11,4 +11,6 @@ public interface IProductGateway {
     List<Product> list();
 
     List<Product> findAllByCategory(String category);
+
+    Product getById(Long id);
 }
