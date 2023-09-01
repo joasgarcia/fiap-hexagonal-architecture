@@ -10,6 +10,7 @@ import com.fiap.restaurant.cleanarchitecture.gateway.product.IImageGateway;
 import com.fiap.restaurant.cleanarchitecture.gateway.product.IProductGateway;
 import com.fiap.restaurant.cleanarchitecture.types.dto.IdDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.SaveItemDTO;
+import com.fiap.restaurant.cleanarchitecture.types.dto.product.ImageSrcDTO;
 import com.fiap.restaurant.core.exception.ResourceNotFoundException;
 
 public class ItemUseCase {
@@ -31,10 +32,10 @@ public class ItemUseCase {
             item.addItemProduct(itemProduct);
         }
 
-        for (String imageSrc : saveItemDTO.getImageSrcList()) {
+        for (ImageSrcDTO imageSrc : saveItemDTO.getImageSrcList()) {
             Image image = new Image();
             image.setItem(item);
-            image.setSrc(imageSrc);
+            image.setSrc(imageSrc.getSrc());
             image = imageGateway.save(image);
 
             item.addImage(image);

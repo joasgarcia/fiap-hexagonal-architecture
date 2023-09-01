@@ -1,7 +1,6 @@
 package com.fiap.restaurant.cleanarchitecture.entity.order;
 
 import com.fiap.restaurant.cleanarchitecture.entity.product.Image;
-import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;

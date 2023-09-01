@@ -18,8 +18,20 @@ public class ItemProductJpa {
     @JoinColumn(name = "product_id")
     private ProductJpa product;
 
+    public Long getId() {
+        return id;
+    }
+
+    public ItemJpa getItem() {
+        return item;
+    }
+
     public void setItem(ItemJpa item) {
         this.item = item;
+    }
+
+    public ProductJpa getProduct() {
+        return product;
     }
 
     public void setProduct(ProductJpa product) {

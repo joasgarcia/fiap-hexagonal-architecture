@@ -9,6 +9,10 @@ public class ItemProduct {
     private Item item;
     private Product product;
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Item getItem() {
         return item;
     }
