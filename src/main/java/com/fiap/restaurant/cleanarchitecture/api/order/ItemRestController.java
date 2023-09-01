@@ -1,7 +1,7 @@
 package com.fiap.restaurant.cleanarchitecture.api.order;
 
 import com.fiap.restaurant.cleanarchitecture.controller.order.ItemController;
-import com.fiap.restaurant.cleanarchitecture.entity.order.Item;
+import com.fiap.restaurant.cleanarchitecture.types.dto.order.ItemPresenterDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.SaveItemDTO;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemProductDatabaseConnection;
@@ -34,8 +34,8 @@ public class ItemRestController {
     @PostMapping(path = "/")
     public ResponseEntity<Object> save(@RequestBody SaveItemDTO saveItemDTO) {
         try {
-            Item item = ItemController.save(saveItemDTO, this.itemDatabaseConnection, this.productDatabaseConnection, this.itemProductDatabaseConnection, this.imageDatabaseConnection);
-            return ResponseEntity.ok(item);
+            ItemPresenterDTO itemPresenterDTO = ItemController.save(saveItemDTO, this.itemDatabaseConnection, this.productDatabaseConnection, this.itemProductDatabaseConnection, this.imageDatabaseConnection);
+            return ResponseEntity.ok(itemPresenterDTO);
         } catch (ResourceNotFoundException resourceNotFoundException) {
             return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
         }

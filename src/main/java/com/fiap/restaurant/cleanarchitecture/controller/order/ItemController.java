@@ -9,6 +9,8 @@ import com.fiap.restaurant.cleanarchitecture.gateway.product.IImageGateway;
 import com.fiap.restaurant.cleanarchitecture.gateway.product.IProductGateway;
 import com.fiap.restaurant.cleanarchitecture.gateway.product.ImageGateway;
 import com.fiap.restaurant.cleanarchitecture.gateway.product.ProductGateway;
+import com.fiap.restaurant.cleanarchitecture.presenter.order.ItemPresenter;
+import com.fiap.restaurant.cleanarchitecture.types.dto.order.ItemPresenterDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.SaveItemDTO;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemProductDatabaseConnection;
@@ -18,12 +20,13 @@ import com.fiap.restaurant.cleanarchitecture.usecase.order.ItemUseCase;
 
 public class ItemController {
 
-    public static Item save(SaveItemDTO saveItemDTO, ItemDatabaseConnection itemDatabaseConnection, ProductDatabaseConnection productDatabaseConnection, ItemProductDatabaseConnection itemProductDatabaseConnection, ImageDatabaseConnection imageDatabaseConnection) {
+    public static ItemPresenterDTO save(SaveItemDTO saveItemDTO, ItemDatabaseConnection itemDatabaseConnection, ProductDatabaseConnection productDatabaseConnection, ItemProductDatabaseConnection itemProductDatabaseConnection, ImageDatabaseConnection imageDatabaseConnection) {
         IItemGateway itemGateway = new ItemGateway(itemDatabaseConnection);
         IProductGateway productGateway = new ProductGateway(productDatabaseConnection);
         IItemProductGateway itemProductGateway = new ItemProductGateway(itemProductDatabaseConnection, productDatabaseConnection, itemDatabaseConnection);
         IImageGateway imageGateway = new ImageGateway(imageDatabaseConnection);
 
-        return ItemUseCase.save(saveItemDTO, itemGateway, productGateway, itemProductGateway, imageGateway);
+        Item item = ItemUseCase.save(saveItemDTO, itemGateway, productGateway, itemProductGateway, imageGateway);
+        return ItemPresenter.fromItem(item);
     }
 }
