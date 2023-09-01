@@ -1,6 +1,7 @@
 package com.fiap.restaurant.cleanarchitecture.types.dto.order;
 
 import com.fiap.restaurant.cleanarchitecture.types.dto.IdDTO;
+import com.fiap.restaurant.cleanarchitecture.types.dto.product.ImageSrcDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ public class SaveItemDTO {
     private String name;
     private String description;
     private Double price;
-    private List<String> imageSrcList;
+    private List<ImageSrcDTO> imageSrcList;
     private List<IdDTO> productIdList;
 
     public SaveItemDTO() {
@@ -30,7 +31,7 @@ public class SaveItemDTO {
         return price;
     }
 
-    public List<String> getImageSrcList() {
+    public List<ImageSrcDTO> getImageSrcList() {
         return imageSrcList;
     }
 
