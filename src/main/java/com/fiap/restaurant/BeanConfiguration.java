@@ -9,8 +9,10 @@ import com.fiap.restaurant.adapter.driven.data.repository.order.OrderRepository;
 import com.fiap.restaurant.adapter.driven.data.repository.product.ImageRepository;
 import com.fiap.restaurant.adapter.driven.data.repository.product.ProductRepository;
 import com.fiap.restaurant.cleanarchitecture.external.db.customer.CustomerJpa;
+import com.fiap.restaurant.cleanarchitecture.external.db.product.ImageJpa;
 import com.fiap.restaurant.cleanarchitecture.external.db.product.ProductJpa;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.customer.CustomerDatabaseConnection;
+import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ImageDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
 import com.fiap.restaurant.core.service.customer.CustomerService;
 import com.fiap.restaurant.core.service.order.ItemProductService;
@@ -101,4 +103,10 @@ public class BeanConfiguration {
 
     @Autowired
     public ProductDatabaseConnection<ProductJpa> productDatabaseConnection;
+
+    @Autowired
+    public ImageDatabaseConnection<ImageJpa> imageDatabaseConnection;
+
+
+
 }
