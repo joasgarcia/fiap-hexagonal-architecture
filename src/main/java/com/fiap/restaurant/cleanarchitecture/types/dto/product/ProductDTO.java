@@ -1,6 +1,6 @@
 package com.fiap.restaurant.cleanarchitecture.types.dto.product;
 
-public class SaveProductDTO {
+public class ProductDTO {
 
     private String name;
     private String description;
