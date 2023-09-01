@@ -26,4 +26,9 @@ public class ItemJpaConnection implements ItemDatabaseConnection<ItemJpa> {
     public void delete(Long id) {
         this.itemJpaRepository.deleteById(id);
     }
+
+    @Override
+    public boolean existsById(Long id) {
+        return itemJpaRepository.existsById(id);
+    }
 }

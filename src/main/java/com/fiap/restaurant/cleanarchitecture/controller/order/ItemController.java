@@ -29,4 +29,12 @@ public class ItemController {
         Item item = ItemUseCase.save(saveItemDTO, itemGateway, productGateway, itemProductGateway, imageGateway);
         return ItemPresenter.fromItem(item);
     }
+
+    public static void delete(Long id, ItemDatabaseConnection itemDatabaseConnection, ProductDatabaseConnection productDatabaseConnection, ItemProductDatabaseConnection itemProductDatabaseConnection, ImageDatabaseConnection imageDatabaseConnection) {
+        IItemGateway itemGateway = new ItemGateway(itemDatabaseConnection);
+        IItemProductGateway itemProductGateway = new ItemProductGateway(itemProductDatabaseConnection, productDatabaseConnection, itemDatabaseConnection);
+        IImageGateway imageGateway = new ImageGateway(imageDatabaseConnection);
+
+        ItemUseCase.delete(id, itemGateway, itemProductGateway, imageGateway);
+    }
 }

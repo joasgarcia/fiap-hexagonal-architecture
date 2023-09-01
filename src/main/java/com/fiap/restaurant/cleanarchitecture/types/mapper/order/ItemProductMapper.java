@@ -7,6 +7,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ItemProductMapper {
 
@@ -19,5 +22,15 @@ public interface ItemProductMapper {
         itemProduct.setItem(ItemMapper.INSTANCE.toItem(itemProductJpa.getItem()));
 
         return itemProduct;
+    }
+
+    default List<ItemProduct> toItemProductList(List<ItemProductJpa> itemProductJpaList) {
+        List<ItemProduct> itemProductList = new ArrayList<>();
+
+        for (ItemProductJpa itemProductJpa : itemProductJpaList) {
+            itemProductList.add(toItemProduct(itemProductJpa));
+        }
+
+        return itemProductList;
     }
 }

@@ -13,6 +13,8 @@ import com.fiap.restaurant.cleanarchitecture.types.dto.order.SaveItemDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.product.ImageSrcDTO;
 import com.fiap.restaurant.core.exception.ResourceNotFoundException;
 
+import java.util.List;
+
 public class ItemUseCase {
 
     public static Item save(SaveItemDTO saveItemDTO, IItemGateway itemGateway, IProductGateway productGateway, IItemProductGateway itemProductGateway, IImageGateway imageGateway) {
@@ -42,5 +44,23 @@ public class ItemUseCase {
         }
 
         return item;
+    }
+
+    public static void delete(Long id, IItemGateway itemGateway, IItemProductGateway itemProductGateway, IImageGateway imageGateway) {
+        if (!itemGateway.existsById(id)) throw new ResourceNotFoundException("Item não encontrado");
+
+        List<ItemProduct> itemProductList = itemProductGateway.findAllByItemId(id);
+
+        for (ItemProduct itemProduct : itemProductList) {
+            itemProductGateway.delete(itemProduct);
+        }
+
+        List<Image> imageList = imageGateway.findAllByItemId(id);
+
+        for (Image image : imageList) {
+            imageGateway.delete(image.getId());
+        }
+
+        itemGateway.delete(id);
     }
 }
