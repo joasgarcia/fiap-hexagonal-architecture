@@ -8,5 +8,6 @@ public interface ProductDatabaseConnection<T> {
     List<T> list();
     List<T> findAllByCategory(String category);
     T getById(Long id);
-
+    boolean existsById(Long id);
+    void delete(T product);
 }

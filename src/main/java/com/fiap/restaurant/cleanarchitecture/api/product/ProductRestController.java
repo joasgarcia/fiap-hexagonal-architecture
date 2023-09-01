@@ -5,6 +5,7 @@ import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
 import com.fiap.restaurant.cleanarchitecture.types.dto.product.SaveProductDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
+import com.fiap.restaurant.core.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,16 @@ public class ProductRestController {
             return ResponseEntity.ok().body(true);
         } catch (BusinessException businessException) {
             return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        try {
+            ProductController.delete(id, this.productDatabaseConnection);
+            return ResponseEntity.ok().body(true);
+        } catch (ResourceNotFoundException resourceNotFoundException) {
+            return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 }
