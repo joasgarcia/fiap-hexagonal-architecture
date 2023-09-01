@@ -2,7 +2,7 @@ package com.fiap.restaurant.cleanarchitecture.api.product;
 
 import com.fiap.restaurant.cleanarchitecture.controller.product.ProductController;
 import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.SaveProductDTO;
+import com.fiap.restaurant.cleanarchitecture.types.dto.product.ProductDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
 import com.fiap.restaurant.core.exception.ResourceNotFoundException;
@@ -33,10 +33,22 @@ public class ProductRestController {
     }
 
     @PostMapping(path = "/")
-    public ResponseEntity<Object> save(@RequestBody SaveProductDTO saveProductDTO) {
+    public ResponseEntity<Object> save(@RequestBody ProductDTO productDTO) {
         try {
-            ProductController.save(saveProductDTO, this.productDatabaseConnection);
+            ProductController.save(productDTO, this.productDatabaseConnection);
             return ResponseEntity.ok().body(true);
+        } catch (BusinessException businessException) {
+            return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+        try {
+            ProductController.update(id, productDTO, this.productDatabaseConnection);
+            return ResponseEntity.ok().body(true);
+        } catch (ResourceNotFoundException resourceNotFoundException) {
+            return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
         } catch (BusinessException businessException) {
             return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
         }

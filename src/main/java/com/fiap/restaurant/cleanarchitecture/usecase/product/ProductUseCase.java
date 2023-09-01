@@ -2,16 +2,26 @@ package com.fiap.restaurant.cleanarchitecture.usecase.product;
 
 import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
 import com.fiap.restaurant.cleanarchitecture.gateway.product.IProductGateway;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.SaveProductDTO;
+import com.fiap.restaurant.cleanarchitecture.types.dto.product.ProductDTO;
 import com.fiap.restaurant.core.exception.ResourceNotFoundException;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 
 public class ProductUseCase {
 
-    public static Product save(SaveProductDTO saveProductDTO, IProductGateway productGateway) {
-        Product product = new Product(saveProductDTO.getName(), saveProductDTO.getDescription(), saveProductDTO.getPrice(), saveProductDTO.getCategory());
+    public static Product save(ProductDTO productDTO, IProductGateway productGateway) {
+        Product product = new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getPrice(), productDTO.getCategory());
         productGateway.save(product);
+        return product;
+    }
+
+    public static Product update(Long id, ProductDTO productDTO, IProductGateway productGateway) {
+        if (!productGateway.existsById(id)) throw new ResourceNotFoundException("Produto não encontrado");
+
+        Product product = productGateway.getById(id);
+        BeanUtils.copyProperties(productDTO, product, "id");
+        productGateway.update(id, product);
         return product;
     }
 
