@@ -21,6 +21,10 @@ public class ProductJpa {
     @Column(name = "price")
     private Double price;
 
+    public Long getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
