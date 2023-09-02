@@ -4,8 +4,8 @@ import com.fiap.restaurant.cleanarchitecture.controller.customer.CustomerControl
 import com.fiap.restaurant.cleanarchitecture.entity.customer.Customer;
 import com.fiap.restaurant.cleanarchitecture.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
+import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.customer.CustomerDatabaseConnection;
-import com.fiap.restaurant.core.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -4,7 +4,7 @@ import com.fiap.restaurant.cleanarchitecture.entity.customer.Customer;
 import com.fiap.restaurant.cleanarchitecture.gateway.customer.ICustomerGateway;
 import com.fiap.restaurant.cleanarchitecture.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
-import com.fiap.restaurant.core.exception.ResourceNotFoundException;
+import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;
 
 public class CustomerUseCase {
 
