@@ -4,8 +4,8 @@ import com.fiap.restaurant.cleanarchitecture.controller.product.ProductControlle
 import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
 import com.fiap.restaurant.cleanarchitecture.types.dto.product.ProductDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
+import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
-import com.fiap.restaurant.core.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
