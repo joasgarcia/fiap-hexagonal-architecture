@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @SuppressWarnings("unchecked")
 public class ProductGateway implements IProductGateway {
@@ -19,21 +20,26 @@ public class ProductGateway implements IProductGateway {
     }
 
     @Override
-    public void save(Product product) {
+    public Product save(Product product) {
         ProductJpa productJpa = new ProductJpa();
         productJpa.setName(product.getName());
         productJpa.setDescription(product.getDescription());
         productJpa.setPrice(product.getPrice());
         productJpa.setCategory(product.getCategory());
 
-        this.productDatabaseConnection.save(productJpa);
+        productJpa = (ProductJpa) this.productDatabaseConnection.save(productJpa);
+
+        return ProductMapper.INSTANCE.toProduct(productJpa);
     }
 
     @Override
-    public void update(Long id, Product product) {
-        ProductJpa productJpa = (ProductJpa) this.productDatabaseConnection.getById(id);
-        BeanUtils.copyProperties(product, productJpa, "id");
-        this.productDatabaseConnection.save(productJpa);
+    public Product update(Long id, Product product) {
+        Optional<ProductJpa> productJpa = this.productDatabaseConnection.getById(id);
+
+        BeanUtils.copyProperties(product, productJpa.get(), "id");
+        ProductJpa updatedProductJpa = (ProductJpa) this.productDatabaseConnection.save(productJpa.get());
+
+        return ProductMapper.INSTANCE.toProduct(updatedProductJpa);
     }
 
     @Override
@@ -62,10 +68,8 @@ public class ProductGateway implements IProductGateway {
 
     @Override
     public Product getById(Long id) {
-        ProductJpa productJpa = (ProductJpa) this.productDatabaseConnection.getById(id);
-        if (productJpa == null) return null;
-
-        return ProductMapper.INSTANCE.toProduct(productJpa);
+        Optional<ProductJpa> productJpa = this.productDatabaseConnection.getById(id);
+        return productJpa.map(ProductMapper.INSTANCE::toProduct).orElse(null);
     }
 
     @Override
@@ -75,7 +79,7 @@ public class ProductGateway implements IProductGateway {
 
     @Override
     public void delete(Long id) {
-        ProductJpa productJpa = (ProductJpa) this.productDatabaseConnection.getById(id);
-        this.productDatabaseConnection.delete(productJpa);
+        Optional<ProductJpa> productJpa = this.productDatabaseConnection.getById(id);
+        productJpa.ifPresent(this.productDatabaseConnection::delete);
     }
 }

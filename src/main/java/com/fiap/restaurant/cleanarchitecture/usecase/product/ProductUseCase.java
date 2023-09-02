@@ -12,7 +12,7 @@ public class ProductUseCase {
 
     public static Product save(ProductDTO productDTO, IProductGateway productGateway) {
         Product product = new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getPrice(), productDTO.getCategory());
-        productGateway.save(product);
+        product = productGateway.save(product);
         return product;
     }
 
