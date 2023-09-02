@@ -4,6 +4,7 @@ import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
 import com.fiap.restaurant.cleanarchitecture.external.db.product.ProductJpa;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.mapper.product.ProductMapper;
+import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,13 @@ public class ProductGateway implements IProductGateway {
         productJpa.setPrice(product.getPrice());
         productJpa.setCategory(product.getCategory());
 
+        this.productDatabaseConnection.save(productJpa);
+    }
+
+    @Override
+    public void update(Long id, Product product) {
+        ProductJpa productJpa = (ProductJpa) this.productDatabaseConnection.getById(id);
+        BeanUtils.copyProperties(product, productJpa, "id");
         this.productDatabaseConnection.save(productJpa);
     }
 
@@ -58,5 +66,16 @@ public class ProductGateway implements IProductGateway {
         if (productJpa == null) return null;
 
         return ProductMapper.INSTANCE.toProduct(productJpa);
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return this.productDatabaseConnection.existsById(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        ProductJpa productJpa = (ProductJpa) this.productDatabaseConnection.getById(id);
+        this.productDatabaseConnection.delete(productJpa);
     }
 }
