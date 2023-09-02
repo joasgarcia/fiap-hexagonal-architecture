@@ -6,9 +6,9 @@ import com.fiap.restaurant.cleanarchitecture.external.db.product.ProductJpa;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ImageDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.mapper.product.ImageMapper;
-import org.springframework.beans.BeanUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 @SuppressWarnings("unchecked")
 public class ImageGateway implements IImageGateway {
@@ -29,29 +29,34 @@ public class ImageGateway implements IImageGateway {
     public Image save(Image image) {
         ImageJpa imageJpa = new ImageJpa();
         imageJpa.setSrc(image.getSrc());
-        if (image.getProduct() != null) imageJpa.setProduct((ProductJpa) this.productDatabaseConnection.getById(image.getProduct().getId()));
 
-        this.imageDatabaseConnection.save(imageJpa);
+        if (image.getProduct() != null) {
+            ProductJpa productJpa = (ProductJpa) this.productDatabaseConnection.getById(image.getProduct().getId()).get();
+            imageJpa.setProduct(productJpa);
+        }
+
+        imageJpa = (ImageJpa) this.imageDatabaseConnection.save(imageJpa);
 
         return ImageMapper.INSTANCE.toImage(imageJpa);
     }
 
     @Override
     public Image update(Image image) {
-        ImageJpa imageJpa = (ImageJpa) this.imageDatabaseConnection.getById(image.getId());
-        if (imageJpa == null) return null;
+        Optional<ImageJpa> imageJpa = this.imageDatabaseConnection.getById(image.getId());
+        if (imageJpa.isEmpty()) return null;
 
-        BeanUtils.copyProperties(image, imageJpa, "id");
-        this.imageDatabaseConnection.save(imageJpa);
-        return ImageMapper.INSTANCE.toImage(imageJpa);
+        ImageJpa updatedImageJpa = imageJpa.get();
+        updatedImageJpa.setSrc(image.getSrc());
+
+        updatedImageJpa = (ImageJpa) this.imageDatabaseConnection.save(updatedImageJpa);
+        return ImageMapper.INSTANCE.toImage(updatedImageJpa);
     }
 
     @Override
     public Image getById(Long id) {
-        ImageJpa imageJpa = (ImageJpa) this.imageDatabaseConnection.getById(id);
-        if (imageJpa == null) return null;
+        Optional<ImageJpa> imageJpa = this.imageDatabaseConnection.getById(id);
+        return imageJpa.map(ImageMapper.INSTANCE::toImage).orElse(null);
 
-        return ImageMapper.INSTANCE.toImage(imageJpa);
     }
 
     @Override
@@ -61,8 +66,8 @@ public class ImageGateway implements IImageGateway {
 
     @Override
     public void delete(Long id) {
-        ImageJpa imageJpa = (ImageJpa) this.imageDatabaseConnection.getById(id);
-        this.imageDatabaseConnection.delete(imageJpa);
+        Optional<ImageJpa> imageJpa = this.imageDatabaseConnection.getById(id);
+        imageJpa.ifPresent(this.imageDatabaseConnection::delete);
     }
 
     @Override

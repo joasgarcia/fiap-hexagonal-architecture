@@ -24,11 +24,11 @@ public class ImageUseCase {
     }
 
     public static Image update(Long id, UpdateImageDTO updateImageDTO, IImageGateway imageGateway) {
-        Image image = imageGateway.getById(id);
-        if (image == null) throw new ResourceNotFoundException("Imagem não encontrada");
+        if (!imageGateway.existsById(id)) throw new ResourceNotFoundException("Imagem não encontrada");
 
+        Image image = imageGateway.getById(id);
         image.setSrc(updateImageDTO.getSrc());
-        return imageGateway.save(image);
+        return imageGateway.update(image);
     }
 
     public static void delete(Long id, IImageGateway imageGateway) {
