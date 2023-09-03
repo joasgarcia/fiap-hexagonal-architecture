@@ -18,4 +18,9 @@ public class OrderJpaConnection implements OrderDatabaseConnection<OrderJpa> {
     public OrderJpa getById(Long id) {
         return orderJpaRepository.getReferenceById(id);
     }
+
+    @Override
+    public OrderJpa save(OrderJpa orderJpa) {
+        return this.orderJpaRepository.save(orderJpa);
+    }
 }
