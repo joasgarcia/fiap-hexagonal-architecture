@@ -2,7 +2,6 @@ package com.fiap.restaurant.adapter.driven.data.repository.order;
 
 import com.fiap.restaurant.adapter.driven.data.entity.customer.CustomerEntity;
 import com.fiap.restaurant.adapter.driven.data.entity.order.OrderEntity;
-import com.fiap.restaurant.adapter.driven.data.entity.order.OrderItemEntity;
 import com.fiap.restaurant.adapter.driven.data.mapper.order.OrderMapper;
 import com.fiap.restaurant.adapter.driven.data.mapper.order.EntityToOrderMapper;
 import com.fiap.restaurant.adapter.driven.data.repository.customer.CustomerJpaRepository;
