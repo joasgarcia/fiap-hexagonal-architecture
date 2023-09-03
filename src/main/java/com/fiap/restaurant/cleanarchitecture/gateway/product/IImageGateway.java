@@ -12,5 +12,6 @@ public interface IImageGateway {
     boolean existsById(Long id);
     void delete(Long id);
     List<Image> findAllByProduct(Long productId);
+    List<Image> findAllByItemId(Long itemId);
 
 }
