@@ -4,6 +4,7 @@ import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.Product
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ProductJpaConnection implements ProductDatabaseConnection<ProductJpa> {
@@ -15,8 +16,8 @@ public class ProductJpaConnection implements ProductDatabaseConnection<ProductJp
     }
 
     @Override
-    public void save(ProductJpa product) {
-        this.productJpaRepository.save(product);
+    public ProductJpa save(ProductJpa product) {
+        return this.productJpaRepository.save(product);
     }
 
     @Override
@@ -30,8 +31,8 @@ public class ProductJpaConnection implements ProductDatabaseConnection<ProductJp
     }
 
     @Override
-    public ProductJpa getById(Long id) {
-        return this.productJpaRepository.getReferenceById(id);
+    public Optional<ProductJpa> getById(Long id) {
+        return this.productJpaRepository.findById(id);
     }
 
     @Override

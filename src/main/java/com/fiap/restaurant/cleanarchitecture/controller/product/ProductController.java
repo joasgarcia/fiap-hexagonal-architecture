@@ -11,14 +11,14 @@ import java.util.List;
 
 public class ProductController {
 
-    public static void save(ProductDTO productDTO, ProductDatabaseConnection productDatabaseConnection) {
+    public static Product save(ProductDTO productDTO, ProductDatabaseConnection productDatabaseConnection) {
         IProductGateway productGateway = new ProductGateway(productDatabaseConnection);
-        ProductUseCase.save(productDTO, productGateway);
+        return ProductUseCase.save(productDTO, productGateway);
     }
 
-    public static void update(Long id, ProductDTO productDTO, ProductDatabaseConnection productDatabaseConnection) {
+    public static Product update(Long id, ProductDTO productDTO, ProductDatabaseConnection productDatabaseConnection) {
         IProductGateway productGateway = new ProductGateway(productDatabaseConnection);
-        ProductUseCase.update(id, productDTO, productGateway);
+        return ProductUseCase.update(id, productDTO, productGateway);
     }
 
     public static List<Product> list(ProductDatabaseConnection productDatabaseConnection) {
