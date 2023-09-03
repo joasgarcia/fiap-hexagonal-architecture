@@ -1,6 +1,7 @@
 package com.fiap.restaurant.cleanarchitecture.entity.order;
 
 import com.fiap.restaurant.cleanarchitecture.entity.customer.Customer;
+import com.fiap.restaurant.core.enums.OrderPaymentStatus;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +16,8 @@ public class Order {
     private OrderStatus status;
 
     private List<OrderItem> items;
+
+    private OrderPaymentStatus paymentStatus;
 
     public Order() {
         this.setItems(new ArrayList<>());
@@ -67,5 +70,13 @@ public class Order {
     public void addItem(OrderItem orderItem) {
         this.items.add(orderItem);
         orderItem.setOrder(this);
+    }
+
+    public OrderPaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(OrderPaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 }

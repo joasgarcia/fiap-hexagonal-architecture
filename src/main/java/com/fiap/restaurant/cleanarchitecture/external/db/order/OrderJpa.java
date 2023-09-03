@@ -2,6 +2,7 @@ package com.fiap.restaurant.cleanarchitecture.external.db.order;
 
 import com.fiap.restaurant.cleanarchitecture.entity.order.OrderStatus;
 import com.fiap.restaurant.cleanarchitecture.external.db.customer.CustomerJpa;
+import com.fiap.restaurant.core.enums.OrderPaymentStatus;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -24,6 +25,10 @@ public class OrderJpa {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    @Column(name = "paymentStatus")
+    @Enumerated(EnumType.STRING)
+    private OrderPaymentStatus paymentStatus;
 
     @OneToMany(targetEntity = OrderItemJpa.class, mappedBy = "order", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     private List<OrderItemJpa> items;
@@ -62,6 +67,14 @@ public class OrderJpa {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    public OrderPaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(OrderPaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 }
 
