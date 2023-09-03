@@ -1,6 +1,6 @@
 package com.fiap.restaurant.cleanarchitecture.external.db.product;
 
-import com.fiap.restaurant.adapter.driven.data.entity.order.ItemEntity;
+import com.fiap.restaurant.cleanarchitecture.external.db.order.ItemJpa;
 import jakarta.persistence.*;
 
 @Entity(name = "image_ca")
@@ -19,7 +19,7 @@ public class ImageJpa {
 
     @ManyToOne
     @JoinColumn(name = "item_id")
-    private ItemEntity item;
+    private ItemJpa item;
 
     public Long getId() {
         return id;
@@ -45,11 +45,11 @@ public class ImageJpa {
         this.product = product;
     }
 
-    public ItemEntity getItem() {
+    public ItemJpa getItem() {
         return item;
     }
 
-    public void setItem(ItemEntity item) {
+    public void setItem(ItemJpa item) {
         this.item = item;
     }
 

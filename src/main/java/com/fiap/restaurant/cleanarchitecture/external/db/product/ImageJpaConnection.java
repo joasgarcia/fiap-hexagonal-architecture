@@ -38,4 +38,9 @@ public class ImageJpaConnection implements ImageDatabaseConnection<ImageJpa> {
     public List<ImageJpa> findAllByProductId(Long productId) {
         return this.imageJpaRepository.findAllByProductId(productId);
     }
+
+    @Override
+    public List<ImageJpa> findAllByItemId(Long itemId) {
+        return this.imageJpaRepository.findAllByItemId(itemId);
+    }
 }

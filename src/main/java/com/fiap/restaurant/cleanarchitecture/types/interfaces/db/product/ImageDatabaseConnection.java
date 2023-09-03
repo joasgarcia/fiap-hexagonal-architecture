@@ -9,5 +9,6 @@ public interface ImageDatabaseConnection<T> {
     T getById(Long id);
     boolean existsById(Long id);
     List<T> findAllByProductId(Long productId);
+    List<T> findAllByItemId(Long itemId);
 
 }
