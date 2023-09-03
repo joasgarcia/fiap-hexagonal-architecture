@@ -11,7 +11,7 @@ import com.fiap.restaurant.cleanarchitecture.gateway.product.IProductGateway;
 import com.fiap.restaurant.cleanarchitecture.types.dto.IdDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.SaveItemDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.product.ImageSrcDTO;
-import com.fiap.restaurant.core.exception.ResourceNotFoundException;
+import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;
 
 import java.util.List;
 
