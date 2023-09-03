@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "6937c86f-ed89-4cbd-b116-b3584f0d03b1",
+		"_postman_id": "025adf08-a110-40e1-a4ba-ecd1b5a7f97c",
 		"name": "fiap-techchallenge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "75225"
+		"_exporter_id": "4543298",
+		"_collection_link": "https://bold-resonance-6781.postman.co/workspace/development~87b27721-dc8a-43eb-83c7-30666598b090/collection/4543298-025adf08-a110-40e1-a4ba-ecd1b5a7f97c?action=share&source=collection_link&creator=4543298"
 	},
 	"item": [
 		{
@@ -31,36 +32,6 @@
 						"ca",
 						"customer",
 						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Webhook Atualização Pagamento do Pedido",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"externalIdentifier\": \"2\",\r\n    \"paymentStatus\": \"APPROVED\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/ca/order/webhookPaymentStatus",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ca",
-						"order",
-						"webhookPaymentStatus"
 					]
 				}
 			},
