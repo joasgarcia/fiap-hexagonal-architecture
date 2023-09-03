@@ -1,7 +1,6 @@
 package com.fiap.restaurant.cleanarchitecture.entity.order;
 
 import com.fiap.restaurant.cleanarchitecture.entity.customer.Customer;
-import com.fiap.restaurant.core.enums.OrderPaymentStatus;
 
 import java.util.ArrayList;
 import java.util.Date;
