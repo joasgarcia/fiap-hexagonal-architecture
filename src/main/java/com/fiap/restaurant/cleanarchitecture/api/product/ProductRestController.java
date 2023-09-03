@@ -35,8 +35,8 @@ public class ProductRestController {
     @PostMapping(path = "/")
     public ResponseEntity<Object> save(@RequestBody ProductDTO productDTO) {
         try {
-            ProductController.save(productDTO, this.productDatabaseConnection);
-            return ResponseEntity.ok().body(true);
+            Product product = ProductController.save(productDTO, this.productDatabaseConnection);
+            return ResponseEntity.ok().body(product);
         } catch (BusinessException businessException) {
             return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -45,8 +45,8 @@ public class ProductRestController {
     @PutMapping(path = "/{id}")
     public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
         try {
-            ProductController.update(id, productDTO, this.productDatabaseConnection);
-            return ResponseEntity.ok().body(true);
+            Product product = ProductController.update(id, productDTO, this.productDatabaseConnection);
+            return ResponseEntity.ok().body(product);
         } catch (ResourceNotFoundException resourceNotFoundException) {
             return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
         } catch (BusinessException businessException) {

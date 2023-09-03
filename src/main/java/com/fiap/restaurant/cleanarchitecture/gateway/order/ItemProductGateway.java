@@ -10,6 +10,7 @@ import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.Product
 import com.fiap.restaurant.cleanarchitecture.types.mapper.order.ItemProductMapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @SuppressWarnings("unchecked")
 public class ItemProductGateway implements IItemProductGateway {
@@ -26,12 +27,12 @@ public class ItemProductGateway implements IItemProductGateway {
 
     @Override
     public ItemProduct save(ItemProduct itemProduct) {
-        ProductJpa productJpa = (ProductJpa) productDatabaseConnection.getById(itemProduct.getProduct().getId());
-        ItemJpa itemJpa = (ItemJpa) itemDatabaseConnection.getById(itemProduct.getItem().getId());
+        Optional<ProductJpa> productJpa = productDatabaseConnection.getById(itemProduct.getProduct().getId());
+        Optional<ItemJpa> itemJpa = itemDatabaseConnection.getById(itemProduct.getItem().getId());
 
         ItemProductJpa itemProductJpa = new ItemProductJpa();
-        itemProductJpa.setProduct(productJpa);
-        itemProductJpa.setItem(itemJpa);
+        itemProductJpa.setProduct(productJpa.get());
+        itemProductJpa.setItem(itemJpa.get());
 
         itemProductJpa = (ItemProductJpa) this.itemProductDatabaseConnection.save(itemProductJpa);
 

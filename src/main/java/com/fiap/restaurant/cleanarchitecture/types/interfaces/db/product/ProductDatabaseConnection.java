@@ -1,13 +1,14 @@
 package com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductDatabaseConnection<T> {
 
-    void save(T product);
+    T save(T product);
     List<T> list();
     List<T> findAllByCategory(String category);
-    T getById(Long id);
+    Optional<T> getById(Long id);
     boolean existsById(Long id);
     void delete(T product);
 }

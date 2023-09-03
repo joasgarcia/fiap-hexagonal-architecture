@@ -4,6 +4,7 @@ import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ImageDa
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ImageJpaConnection implements ImageDatabaseConnection<ImageJpa> {
@@ -25,8 +26,8 @@ public class ImageJpaConnection implements ImageDatabaseConnection<ImageJpa> {
     }
 
     @Override
-    public ImageJpa getById(Long id) {
-        return this.imageJpaRepository.getReferenceById(id);
+    public Optional<ImageJpa> getById(Long id) {
+        return this.imageJpaRepository.findById(id);
     }
 
     @Override
