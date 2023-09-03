@@ -35,4 +35,4 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://app-restaurant-mysql:3306/techchallenge
+              value: jdbc:mysql://app-restaurant-mysql-service:3306/techchallenge
