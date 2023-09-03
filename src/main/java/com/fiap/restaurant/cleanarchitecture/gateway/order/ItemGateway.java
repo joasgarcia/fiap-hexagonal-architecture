@@ -29,4 +29,9 @@ public class ItemGateway implements IItemGateway {
     public void delete(Long id) {
         this.itemDatabaseConnection.delete(id);
     }
+
+    @Override
+    public boolean existsById(Long id) {
+        return this.itemDatabaseConnection.existsById(id);
+    }
 }

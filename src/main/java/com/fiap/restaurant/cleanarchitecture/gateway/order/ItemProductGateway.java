@@ -9,6 +9,8 @@ import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemProdu
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.mapper.order.ItemProductMapper;
 
+import java.util.List;
+
 @SuppressWarnings("unchecked")
 public class ItemProductGateway implements IItemProductGateway {
 
@@ -37,7 +39,13 @@ public class ItemProductGateway implements IItemProductGateway {
     }
 
     @Override
-    public void delete(Long id) {
-        this.itemProductDatabaseConnection.delete(id);
+    public void delete(ItemProduct itemProduct) {
+        this.itemProductDatabaseConnection.delete(itemProduct.getId());
+    }
+
+    @Override
+    public List<ItemProduct> findAllByItemId(Long itemId) {
+        List<ItemProductJpa> itemProductJpaList = this.itemProductDatabaseConnection.findAllByItemId(itemId);
+        return ItemProductMapper.INSTANCE.toItemProductList(itemProductJpaList);
     }
 }

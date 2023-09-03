@@ -70,4 +70,10 @@ public class ImageGateway implements IImageGateway {
         List<ImageJpa> imageJpaList = this.imageDatabaseConnection.findAllByProductId(productId);
         return ImageMapper.INSTANCE.toImageList(imageJpaList);
     }
+
+    @Override
+    public List<Image> findAllByItemId(Long itemId) {
+        List<ImageJpa> imageJpaList = this.imageDatabaseConnection.findAllByItemId(itemId);
+        return ImageMapper.INSTANCE.toImageList(imageJpaList);
+    }
 }

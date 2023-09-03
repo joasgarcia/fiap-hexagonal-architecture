@@ -3,6 +3,8 @@ package com.fiap.restaurant.cleanarchitecture.external.db.order;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemProductDatabaseConnection;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ItemProductJpaConnection implements ItemProductDatabaseConnection<ItemProductJpa> {
 
@@ -20,5 +22,10 @@ public class ItemProductJpaConnection implements ItemProductDatabaseConnection<I
     @Override
     public void delete(Long id) {
         this.cleanItemProductRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ItemProductJpa> findAllByItemId(Long itemId) {
+        return this.cleanItemProductRepository.findAllByItemId(itemId);
     }
 }

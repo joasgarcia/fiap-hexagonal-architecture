@@ -9,5 +9,6 @@ import java.util.List;
 public interface CleanImageJpaRepository extends JpaRepository<ImageJpa, Long> {
 
     List<ImageJpa> findAllByProductId(Long productId);
+    List<ImageJpa> findAllByItemId(Long itemId);
 
 }
