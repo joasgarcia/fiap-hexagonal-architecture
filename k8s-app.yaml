@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-restaurant-service
+spec:
+  selector:
+    app: app-restaurant
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      nodePort: 30000
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-restaurant
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app-restaurant
+  template:
+    metadata:
+      labels:
+        app: app-restaurant
+    spec:
+      containers:
+        - name: app-restaurant
+          image: app-restaurant:1.0.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://app-restaurant-mysql:3306/techchallenge
