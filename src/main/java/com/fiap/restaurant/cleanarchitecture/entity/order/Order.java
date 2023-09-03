@@ -54,10 +54,6 @@ public class Order {
         this.status = status;
     }
 
-    public void transmitToKitchen() {
-        this.setStatus(OrderStatus.TRANSMITED_TO_KITCHEN);
-    }
-
     public void setItems(List<OrderItem> items) {
         this.items = items;
     }
