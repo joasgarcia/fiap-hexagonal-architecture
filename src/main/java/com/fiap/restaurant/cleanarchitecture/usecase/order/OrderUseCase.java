@@ -7,6 +7,8 @@ import com.fiap.restaurant.cleanarchitecture.gateway.order.IOrderGateway;
 import com.fiap.restaurant.cleanarchitecture.gateway.order.OrderGateway;
 import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;
 
+import java.util.List;
+
 public class OrderUseCase {
 
     public static Order findById(Long id, IOrderGateway orderGateway) {
@@ -27,7 +29,7 @@ public class OrderUseCase {
         return order;
     }
 
-    public static Order updateStatus(Long id, OrderStatus status, OrderGateway orderGateway) {
+    public static Order updateStatus(Long id, OrderStatus status, IOrderGateway orderGateway) {
         Order order = orderGateway.getById(id);
 
         order.setStatus(status);
@@ -35,5 +37,9 @@ public class OrderUseCase {
         orderGateway.update(order);
 
         return order;
+    }
+
+    public static List<Order> listOrderedByStatus(IOrderGateway orderGateway) {
+        return orderGateway.listOrderedByStatusAndId();
     }
 }
