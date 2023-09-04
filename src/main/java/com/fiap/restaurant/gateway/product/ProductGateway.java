@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.gateway.product;
+package com.fiap.restaurant.gateway.product;
 
 import com.fiap.restaurant.entity.product.Product;
 import com.fiap.restaurant.external.db.product.ProductJpa;

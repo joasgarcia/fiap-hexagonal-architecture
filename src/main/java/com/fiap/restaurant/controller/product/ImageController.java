@@ -1,10 +1,10 @@
 package com.fiap.restaurant.controller.product;
 
 import com.fiap.restaurant.entity.product.Image;
-import com.fiap.restaurant.cleanarchitecture.gateway.product.IImageGateway;
-import com.fiap.restaurant.cleanarchitecture.gateway.product.IProductGateway;
-import com.fiap.restaurant.cleanarchitecture.gateway.product.ImageGateway;
-import com.fiap.restaurant.cleanarchitecture.gateway.product.ProductGateway;
+import com.fiap.restaurant.gateway.product.IImageGateway;
+import com.fiap.restaurant.gateway.product.IProductGateway;
+import com.fiap.restaurant.gateway.product.ImageGateway;
+import com.fiap.restaurant.gateway.product.ProductGateway;
 import com.fiap.restaurant.cleanarchitecture.presenter.product.ImagePresenter;
 import com.fiap.restaurant.cleanarchitecture.types.dto.product.ImagePresenterDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.product.SaveProductImageDTO;

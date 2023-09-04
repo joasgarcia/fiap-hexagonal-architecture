@@ -1,14 +1,14 @@
 package com.fiap.restaurant.controller.order;
 
 import com.fiap.restaurant.entity.order.Item;
-import com.fiap.restaurant.cleanarchitecture.gateway.order.IItemGateway;
-import com.fiap.restaurant.cleanarchitecture.gateway.order.IItemProductGateway;
-import com.fiap.restaurant.cleanarchitecture.gateway.order.ItemGateway;
-import com.fiap.restaurant.cleanarchitecture.gateway.order.ItemProductGateway;
-import com.fiap.restaurant.cleanarchitecture.gateway.product.IImageGateway;
-import com.fiap.restaurant.cleanarchitecture.gateway.product.IProductGateway;
-import com.fiap.restaurant.cleanarchitecture.gateway.product.ImageGateway;
-import com.fiap.restaurant.cleanarchitecture.gateway.product.ProductGateway;
+import com.fiap.restaurant.gateway.order.IItemGateway;
+import com.fiap.restaurant.gateway.order.IItemProductGateway;
+import com.fiap.restaurant.gateway.order.ItemGateway;
+import com.fiap.restaurant.gateway.order.ItemProductGateway;
+import com.fiap.restaurant.gateway.product.IImageGateway;
+import com.fiap.restaurant.gateway.product.IProductGateway;
+import com.fiap.restaurant.gateway.product.ImageGateway;
+import com.fiap.restaurant.gateway.product.ProductGateway;
 import com.fiap.restaurant.cleanarchitecture.presenter.order.ItemPresenter;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.ItemPresenterDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.SaveItemDTO;

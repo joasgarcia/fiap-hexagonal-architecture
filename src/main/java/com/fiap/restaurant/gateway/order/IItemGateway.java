@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.gateway.order;
+package com.fiap.restaurant.gateway.order;
 
 import com.fiap.restaurant.entity.order.Item;
 

@@ -1,7 +1,7 @@
 package com.fiap.restaurant.cleanarchitecture.usecase.customer;
 
 import com.fiap.restaurant.entity.customer.Customer;
-import com.fiap.restaurant.cleanarchitecture.gateway.customer.ICustomerGateway;
+import com.fiap.restaurant.gateway.customer.ICustomerGateway;
 import com.fiap.restaurant.cleanarchitecture.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
 import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;

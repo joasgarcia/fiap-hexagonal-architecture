@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.gateway.customer;
+package com.fiap.restaurant.gateway.customer;
 
 import com.fiap.restaurant.external.db.customer.CustomerJpa;
 import com.fiap.restaurant.entity.customer.Customer;
