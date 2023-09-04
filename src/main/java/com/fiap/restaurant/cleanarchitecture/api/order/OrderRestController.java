@@ -2,6 +2,7 @@ package com.fiap.restaurant.cleanarchitecture.api.order;
 
 import com.fiap.restaurant.cleanarchitecture.controller.order.OrderController;
 import com.fiap.restaurant.cleanarchitecture.entity.order.Order;
+import com.fiap.restaurant.cleanarchitecture.types.dto.order.UpdateOrderStatusDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.UpdatePaymentStatusDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.OrderDatabaseConnection;
@@ -40,6 +41,18 @@ public class OrderRestController {
     public ResponseEntity<Object> updatePaymentStatus(@RequestBody UpdatePaymentStatusDTO updatePaymentStatusDTO) {
         try {
             OrderController.updatePaymentStatus(updatePaymentStatusDTO.getExternalIdentifier(), updatePaymentStatusDTO.getPaymentStatus(), this.orderDatabaseConnection);
+            return ResponseEntity.ok().body(true);
+        } catch (BusinessException businessException) {
+            return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (EntityNotFoundException resourceNotFoundException) {
+            return new ResponseEntity<>("Pedido não encontrado", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping(path = "/{id}/status")
+    public ResponseEntity<Object> updateStatus(@PathVariable Long id, @RequestBody UpdateOrderStatusDTO updateOrderStatusDTO) {
+        try {
+            OrderController.updateStatus(id, updateOrderStatusDTO.getStatus(), this.orderDatabaseConnection);
             return ResponseEntity.ok().body(true);
         } catch (BusinessException businessException) {
             return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);

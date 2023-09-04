@@ -2,7 +2,9 @@ package com.fiap.restaurant.cleanarchitecture.usecase.order;
 
 import com.fiap.restaurant.cleanarchitecture.entity.order.Order;
 import com.fiap.restaurant.cleanarchitecture.entity.order.OrderPaymentStatus;
+import com.fiap.restaurant.cleanarchitecture.entity.order.OrderStatus;
 import com.fiap.restaurant.cleanarchitecture.gateway.order.IOrderGateway;
+import com.fiap.restaurant.cleanarchitecture.gateway.order.OrderGateway;
 import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;
 
 public class OrderUseCase {
@@ -19,6 +21,16 @@ public class OrderUseCase {
         Order order = orderGateway.getById(id);
 
         order.setPaymentStatus(paymentStatus);
+
+        orderGateway.update(order);
+
+        return order;
+    }
+
+    public static Order updateStatus(Long id, OrderStatus status, OrderGateway orderGateway) {
+        Order order = orderGateway.getById(id);
+
+        order.setStatus(status);
 
         orderGateway.update(order);
 

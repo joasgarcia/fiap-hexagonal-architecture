@@ -67,6 +67,37 @@
 			"response": []
 		},
 		{
+			"name": "Atualizar status do pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"APPROVED\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ca/order/1/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ca",
+						"order",
+						"1",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "customer",
 			"request": {
 				"method": "GET",
