@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.presenter.order;
+package com.fiap.restaurant.presenter.order;
 
 import com.fiap.restaurant.entity.order.Item;
 import com.fiap.restaurant.entity.order.ItemProduct;

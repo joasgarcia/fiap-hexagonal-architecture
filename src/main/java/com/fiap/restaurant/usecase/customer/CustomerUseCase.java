@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.usecase.customer;
+package com.fiap.restaurant.usecase.customer;
 
 import com.fiap.restaurant.entity.customer.Customer;
 import com.fiap.restaurant.gateway.customer.ICustomerGateway;

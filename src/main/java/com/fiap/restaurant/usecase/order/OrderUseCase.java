@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.usecase.order;
+package com.fiap.restaurant.usecase.order;
 
 import com.fiap.restaurant.entity.order.Order;
 import com.fiap.restaurant.entity.order.OrderPaymentStatus;

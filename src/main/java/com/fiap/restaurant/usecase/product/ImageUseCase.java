@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.usecase.product;
+package com.fiap.restaurant.usecase.product;
 
 import com.fiap.restaurant.entity.product.Image;
 import com.fiap.restaurant.entity.product.Product;

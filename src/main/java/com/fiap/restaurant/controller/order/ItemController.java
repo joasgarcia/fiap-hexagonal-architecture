@@ -9,14 +9,14 @@ import com.fiap.restaurant.gateway.product.IImageGateway;
 import com.fiap.restaurant.gateway.product.IProductGateway;
 import com.fiap.restaurant.gateway.product.ImageGateway;
 import com.fiap.restaurant.gateway.product.ProductGateway;
-import com.fiap.restaurant.cleanarchitecture.presenter.order.ItemPresenter;
+import com.fiap.restaurant.presenter.order.ItemPresenter;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.ItemPresenterDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.SaveItemDTO;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemProductDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ImageDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
-import com.fiap.restaurant.cleanarchitecture.usecase.order.ItemUseCase;
+import com.fiap.restaurant.usecase.order.ItemUseCase;
 
 public class ItemController {
 

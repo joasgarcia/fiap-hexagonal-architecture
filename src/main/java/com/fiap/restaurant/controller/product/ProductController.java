@@ -5,7 +5,7 @@ import com.fiap.restaurant.gateway.product.IProductGateway;
 import com.fiap.restaurant.gateway.product.ProductGateway;
 import com.fiap.restaurant.cleanarchitecture.types.dto.product.ProductDTO;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
-import com.fiap.restaurant.cleanarchitecture.usecase.product.ProductUseCase;
+import com.fiap.restaurant.usecase.product.ProductUseCase;
 
 import java.util.List;
 
