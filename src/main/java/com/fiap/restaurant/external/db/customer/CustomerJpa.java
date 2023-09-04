@@ -2,7 +2,7 @@ package com.fiap.restaurant.external.db.customer;
 
 import jakarta.persistence.*;
 
-@Entity(name = "customer_ca")
+@Entity(name = "customer")
 public class CustomerJpa {
 
     @Id

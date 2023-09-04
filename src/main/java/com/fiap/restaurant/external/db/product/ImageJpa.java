@@ -3,7 +3,7 @@ package com.fiap.restaurant.external.db.product;
 import com.fiap.restaurant.external.db.order.ItemJpa;
 import jakarta.persistence.*;
 
-@Entity(name = "image_ca")
+@Entity(name = "image")
 public class ImageJpa {
 
     @Id

@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Entity(name = "`order_ca`")
+@Entity(name = "`order`")
 public class OrderJpa {
 
     @Id
