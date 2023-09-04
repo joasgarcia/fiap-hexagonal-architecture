@@ -3,7 +3,7 @@ package com.fiap.restaurant.cleanarchitecture.external.db.order;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.OrderDatabaseConnection;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
+import java.util.List;
 
 @Component
 public class OrderJpaConnection implements OrderDatabaseConnection<OrderJpa> {
@@ -22,5 +22,10 @@ public class OrderJpaConnection implements OrderDatabaseConnection<OrderJpa> {
     @Override
     public OrderJpa save(OrderJpa orderJpa) {
         return this.orderJpaRepository.save(orderJpa);
+    }
+
+    @Override
+    public List<OrderJpa> listOrderedByStatusAndId() {
+        return this.orderJpaRepository.listOrderedByStatusAndId();
     }
 }

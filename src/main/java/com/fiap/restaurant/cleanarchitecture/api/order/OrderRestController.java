@@ -2,6 +2,7 @@ package com.fiap.restaurant.cleanarchitecture.api.order;
 
 import com.fiap.restaurant.cleanarchitecture.controller.order.OrderController;
 import com.fiap.restaurant.cleanarchitecture.entity.order.Order;
+import com.fiap.restaurant.cleanarchitecture.types.dto.order.OrderScreenPresenterDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.UpdateOrderStatusDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.UpdatePaymentStatusDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/ca/order")
@@ -58,6 +61,16 @@ public class OrderRestController {
             return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (EntityNotFoundException resourceNotFoundException) {
             return new ResponseEntity<>("Pedido não encontrado", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(path = "/statusScreen")
+    public ResponseEntity<Object> statusScreen() {
+        try {
+            List<OrderScreenPresenterDTO> orderScreenPresenterDTOList = OrderController.listOrderedByStatus(this.orderDatabaseConnection);
+            return ResponseEntity.ok(orderScreenPresenterDTOList);
+        } catch (BusinessException businessException) {
+            return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

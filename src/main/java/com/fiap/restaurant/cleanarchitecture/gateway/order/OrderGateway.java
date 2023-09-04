@@ -6,6 +6,8 @@ import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.OrderData
 import com.fiap.restaurant.cleanarchitecture.types.mapper.order.OrderMapper;
 import org.springframework.beans.BeanUtils;
 
+import java.util.List;
+
 public class OrderGateway implements IOrderGateway {
 
     private final OrderDatabaseConnection orderDatabaseConnection;
@@ -30,5 +32,11 @@ public class OrderGateway implements IOrderGateway {
         OrderJpa updatedOrderJpa = (OrderJpa) this.orderDatabaseConnection.save(orderJpa);
 
         return OrderMapper.INSTANCE.toOrder(updatedOrderJpa);
+    }
+
+    @Override
+    public List<Order> listOrderedByStatusAndId() {
+        List<OrderJpa> orderJpaList = this.orderDatabaseConnection.listOrderedByStatusAndId();
+        return OrderMapper.INSTANCE.toOrderList(orderJpaList);
     }
 }
