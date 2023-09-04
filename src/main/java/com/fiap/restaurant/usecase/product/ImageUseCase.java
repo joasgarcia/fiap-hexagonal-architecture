@@ -4,9 +4,9 @@ import com.fiap.restaurant.entity.product.Image;
 import com.fiap.restaurant.entity.product.Product;
 import com.fiap.restaurant.gateway.product.IImageGateway;
 import com.fiap.restaurant.gateway.product.IProductGateway;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.SaveProductImageDTO;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.UpdateImageDTO;
-import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;
+import com.fiap.restaurant.types.dto.product.SaveProductImageDTO;
+import com.fiap.restaurant.types.dto.product.UpdateImageDTO;
+import com.fiap.restaurant.types.exception.ResourceNotFoundException;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@ import com.fiap.restaurant.entity.order.Order;
 import com.fiap.restaurant.entity.order.OrderPaymentStatus;
 import com.fiap.restaurant.entity.order.OrderStatus;
 import com.fiap.restaurant.gateway.order.OrderGateway;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.OrderDatabaseConnection;
+import com.fiap.restaurant.types.interfaces.db.order.OrderDatabaseConnection;
 import com.fiap.restaurant.usecase.order.OrderUseCase;
 
 public class OrderController {

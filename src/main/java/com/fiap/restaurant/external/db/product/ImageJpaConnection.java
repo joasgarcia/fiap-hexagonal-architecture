@@ -1,6 +1,6 @@
 package com.fiap.restaurant.external.db.product;
 
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ImageDatabaseConnection;
+import com.fiap.restaurant.types.interfaces.db.product.ImageDatabaseConnection;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

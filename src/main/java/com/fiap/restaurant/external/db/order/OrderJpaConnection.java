@@ -1,6 +1,6 @@
 package com.fiap.restaurant.external.db.order;
 
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.OrderDatabaseConnection;
+import com.fiap.restaurant.types.interfaces.db.order.OrderDatabaseConnection;
 import org.springframework.stereotype.Component;
 
 @Component

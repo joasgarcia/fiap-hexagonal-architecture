@@ -8,10 +8,10 @@ import com.fiap.restaurant.gateway.order.IItemGateway;
 import com.fiap.restaurant.gateway.order.IItemProductGateway;
 import com.fiap.restaurant.gateway.product.IImageGateway;
 import com.fiap.restaurant.gateway.product.IProductGateway;
-import com.fiap.restaurant.cleanarchitecture.types.dto.IdDTO;
-import com.fiap.restaurant.cleanarchitecture.types.dto.order.SaveItemDTO;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.ImageSrcDTO;
-import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;
+import com.fiap.restaurant.types.dto.IdDTO;
+import com.fiap.restaurant.types.dto.order.SaveItemDTO;
+import com.fiap.restaurant.types.dto.product.ImageSrcDTO;
+import com.fiap.restaurant.types.exception.ResourceNotFoundException;
 
 import java.util.List;
 

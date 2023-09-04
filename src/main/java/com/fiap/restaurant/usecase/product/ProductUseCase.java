@@ -2,8 +2,8 @@ package com.fiap.restaurant.usecase.product;
 
 import com.fiap.restaurant.entity.product.Product;
 import com.fiap.restaurant.gateway.product.IProductGateway;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.ProductDTO;
-import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;
+import com.fiap.restaurant.types.dto.product.ProductDTO;
+import com.fiap.restaurant.types.exception.ResourceNotFoundException;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;

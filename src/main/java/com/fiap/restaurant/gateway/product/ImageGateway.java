@@ -3,9 +3,9 @@ package com.fiap.restaurant.gateway.product;
 import com.fiap.restaurant.entity.product.Image;
 import com.fiap.restaurant.external.db.product.ImageJpa;
 import com.fiap.restaurant.external.db.product.ProductJpa;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ImageDatabaseConnection;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
-import com.fiap.restaurant.cleanarchitecture.types.mapper.product.ImageMapper;
+import com.fiap.restaurant.types.interfaces.db.product.ImageDatabaseConnection;
+import com.fiap.restaurant.types.interfaces.db.product.ProductDatabaseConnection;
+import com.fiap.restaurant.types.mapper.product.ImageMapper;
 
 import java.util.List;
 import java.util.Optional;

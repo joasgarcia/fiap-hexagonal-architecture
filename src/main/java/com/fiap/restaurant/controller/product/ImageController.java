@@ -6,11 +6,11 @@ import com.fiap.restaurant.gateway.product.IProductGateway;
 import com.fiap.restaurant.gateway.product.ImageGateway;
 import com.fiap.restaurant.gateway.product.ProductGateway;
 import com.fiap.restaurant.presenter.product.ImagePresenter;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.ImagePresenterDTO;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.SaveProductImageDTO;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.UpdateImageDTO;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ImageDatabaseConnection;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
+import com.fiap.restaurant.types.dto.product.ImagePresenterDTO;
+import com.fiap.restaurant.types.dto.product.SaveProductImageDTO;
+import com.fiap.restaurant.types.dto.product.UpdateImageDTO;
+import com.fiap.restaurant.types.interfaces.db.product.ImageDatabaseConnection;
+import com.fiap.restaurant.types.interfaces.db.product.ProductDatabaseConnection;
 import com.fiap.restaurant.usecase.product.ImageUseCase;
 
 import java.util.List;

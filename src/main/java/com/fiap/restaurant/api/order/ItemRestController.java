@@ -1,13 +1,13 @@
 package com.fiap.restaurant.api.order;
 
 import com.fiap.restaurant.controller.order.ItemController;
-import com.fiap.restaurant.cleanarchitecture.types.dto.order.ItemPresenterDTO;
-import com.fiap.restaurant.cleanarchitecture.types.dto.order.SaveItemDTO;
-import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemDatabaseConnection;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemProductDatabaseConnection;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ImageDatabaseConnection;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
+import com.fiap.restaurant.types.dto.order.ItemPresenterDTO;
+import com.fiap.restaurant.types.dto.order.SaveItemDTO;
+import com.fiap.restaurant.types.exception.ResourceNotFoundException;
+import com.fiap.restaurant.types.interfaces.db.order.ItemDatabaseConnection;
+import com.fiap.restaurant.types.interfaces.db.order.ItemProductDatabaseConnection;
+import com.fiap.restaurant.types.interfaces.db.product.ImageDatabaseConnection;
+import com.fiap.restaurant.types.interfaces.db.product.ProductDatabaseConnection;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
 package com.fiap.restaurant.external.db.customer;
 
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.customer.CustomerDatabaseConnection;
+import com.fiap.restaurant.types.interfaces.db.customer.CustomerDatabaseConnection;
 import org.springframework.stereotype.Component;
 
 @Component

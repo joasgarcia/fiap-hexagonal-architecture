@@ -2,12 +2,12 @@ package com.fiap.restaurant.api.product;
 
 import com.fiap.restaurant.controller.product.ImageController;
 import com.fiap.restaurant.entity.product.Image;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.ImagePresenterDTO;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.SaveProductImageDTO;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.UpdateImageDTO;
-import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ImageDatabaseConnection;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
+import com.fiap.restaurant.types.dto.product.ImagePresenterDTO;
+import com.fiap.restaurant.types.dto.product.SaveProductImageDTO;
+import com.fiap.restaurant.types.dto.product.UpdateImageDTO;
+import com.fiap.restaurant.types.exception.ResourceNotFoundException;
+import com.fiap.restaurant.types.interfaces.db.product.ImageDatabaseConnection;
+import com.fiap.restaurant.types.interfaces.db.product.ProductDatabaseConnection;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

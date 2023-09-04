@@ -1,7 +1,7 @@
 package com.fiap.restaurant.presenter.product;
 
 import com.fiap.restaurant.entity.product.Image;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.ImagePresenterDTO;
+import com.fiap.restaurant.types.dto.product.ImagePresenterDTO;
 
 import java.util.ArrayList;
 import java.util.List;

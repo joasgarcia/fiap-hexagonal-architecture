@@ -5,7 +5,7 @@ import com.fiap.restaurant.entity.order.OrderPaymentStatus;
 import com.fiap.restaurant.entity.order.OrderStatus;
 import com.fiap.restaurant.gateway.order.IOrderGateway;
 import com.fiap.restaurant.gateway.order.OrderGateway;
-import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;
+import com.fiap.restaurant.types.exception.ResourceNotFoundException;
 
 public class OrderUseCase {
 

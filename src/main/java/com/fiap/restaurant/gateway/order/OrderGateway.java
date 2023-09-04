@@ -2,8 +2,8 @@ package com.fiap.restaurant.gateway.order;
 
 import com.fiap.restaurant.entity.order.Order;
 import com.fiap.restaurant.external.db.order.OrderJpa;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.OrderDatabaseConnection;
-import com.fiap.restaurant.cleanarchitecture.types.mapper.order.OrderMapper;
+import com.fiap.restaurant.types.interfaces.db.order.OrderDatabaseConnection;
+import com.fiap.restaurant.types.mapper.order.OrderMapper;
 import org.springframework.beans.BeanUtils;
 
 public class OrderGateway implements IOrderGateway {

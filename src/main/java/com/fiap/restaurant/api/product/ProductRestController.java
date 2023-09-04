@@ -2,10 +2,10 @@ package com.fiap.restaurant.api.product;
 
 import com.fiap.restaurant.controller.product.ProductController;
 import com.fiap.restaurant.entity.product.Product;
-import com.fiap.restaurant.cleanarchitecture.types.dto.product.ProductDTO;
-import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
-import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
+import com.fiap.restaurant.types.dto.product.ProductDTO;
+import com.fiap.restaurant.types.exception.BusinessException;
+import com.fiap.restaurant.types.exception.ResourceNotFoundException;
+import com.fiap.restaurant.types.interfaces.db.product.ProductDatabaseConnection;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

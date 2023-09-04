@@ -2,8 +2,8 @@ package com.fiap.restaurant.gateway.product;
 
 import com.fiap.restaurant.entity.product.Product;
 import com.fiap.restaurant.external.db.product.ProductJpa;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
-import com.fiap.restaurant.cleanarchitecture.types.mapper.product.ProductMapper;
+import com.fiap.restaurant.types.interfaces.db.product.ProductDatabaseConnection;
+import com.fiap.restaurant.types.mapper.product.ProductMapper;
 import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;

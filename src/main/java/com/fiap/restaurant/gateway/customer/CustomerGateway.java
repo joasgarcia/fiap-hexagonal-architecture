@@ -2,7 +2,7 @@ package com.fiap.restaurant.gateway.customer;
 
 import com.fiap.restaurant.external.db.customer.CustomerJpa;
 import com.fiap.restaurant.entity.customer.Customer;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.customer.CustomerDatabaseConnection;
+import com.fiap.restaurant.types.interfaces.db.customer.CustomerDatabaseConnection;
 
 @SuppressWarnings("unchecked")
 public class CustomerGateway implements ICustomerGateway {

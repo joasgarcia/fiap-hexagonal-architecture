@@ -2,10 +2,10 @@ package com.fiap.restaurant.api.order;
 
 import com.fiap.restaurant.controller.order.OrderController;
 import com.fiap.restaurant.entity.order.Order;
-import com.fiap.restaurant.cleanarchitecture.types.dto.order.UpdateOrderStatusDTO;
-import com.fiap.restaurant.cleanarchitecture.types.dto.order.UpdatePaymentStatusDTO;
-import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.OrderDatabaseConnection;
+import com.fiap.restaurant.types.dto.order.UpdateOrderStatusDTO;
+import com.fiap.restaurant.types.dto.order.UpdatePaymentStatusDTO;
+import com.fiap.restaurant.types.exception.BusinessException;
+import com.fiap.restaurant.types.interfaces.db.order.OrderDatabaseConnection;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

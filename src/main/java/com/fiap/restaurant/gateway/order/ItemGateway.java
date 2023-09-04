@@ -2,8 +2,8 @@ package com.fiap.restaurant.gateway.order;
 
 import com.fiap.restaurant.entity.order.Item;
 import com.fiap.restaurant.external.db.order.ItemJpa;
-import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemDatabaseConnection;
-import com.fiap.restaurant.cleanarchitecture.types.mapper.order.ItemMapper;
+import com.fiap.restaurant.types.interfaces.db.order.ItemDatabaseConnection;
+import com.fiap.restaurant.types.mapper.order.ItemMapper;
 import org.springframework.beans.BeanUtils;
 
 @SuppressWarnings("unchecked")
