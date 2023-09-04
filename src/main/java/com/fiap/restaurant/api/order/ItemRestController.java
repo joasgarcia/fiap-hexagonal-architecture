@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.api.order;
+package com.fiap.restaurant.api.order;
 
 import com.fiap.restaurant.cleanarchitecture.controller.order.ItemController;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.ItemPresenterDTO;

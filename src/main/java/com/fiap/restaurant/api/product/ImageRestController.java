@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.api.product;
+package com.fiap.restaurant.api.product;
 
 import com.fiap.restaurant.cleanarchitecture.controller.product.ImageController;
 import com.fiap.restaurant.cleanarchitecture.entity.product.Image;
