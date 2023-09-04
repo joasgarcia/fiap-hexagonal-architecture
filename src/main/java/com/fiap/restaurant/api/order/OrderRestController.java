@@ -1,6 +1,6 @@
 package com.fiap.restaurant.api.order;
 
-import com.fiap.restaurant.cleanarchitecture.controller.order.OrderController;
+import com.fiap.restaurant.controller.order.OrderController;
 import com.fiap.restaurant.cleanarchitecture.entity.order.Order;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.UpdateOrderStatusDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.UpdatePaymentStatusDTO;

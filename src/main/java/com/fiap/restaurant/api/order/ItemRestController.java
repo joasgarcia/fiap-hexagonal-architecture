@@ -1,6 +1,6 @@
 package com.fiap.restaurant.api.order;
 
-import com.fiap.restaurant.cleanarchitecture.controller.order.ItemController;
+import com.fiap.restaurant.controller.order.ItemController;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.ItemPresenterDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.SaveItemDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;

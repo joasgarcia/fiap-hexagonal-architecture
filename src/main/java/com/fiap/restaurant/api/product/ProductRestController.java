@@ -1,6 +1,6 @@
 package com.fiap.restaurant.api.product;
 
-import com.fiap.restaurant.cleanarchitecture.controller.product.ProductController;
+import com.fiap.restaurant.controller.product.ProductController;
 import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
 import com.fiap.restaurant.cleanarchitecture.types.dto.product.ProductDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;

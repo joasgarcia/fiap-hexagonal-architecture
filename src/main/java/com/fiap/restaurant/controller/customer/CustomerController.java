@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.controller.customer;
+package com.fiap.restaurant.controller.customer;
 
 import com.fiap.restaurant.cleanarchitecture.entity.customer.Customer;
 import com.fiap.restaurant.cleanarchitecture.gateway.customer.CustomerGateway;

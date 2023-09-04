@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.controller.order;
+package com.fiap.restaurant.controller.order;
 
 import com.fiap.restaurant.cleanarchitecture.entity.order.Order;
 import com.fiap.restaurant.cleanarchitecture.entity.order.OrderPaymentStatus;

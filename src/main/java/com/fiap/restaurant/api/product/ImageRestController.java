@@ -1,6 +1,6 @@
 package com.fiap.restaurant.api.product;
 
-import com.fiap.restaurant.cleanarchitecture.controller.product.ImageController;
+import com.fiap.restaurant.controller.product.ImageController;
 import com.fiap.restaurant.cleanarchitecture.entity.product.Image;
 import com.fiap.restaurant.cleanarchitecture.types.dto.product.ImagePresenterDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.product.SaveProductImageDTO;

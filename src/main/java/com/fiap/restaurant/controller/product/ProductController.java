@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.controller.product;
+package com.fiap.restaurant.controller.product;
 
 import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
 import com.fiap.restaurant.cleanarchitecture.gateway.product.IProductGateway;
