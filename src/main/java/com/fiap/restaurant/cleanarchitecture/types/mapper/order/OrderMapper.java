@@ -1,7 +1,7 @@
 package com.fiap.restaurant.cleanarchitecture.types.mapper.order;
 
 import com.fiap.restaurant.entity.order.Order;
-import com.fiap.restaurant.cleanarchitecture.external.db.order.OrderJpa;
+import com.fiap.restaurant.external.db.order.OrderJpa;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

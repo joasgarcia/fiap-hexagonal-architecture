@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.external.db.product;
+package com.fiap.restaurant.external.db.product;
 
 import jakarta.persistence.*;
 

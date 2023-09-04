@@ -1,7 +1,7 @@
 package com.fiap.restaurant.cleanarchitecture.gateway.order;
 
 import com.fiap.restaurant.entity.order.Item;
-import com.fiap.restaurant.cleanarchitecture.external.db.order.ItemJpa;
+import com.fiap.restaurant.external.db.order.ItemJpa;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.mapper.order.ItemMapper;
 import org.springframework.beans.BeanUtils;

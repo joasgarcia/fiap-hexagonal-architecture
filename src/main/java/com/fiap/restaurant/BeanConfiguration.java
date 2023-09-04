@@ -1,11 +1,11 @@
 package com.fiap.restaurant;
 
-import com.fiap.restaurant.cleanarchitecture.external.db.customer.CustomerJpa;
-import com.fiap.restaurant.cleanarchitecture.external.db.order.ItemJpa;
-import com.fiap.restaurant.cleanarchitecture.external.db.order.ItemProductJpa;
-import com.fiap.restaurant.cleanarchitecture.external.db.product.ImageJpa;
-import com.fiap.restaurant.cleanarchitecture.external.db.order.OrderJpa;
-import com.fiap.restaurant.cleanarchitecture.external.db.product.ProductJpa;
+import com.fiap.restaurant.external.db.customer.CustomerJpa;
+import com.fiap.restaurant.external.db.order.ItemJpa;
+import com.fiap.restaurant.external.db.order.ItemProductJpa;
+import com.fiap.restaurant.external.db.product.ImageJpa;
+import com.fiap.restaurant.external.db.order.OrderJpa;
+import com.fiap.restaurant.external.db.product.ProductJpa;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.customer.CustomerDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemProductDatabaseConnection;

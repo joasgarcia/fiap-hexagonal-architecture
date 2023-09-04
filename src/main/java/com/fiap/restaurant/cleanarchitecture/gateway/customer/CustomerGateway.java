@@ -1,6 +1,6 @@
 package com.fiap.restaurant.cleanarchitecture.gateway.customer;
 
-import com.fiap.restaurant.cleanarchitecture.external.db.customer.CustomerJpa;
+import com.fiap.restaurant.external.db.customer.CustomerJpa;
 import com.fiap.restaurant.entity.customer.Customer;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.customer.CustomerDatabaseConnection;
 

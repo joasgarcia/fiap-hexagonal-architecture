@@ -1,6 +1,6 @@
-package com.fiap.restaurant.cleanarchitecture.external.db.order;
+package com.fiap.restaurant.external.db.order;
 
-import com.fiap.restaurant.cleanarchitecture.external.db.product.ProductJpa;
+import com.fiap.restaurant.external.db.product.ProductJpa;
 import jakarta.persistence.*;
 
 @Entity(name = "item_product_ca")
