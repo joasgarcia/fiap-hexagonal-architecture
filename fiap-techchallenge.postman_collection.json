@@ -67,6 +67,39 @@
 			"response": []
 		},
 		{
+			"name": "Listar pedidos por status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"externalIdentifier\": \"2\",\r\n    \"paymentStatus\": \"APPROVED\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ca/order/statusScreen",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ca",
+						"order",
+						"statusScreen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Atualizar status do pedido",
 			"request": {
 				"method": "POST",
