@@ -8,24 +8,24 @@ import java.util.List;
 @Component
 public class ItemProductJpaConnection implements ItemProductDatabaseConnection<ItemProductJpa> {
 
-    private final CleanItemProductRepository cleanItemProductRepository;
+    private final ItemProductRepository itemProductRepository;
 
-    public ItemProductJpaConnection(CleanItemProductRepository cleanItemProductRepository) {
-        this.cleanItemProductRepository = cleanItemProductRepository;
+    public ItemProductJpaConnection(ItemProductRepository itemProductRepository) {
+        this.itemProductRepository = itemProductRepository;
     }
 
     @Override
     public ItemProductJpa save(ItemProductJpa itemProduct) {
-        return this.cleanItemProductRepository.save(itemProduct);
+        return this.itemProductRepository.save(itemProduct);
     }
 
     @Override
     public void delete(Long id) {
-        this.cleanItemProductRepository.deleteById(id);
+        this.itemProductRepository.deleteById(id);
     }
 
     @Override
     public List<ItemProductJpa> findAllByItemId(Long itemId) {
-        return this.cleanItemProductRepository.findAllByItemId(itemId);
+        return this.itemProductRepository.findAllByItemId(itemId);
     }
 }
