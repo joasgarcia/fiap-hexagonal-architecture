@@ -11,6 +11,7 @@ spec:
       protocol: TCP
       nodePort: 30000
   type: LoadBalancer
+  externalTrafficPolicy: Local
 
 ---
 apiVersion: apps/v1
