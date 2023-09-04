@@ -1,9 +1,9 @@
 package com.fiap.restaurant.cleanarchitecture.presenter.order;
 
-import com.fiap.restaurant.cleanarchitecture.entity.order.Item;
-import com.fiap.restaurant.cleanarchitecture.entity.order.ItemProduct;
-import com.fiap.restaurant.cleanarchitecture.entity.product.Image;
-import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
+import com.fiap.restaurant.entity.order.Item;
+import com.fiap.restaurant.entity.order.ItemProduct;
+import com.fiap.restaurant.entity.product.Image;
+import com.fiap.restaurant.entity.product.Product;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.ItemImagePresenterDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.ItemPresenterDTO;
 import com.fiap.restaurant.cleanarchitecture.types.dto.order.ItemProductPresenterDTO;

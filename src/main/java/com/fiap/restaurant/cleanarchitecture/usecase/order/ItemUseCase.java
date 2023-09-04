@@ -1,9 +1,9 @@
 package com.fiap.restaurant.cleanarchitecture.usecase.order;
 
-import com.fiap.restaurant.cleanarchitecture.entity.order.Item;
-import com.fiap.restaurant.cleanarchitecture.entity.order.ItemProduct;
-import com.fiap.restaurant.cleanarchitecture.entity.product.Image;
-import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
+import com.fiap.restaurant.entity.order.Item;
+import com.fiap.restaurant.entity.order.ItemProduct;
+import com.fiap.restaurant.entity.product.Image;
+import com.fiap.restaurant.entity.product.Product;
 import com.fiap.restaurant.cleanarchitecture.gateway.order.IItemGateway;
 import com.fiap.restaurant.cleanarchitecture.gateway.order.IItemProductGateway;
 import com.fiap.restaurant.cleanarchitecture.gateway.product.IImageGateway;

@@ -1,8 +1,8 @@
 package com.fiap.restaurant.cleanarchitecture.external.db.order;
 
-import com.fiap.restaurant.cleanarchitecture.entity.order.OrderStatus;
+import com.fiap.restaurant.entity.order.OrderStatus;
 import com.fiap.restaurant.cleanarchitecture.external.db.customer.CustomerJpa;
-import com.fiap.restaurant.cleanarchitecture.entity.order.OrderPaymentStatus;
+import com.fiap.restaurant.entity.order.OrderPaymentStatus;
 import jakarta.persistence.*;
 
 import java.util.Date;

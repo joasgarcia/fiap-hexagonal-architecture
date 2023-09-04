@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.entity.order;
+package com.fiap.restaurant.entity.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

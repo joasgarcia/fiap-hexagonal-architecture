@@ -1,6 +1,6 @@
-package com.fiap.restaurant.cleanarchitecture.entity.order;
+package com.fiap.restaurant.entity.order;
 
-import com.fiap.restaurant.cleanarchitecture.entity.customer.Customer;
+import com.fiap.restaurant.entity.customer.Customer;
 
 import java.util.ArrayList;
 import java.util.Date;

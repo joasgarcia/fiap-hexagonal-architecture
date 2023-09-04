@@ -1,6 +1,6 @@
 package com.fiap.restaurant.cleanarchitecture.gateway.order;
 
-import com.fiap.restaurant.cleanarchitecture.entity.order.ItemProduct;
+import com.fiap.restaurant.entity.order.ItemProduct;
 
 import java.util.List;
 

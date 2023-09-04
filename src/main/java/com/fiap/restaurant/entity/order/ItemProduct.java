@@ -1,6 +1,6 @@
-package com.fiap.restaurant.cleanarchitecture.entity.order;
+package com.fiap.restaurant.entity.order;
 
-import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
+import com.fiap.restaurant.entity.product.Product;
 
 public class ItemProduct {
 

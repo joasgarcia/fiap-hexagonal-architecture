@@ -1,6 +1,6 @@
 package com.fiap.restaurant.controller.customer;
 
-import com.fiap.restaurant.cleanarchitecture.entity.customer.Customer;
+import com.fiap.restaurant.entity.customer.Customer;
 import com.fiap.restaurant.cleanarchitecture.gateway.customer.CustomerGateway;
 import com.fiap.restaurant.cleanarchitecture.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.customer.CustomerDatabaseConnection;

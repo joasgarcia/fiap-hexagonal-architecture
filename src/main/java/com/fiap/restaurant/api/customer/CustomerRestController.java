@@ -1,7 +1,7 @@
 package com.fiap.restaurant.api.customer;
 
 import com.fiap.restaurant.controller.customer.CustomerController;
-import com.fiap.restaurant.cleanarchitecture.entity.customer.Customer;
+import com.fiap.restaurant.entity.customer.Customer;
 import com.fiap.restaurant.cleanarchitecture.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.cleanarchitecture.types.exception.BusinessException;
 import com.fiap.restaurant.cleanarchitecture.types.exception.ResourceNotFoundException;

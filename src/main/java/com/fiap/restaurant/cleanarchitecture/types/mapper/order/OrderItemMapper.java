@@ -1,6 +1,6 @@
 package com.fiap.restaurant.cleanarchitecture.types.mapper.order;
 
-import com.fiap.restaurant.cleanarchitecture.entity.order.OrderItem;
+import com.fiap.restaurant.entity.order.OrderItem;
 import com.fiap.restaurant.cleanarchitecture.external.db.order.OrderItemJpa;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

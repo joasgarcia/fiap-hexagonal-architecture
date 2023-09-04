@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.entity.product;
+package com.fiap.restaurant.entity.product;
 
 public class Product {
 

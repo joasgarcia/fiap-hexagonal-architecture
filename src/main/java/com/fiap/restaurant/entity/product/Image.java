@@ -1,6 +1,6 @@
-package com.fiap.restaurant.cleanarchitecture.entity.product;
+package com.fiap.restaurant.entity.product;
 
-import com.fiap.restaurant.cleanarchitecture.entity.order.Item;
+import com.fiap.restaurant.entity.order.Item;
 
 public class Image {
 

@@ -1,6 +1,6 @@
 package com.fiap.restaurant.cleanarchitecture.types.mapper.product;
 
-import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
+import com.fiap.restaurant.entity.product.Product;
 import com.fiap.restaurant.cleanarchitecture.external.db.product.ProductJpa;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

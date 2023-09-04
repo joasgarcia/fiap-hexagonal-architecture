@@ -1,8 +1,8 @@
 package com.fiap.restaurant.controller.order;
 
-import com.fiap.restaurant.cleanarchitecture.entity.order.Order;
-import com.fiap.restaurant.cleanarchitecture.entity.order.OrderPaymentStatus;
-import com.fiap.restaurant.cleanarchitecture.entity.order.OrderStatus;
+import com.fiap.restaurant.entity.order.Order;
+import com.fiap.restaurant.entity.order.OrderPaymentStatus;
+import com.fiap.restaurant.entity.order.OrderStatus;
 import com.fiap.restaurant.cleanarchitecture.gateway.order.OrderGateway;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.OrderDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.usecase.order.OrderUseCase;

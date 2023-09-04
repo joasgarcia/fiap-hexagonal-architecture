@@ -1,4 +1,4 @@
-package com.fiap.restaurant.cleanarchitecture.entity.order;
+package com.fiap.restaurant.entity.order;
 
 public enum OrderStatus {
 

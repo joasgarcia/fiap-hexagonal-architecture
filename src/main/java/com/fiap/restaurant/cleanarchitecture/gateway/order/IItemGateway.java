@@ -1,6 +1,6 @@
 package com.fiap.restaurant.cleanarchitecture.gateway.order;
 
-import com.fiap.restaurant.cleanarchitecture.entity.order.Item;
+import com.fiap.restaurant.entity.order.Item;
 
 public interface IItemGateway {
 

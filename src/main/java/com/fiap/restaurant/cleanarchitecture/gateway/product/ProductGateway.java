@@ -1,6 +1,6 @@
 package com.fiap.restaurant.cleanarchitecture.gateway.product;
 
-import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
+import com.fiap.restaurant.entity.product.Product;
 import com.fiap.restaurant.cleanarchitecture.external.db.product.ProductJpa;
 import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.product.ProductDatabaseConnection;
 import com.fiap.restaurant.cleanarchitecture.types.mapper.product.ProductMapper;

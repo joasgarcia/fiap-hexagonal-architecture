@@ -1,6 +1,6 @@
 package com.fiap.restaurant.controller.product;
 
-import com.fiap.restaurant.cleanarchitecture.entity.product.Product;
+import com.fiap.restaurant.entity.product.Product;
 import com.fiap.restaurant.cleanarchitecture.gateway.product.IProductGateway;
 import com.fiap.restaurant.cleanarchitecture.gateway.product.ProductGateway;
 import com.fiap.restaurant.cleanarchitecture.types.dto.product.ProductDTO;
