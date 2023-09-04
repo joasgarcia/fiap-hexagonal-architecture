@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ca/customer/",
+					"raw": "http://localhost:8080/customer/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -51,7 +51,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ca/order/webhookPaymentStatus",
+					"raw": "http://localhost:8080/order/webhookPaymentStatus",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -81,7 +81,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ca/order/1/status",
+					"raw": "http://localhost:8080/order/1/status",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -103,7 +103,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/ca/customer/00000000000",
+					"raw": "http://localhost:8080/customer/00000000000",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -124,7 +124,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/ca/product/",
+					"raw": "http://localhost:8080/product/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -145,7 +145,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/ca/product/listByCategory/DRINK",
+					"raw": "http://localhost:8080/product/listByCategory/DRINK",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -176,7 +176,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ca/product/",
+					"raw": "http://localhost:8080/product/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -197,7 +197,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/ca/product/ID",
+					"raw": "http://localhost:8080/product/ID",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -227,7 +227,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ca/product/ID",
+					"raw": "http://localhost:8080/product/ID",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -257,7 +257,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ca/image/",
+					"raw": "http://localhost:8080/image/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -287,7 +287,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ca/image/11",
+					"raw": "http://localhost:8080/image/11",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -308,7 +308,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/ca/image/ID",
+					"raw": "http://localhost:8080/image/ID",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -329,7 +329,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/ca/image/productId=ID",
+					"raw": "http://localhost:8080/image/productId=ID",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -359,7 +359,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ca/item/",
+					"raw": "http://localhost:8080/item/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -380,7 +380,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/ca/item/ID",
+					"raw": "http://localhost:8080/item/ID",
 					"protocol": "http",
 					"host": [
 						"localhost"
