@@ -6,6 +6,8 @@ import com.fiap.restaurant.cleanarchitecture.types.interfaces.db.order.ItemDatab
 import com.fiap.restaurant.cleanarchitecture.types.mapper.order.ItemMapper;
 import org.springframework.beans.BeanUtils;
 
+import java.util.Optional;
+
 @SuppressWarnings("unchecked")
 public class ItemGateway implements IItemGateway {
 
@@ -33,5 +35,12 @@ public class ItemGateway implements IItemGateway {
     @Override
     public boolean existsById(Long id) {
         return this.itemDatabaseConnection.existsById(id);
+    }
+
+    @Override
+    public Item getById(Long id) {
+        Optional<ItemJpa> itemJpa = this.itemDatabaseConnection.getById(id);
+
+        return ItemMapper.INSTANCE.toItem(itemJpa.get());
     }
 }

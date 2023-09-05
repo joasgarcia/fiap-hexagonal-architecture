@@ -14,7 +14,7 @@ public class Order {
 
     private OrderStatus status;
 
-    private List<OrderItem> items;
+    private List<OrderItem> items = new ArrayList<>();
 
     private OrderPaymentStatus paymentStatus;
 
