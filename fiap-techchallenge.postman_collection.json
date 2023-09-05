@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "6937c86f-ed89-4cbd-b116-b3584f0d03b1",
+		"_postman_id": "ea116d59-b30d-432c-8c90-e6431a2c1571",
 		"name": "fiap-techchallenge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "75225"
+		"_exporter_id": "13874439"
 	},
 	"item": [
 		{
@@ -100,16 +100,34 @@
 			"response": []
 		},
 		{
-			"name": "Criar pedido (checkout)",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "Consultar pedido",
 			"request": {
 				"method": "GET",
 				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/ca/order/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ca",
+						"order",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar pedido (checkout)",
+			"request": {
+				"method": "POST",
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"customerCpf\": \"73646201096\",\r\n    \"items\": [\r\n        {\r\n            \"itemId\": 1,\r\n            \"observation\": \"Sem molho\"\r\n        },\r\n        {\r\n            itemId: 2,\r\n            \"observation\": \r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"customerCpf\": \"00000000000\",\r\n    \"items\": [\r\n        {\r\n            \"itemId\": 1,\r\n            \"observation\": \"Sem molho\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -139,7 +157,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"status\": \"APPROVED\"\r\n}",
+					"raw": "{\r\n    \"status\": \"READY\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
