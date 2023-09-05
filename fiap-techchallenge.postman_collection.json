@@ -100,6 +100,39 @@
 			"response": []
 		},
 		{
+			"name": "Criar pedido (checkout)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customerCpf\": \"73646201096\",\r\n    \"items\": [\r\n        {\r\n            \"itemId\": 1,\r\n            \"observation\": \"Sem molho\"\r\n        },\r\n        {\r\n            itemId: 2,\r\n            \"observation\": \r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ca/order/checkout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ca",
+						"order",
+						"checkout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Atualizar status do pedido",
 			"request": {
 				"method": "POST",
