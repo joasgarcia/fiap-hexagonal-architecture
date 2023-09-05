@@ -9,6 +9,7 @@ public interface IOrderGateway {
     Order getById(Long id);
 
     Order update(Order order);
+    Order save(Order order);
 
     List<Order> listOrderedByStatusAndId();
 }
