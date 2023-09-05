@@ -17,11 +17,28 @@ https://www.figma.com/file/ad4YsYUo9lsNxWB75KuXWH/Event-Storm---Sistema-para-lan
 - Cozinheiro: Profissional contratado pela lanchonete para realizar a preparação dos pedidos
 - Gateway de pagamento: Empresa que oferece um meio para processamento de pagamentos. Ex: Asaas, Mercado Pago, Stripe etc.
 
-## Documentação da API
+## Collection da API (Postman)
 
-A documentação da API foi gerada a partir da utilização da biblioteca [Springdoc (OpenAPI)](https://springdoc.org/).
+A lista de endpoints com o payload já configurado basta baixar a [_collection_](./fiap-techchallenge.postman_collection.json) e importá-la no Postman. 
 
-Após iniciar a aplicação, a documentação pode ser acessada através do endereço:
+## Como rodar a aplicação
 
-http://localhost:8080/swagger-ui/index.html
+Primeiro, é necessário subir o banco de dados em MySQL:
 
+```shell
+kubectl apply -f k8s-mysql.yaml;
+```
+
+Em seguida, é possível subir os pods da aplicação Spring Boot:
+
+```shell
+kubectl apply -f k8s-app.yaml;
+```
+
+É necessário esperar cerca de 30s até a aplicação fazer o _build_ e rodar. Para acompanhar o progresso, basta executar um `kubectl logs` em algum dos pods e verificar se o log `Started RestaurantApplication...` apareceu.
+
+Para usar a _collection_ com `localhost`, é preciso mapear as requisições na porta 8080.
+
+```shell
+kubectl port-forward service/app-restaurant-service 8080:8080;
+```
