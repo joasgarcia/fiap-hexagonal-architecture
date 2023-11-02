@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/ca/item")
+@RequestMapping("/item")
 public class ItemRestController {
 
     private final ItemDatabaseConnection itemDatabaseConnection;

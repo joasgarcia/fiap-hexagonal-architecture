@@ -24,7 +24,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/ca/order")
+@RequestMapping("/order")
 public class OrderRestController {
 
     private final OrderDatabaseConnection orderDatabaseConnection;

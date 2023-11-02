@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/ca/customer")
+@RequestMapping("/customer")
 public class CustomerRestController {
 
     private final CustomerDatabaseConnection customerDatabaseConnection;

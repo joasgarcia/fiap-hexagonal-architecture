@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ca/image")
+@RequestMapping("/image")
 public class ImageRestController {
 
     private final ImageDatabaseConnection imageDatabaseConnection;
