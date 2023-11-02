@@ -11,9 +11,9 @@ public interface OrderJpaRepository extends JpaRepository<OrderJpa, Long> {
 
     @Query(value = """
         SELECT *
-        FROM order_ca orderca
+        FROM `order` `order`
         WHERE status != 'FINISHED'
-        ORDER BY CASE orderca.status
+        ORDER BY CASE `order`.status
                      WHEN 'READY' THEN 0
                      WHEN 'PREPARING' THEN 1
                      WHEN 'RECEIVED' THEN 2
