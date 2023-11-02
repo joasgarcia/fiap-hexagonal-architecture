@@ -2,7 +2,7 @@ package com.fiap.restaurant.cleanarchitecture.external.db.product;
 
 import jakarta.persistence.*;
 
-@Entity(name = "product_ca")
+@Entity(name = "product")
 public class ProductJpa {
 
     @Id
