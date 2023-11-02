@@ -8,9 +8,9 @@ import java.util.List;
 @Component
 public class OrderJpaConnection implements OrderDatabaseConnection<OrderJpa> {
 
-    private final CleanOrderJpaRepository orderJpaRepository;
+    private final OrderJpaRepository orderJpaRepository;
 
-    public OrderJpaConnection(CleanOrderJpaRepository orderJpaRepository) {
+    public OrderJpaConnection(OrderJpaRepository orderJpaRepository) {
         this.orderJpaRepository = orderJpaRepository;
     }
 

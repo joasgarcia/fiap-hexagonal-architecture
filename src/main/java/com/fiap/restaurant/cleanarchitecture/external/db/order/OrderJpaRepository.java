@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CleanOrderJpaRepository extends JpaRepository<OrderJpa, Long> {
+public interface OrderJpaRepository extends JpaRepository<OrderJpa, Long> {
 
     @Query(value = """
         SELECT *

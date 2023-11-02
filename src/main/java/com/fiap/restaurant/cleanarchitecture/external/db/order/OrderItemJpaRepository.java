@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CleanItemJpaRepository extends JpaRepository<ItemJpa, Long> {
+public interface OrderItemJpaRepository extends JpaRepository<OrderItemJpa, Long> {
 }

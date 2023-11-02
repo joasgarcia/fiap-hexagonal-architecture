@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerJpaConnection implements CustomerDatabaseConnection<CustomerJpa> {
 
-    private final CleanCustomerJpaRepository customerJpaRepository;
+    private final CustomerJpaRepository customerJpaRepository;
 
-    public CustomerJpaConnection(CleanCustomerJpaRepository customerJpaRepository) {
+    public CustomerJpaConnection(CustomerJpaRepository customerJpaRepository) {
         this.customerJpaRepository = customerJpaRepository;
     }
 

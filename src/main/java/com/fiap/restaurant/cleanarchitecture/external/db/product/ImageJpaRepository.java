@@ -6,8 +6,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CleanProductJpaRepository extends JpaRepository<ProductJpa, Long> {
+public interface ImageJpaRepository extends JpaRepository<ImageJpa, Long> {
 
-    List<ProductJpa> findAllByCategory(String category);
+    List<ImageJpa> findAllByProductId(Long productId);
+    List<ImageJpa> findAllByItemId(Long itemId);
 
 }

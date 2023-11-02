@@ -8,9 +8,9 @@ import java.util.List;
 @Component
 public class ItemProductJpaConnection implements ItemProductDatabaseConnection<ItemProductJpa> {
 
-    private final CleanItemProductRepository cleanItemProductRepository;
+    private final ItemProductRepository cleanItemProductRepository;
 
-    public ItemProductJpaConnection(CleanItemProductRepository cleanItemProductRepository) {
+    public ItemProductJpaConnection(ItemProductRepository cleanItemProductRepository) {
         this.cleanItemProductRepository = cleanItemProductRepository;
     }
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CleanItemProductRepository extends JpaRepository<ItemProductJpa, Long> {
+public interface ItemProductRepository extends JpaRepository<ItemProductJpa, Long> {
 
     List<ItemProductJpa> findAllByItemId(Long itemId);
 }

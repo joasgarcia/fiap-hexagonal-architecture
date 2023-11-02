@@ -8,9 +8,9 @@ import java.util.Optional;
 @Component
 public class ItemJpaConnection implements ItemDatabaseConnection<ItemJpa> {
 
-    private final CleanItemJpaRepository itemJpaRepository;
+    private final ItemJpaRepository itemJpaRepository;
 
-    public ItemJpaConnection(CleanItemJpaRepository itemJpaRepository) {
+    public ItemJpaConnection(ItemJpaRepository itemJpaRepository) {
         this.itemJpaRepository = itemJpaRepository;
     }
 

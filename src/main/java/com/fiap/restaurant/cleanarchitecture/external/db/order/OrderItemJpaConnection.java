@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderItemJpaConnection implements OrderItemDatabaseConnection {
 
-    private final CleanOrderItemJpaRepository orderItemJpaRepository;
+    private final OrderItemJpaRepository orderItemJpaRepository;
 
-    public OrderItemJpaConnection(CleanOrderItemJpaRepository orderItemJpaRepository) {
+    public OrderItemJpaConnection(OrderItemJpaRepository orderItemJpaRepository) {
         this.orderItemJpaRepository = orderItemJpaRepository;
     }
     @Override

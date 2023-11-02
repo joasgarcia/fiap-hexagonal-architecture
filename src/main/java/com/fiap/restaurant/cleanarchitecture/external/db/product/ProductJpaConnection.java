@@ -9,9 +9,9 @@ import java.util.Optional;
 @Component
 public class ProductJpaConnection implements ProductDatabaseConnection<ProductJpa> {
 
-    private final CleanProductJpaRepository productJpaRepository;
+    private final ProductJpaRepository productJpaRepository;
 
-    public ProductJpaConnection(CleanProductJpaRepository productJpaRepository) {
+    public ProductJpaConnection(ProductJpaRepository productJpaRepository) {
         this.productJpaRepository = productJpaRepository;
     }
 

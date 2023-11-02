@@ -9,9 +9,9 @@ import java.util.Optional;
 @Component
 public class ImageJpaConnection implements ImageDatabaseConnection<ImageJpa> {
 
-    private final CleanImageJpaRepository imageJpaRepository;
+    private final ImageJpaRepository imageJpaRepository;
 
-    public ImageJpaConnection(CleanImageJpaRepository imageJpaRepository) {
+    public ImageJpaConnection(ImageJpaRepository imageJpaRepository) {
         this.imageJpaRepository = imageJpaRepository;
     }
 
