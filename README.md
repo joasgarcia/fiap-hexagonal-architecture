@@ -42,3 +42,4 @@ Para usar a _collection_ com `localhost`, é preciso mapear as requisições na 
 ```shell
 kubectl port-forward service/app-restaurant-service 8080:8080;
 ```
+
