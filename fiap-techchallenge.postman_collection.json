@@ -1,13 +1,14 @@
 {
 	"info": {
-		"_postman_id": "ea116d59-b30d-432c-8c90-e6431a2c1571",
+		"_postman_id": "26814aaa-7ae6-4d84-b9bc-be13a2f308dc",
 		"name": "fiap-techchallenge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "13874439"
+		"_exporter_id": "4543298",
+		"_collection_link": "https://bold-resonance-6781.postman.co/workspace/development~87b27721-dc8a-43eb-83c7-30666598b090/collection/4543298-26814aaa-7ae6-4d84-b9bc-be13a2f308dc?action=share&source=collection_link&creator=4543298"
 	},
 	"item": [
 		{
-			"name": "customer",
+			"name": "Criar cliente",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -21,14 +22,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ca/customer/",
+					"raw": "http://localhost:8080/customer/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"ca",
 						"customer",
 						""
 					]
@@ -37,13 +37,33 @@
 			"response": []
 		},
 		{
-			"name": "Webhook Atualização Pagamento do Pedido",
+			"name": "Listar cliente pelo CPF",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/00000000000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"00000000000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar produto",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"externalIdentifier\": \"2\",\r\n    \"paymentStatus\": \"APPROVED\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Name\",\r\n    \"description\": \"Description\",\r\n    \"category\": \"SNACK\",\r\n    \"price\": 10.00\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -51,32 +71,69 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ca/order/webhookPaymentStatus",
+					"raw": "http://localhost:8080/product/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"ca",
-						"order",
-						"webhookPaymentStatus"
+						"product",
+						""
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Listar pedidos por status",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "Listar produtos",
 			"request": {
 				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar produtos por categoria",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/listByCategory/SNACK",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"listByCategory",
+						"SNACK"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar produto",
+			"request": {
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"externalIdentifier\": \"2\",\r\n    \"paymentStatus\": \"APPROVED\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Name\",\r\n    \"description\": \"Description\",\r\n    \"category\": \"DRINK\",\r\n    \"price\": 1.0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -84,37 +141,182 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ca/order/statusScreen",
+					"raw": "http://localhost:8080/product/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"ca",
-						"order",
-						"statusScreen"
+						"product",
+						"1"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Consultar pedido",
+			"name": "Remover produto",
 			"request": {
-				"method": "GET",
+				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/ca/order/1",
+					"raw": "http://localhost:8080/product/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"ca",
-						"order",
+						"product",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar imagem de produto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"src\": \"http://teste.com/img1.jpg\",\r\n    \"productId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/image/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar imagem",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"src\": \"http://teste.com/img2.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/image/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remover imagem",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/image/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar imagens de produto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/image/productId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image",
+						"productId=1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Name\",\r\n    \"description\": \"Description\",\r\n    \"price\": 15.0,\r\n    \"productIdList\": [{\r\n        \"id\": 1\r\n    }],\r\n    \"imageSrcList\": [{\r\n        \"src\": \"http://teste.com/img3.jpg\"\r\n    }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/item/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"item",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remover item",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/item/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"item",
+						"2"
 					]
 				}
 			},
@@ -135,16 +337,96 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ca/order/checkout",
+					"raw": "http://localhost:8080/order/checkout",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"ca",
 						"order",
 						"checkout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar pedidos por status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/order/statusScreen",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"statusScreen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar pedido",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/order/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Webhook Atualização Pagamento do Pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"externalIdentifier\": \"1\",\r\n    \"paymentStatus\": \"APPROVED\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/order/webhookPaymentStatus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"webhookPaymentStatus"
 					]
 				}
 			},
@@ -165,315 +447,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ca/order/1/status",
+					"raw": "http://localhost:8080/order/1/status",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"ca",
 						"order",
 						"1",
 						"status"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "customer",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/ca/customer/00000000000",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ca",
-						"customer",
-						"00000000000"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "product",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/ca/product/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ca",
-						"product",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "product/listByCategory",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/ca/product/listByCategory/DRINK",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ca",
-						"product",
-						"listByCategory",
-						"DRINK"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "product",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Name\",\r\n    \"description\": \"Description\",\r\n    \"category\": \"SNACK\",\r\n    \"price\": 10.00\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/ca/product/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ca",
-						"product",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "product",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/ca/product/ID",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ca",
-						"product",
-						"ID"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "product",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Name\",\r\n    \"description\": \"Description\",\r\n    \"category\": \"SNACK\",\r\n    \"price\": 1.0\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/ca/product/ID",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ca",
-						"product",
-						"ID"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "image-product",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"src\": \"http://teste.com/img1.jpg\",\r\n    \"productId\": 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/ca/image/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ca",
-						"image",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "image",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"src\": \"http://teste.com/img2.jpg\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/ca/image/11",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ca",
-						"image",
-						"11"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "image",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/ca/image/ID",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ca",
-						"image",
-						"ID"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "image/productId",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/ca/image/productId=ID",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ca",
-						"image",
-						"productId=ID"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "item",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Name\",\r\n    \"description\": \"Description\",\r\n    \"price\": 15.0,\r\n    \"productIdList\": [{\r\n        \"id\": 1\r\n    }],\r\n    \"imageSrcList\": [{\r\n        \"src\": \"http://teste.com/img3.jpg\"\r\n    }]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/ca/item/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ca",
-						"item",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "item",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/ca/item/ID",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ca",
-						"item",
-						"ID"
 					]
 				}
 			},
