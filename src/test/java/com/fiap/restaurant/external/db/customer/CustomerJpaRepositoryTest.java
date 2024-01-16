@@ -1,6 +1,7 @@
 package com.fiap.restaurant.external.db.customer;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,22 +30,28 @@ public class CustomerJpaRepositoryTest {
         customerJpa.setCpf(UUID.randomUUID().toString());
     }
 
-    @Test
-    void mustSaveCustomer() {
-        CustomerJpa savedCustomer = customerJpaRepository.save(customerJpa);
-        assertThat(savedCustomer).isEqualTo(customerJpa);
+    @Nested
+    class SaveCustomer {
+        @Test
+        void mustSaveCustomer() {
+            CustomerJpa savedCustomer = customerJpaRepository.save(customerJpa);
+            assertThat(savedCustomer).isEqualTo(customerJpa);
+        }
     }
 
-    @Test
-    void mustFindCustomerByCpf() {
-        CustomerJpa savedCustomer = customerJpaRepository.save(customerJpa);
-        CustomerJpa foundCustomer = customerJpaRepository.findByCpf(customerJpa.getCpf());
-        assertThat(foundCustomer.getCpf()).isNotEmpty().isEqualTo(savedCustomer.getCpf());
-    }
+    @Nested
+    class FindCustomer {
+        @Test
+        void mustFindCustomerByCpf() {
+            CustomerJpa savedCustomer = customerJpaRepository.save(customerJpa);
+            CustomerJpa foundCustomer = customerJpaRepository.findByCpf(customerJpa.getCpf());
+            assertThat(foundCustomer.getCpf()).isNotEmpty().isEqualTo(savedCustomer.getCpf());
+        }
 
-    @Test
-    void mustNotFindCustomerByCpf() {
-        CustomerJpa customer = customerJpaRepository.findByCpf(customerJpa.getCpf());
-        assertThat(customer).isNull();
+        @Test
+        void mustNotFindCustomerByCpf() {
+            CustomerJpa customer = customerJpaRepository.findByCpf(customerJpa.getCpf());
+            assertThat(customer).isNull();
+        }
     }
 }
