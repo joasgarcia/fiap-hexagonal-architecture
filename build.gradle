@@ -30,6 +30,10 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.assertj:assertj-core:3.25.1'
     testImplementation 'com.h2database:h2:2.2.224'
+
+	// Rest ASsured excluindo groovy
+	// Rest assured json schema validator
+
 }
 
 test {
