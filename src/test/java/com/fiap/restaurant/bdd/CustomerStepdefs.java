@@ -2,13 +2,12 @@ package com.fiap.restaurant.bdd;
 
 import com.fiap.restaurant.api.customer.CustomerRequestHelper;
 import com.fiap.restaurant.types.dto.customer.SaveCustomerDTO;
+import io.cucumber.java.After;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import static com.fiap.restaurant.api.RequestHelper.DEFAULT_CONTENT_TYPE;
 import static com.fiap.restaurant.api.RequestHelper.ENDPOINT_HOST;
@@ -56,5 +55,10 @@ public class CustomerStepdefs {
                 .statusCode(HttpStatus.OK.value())
                 .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/CustomerFindByCpfSchema.json"));
 
+    }
+
+    @After
+    public void tearDown() {
+        System.out.println("clear data");
     }
 }
