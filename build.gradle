@@ -30,10 +30,14 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.assertj:assertj-core:3.25.1'
     testImplementation 'com.h2database:h2:2.2.224'
-
-	// Rest ASsured excluindo groovy
-	// Rest assured json schema validator
-
+    testImplementation 'org.junit.platform:junit-platform-suite-api:1.9.3'
+    testImplementation 'io.cucumber:cucumber-java:7.13.0'
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.13.0'
+    testImplementation 'io.rest-assured:spring-mock-mvc:5.3.0'
+    testImplementation 'io.rest-assured:json-schema-validator:5.3.1'
+    testImplementation 'io.rest-assured:rest-assured:5.3.0', {
+        exclude group: 'org.codehaus.groovy'
+    }
 }
 
 test {
