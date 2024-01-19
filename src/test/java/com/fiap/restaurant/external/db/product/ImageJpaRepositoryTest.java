@@ -2,6 +2,7 @@ package com.fiap.restaurant.external.db.product;
 
 import com.fiap.restaurant.external.db.order.ItemJpa;
 import com.fiap.restaurant.external.db.order.ItemJpaRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -63,6 +64,13 @@ public class ImageJpaRepositoryTest {
             List<ImageJpa> imageJpaList = imageJpaRepository.findAllByProductId(0L);
             assertThat(imageJpaList).isEmpty();
         }
+
+        @AfterEach
+        void tearDown() {
+            imageJpaRepository.delete(imageJpa1);
+            imageJpaRepository.delete(imageJpa2);
+            productJpaRepository.delete(productJpa);
+        }
     }
 
     @Nested
@@ -98,6 +106,12 @@ public class ImageJpaRepositoryTest {
         void mustNotFindAllImagesByItemId() {
             List<ImageJpa> imageJpaList = imageJpaRepository.findAllByItemId(0L);
             assertThat(imageJpaList).isEmpty();
+        }
+
+        @AfterEach
+        void tearDown() {
+            imageJpaRepository.delete(imageJpa3);
+            itemJpaRepository.delete(itemJpa);
         }
     }
 }

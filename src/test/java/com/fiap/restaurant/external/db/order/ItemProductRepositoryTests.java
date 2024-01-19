@@ -2,6 +2,7 @@ package com.fiap.restaurant.external.db.order;
 
 import com.fiap.restaurant.external.db.product.ProductJpa;
 import com.fiap.restaurant.external.db.product.ProductJpaRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,4 +91,14 @@ public class ItemProductRepositoryTests {
         assertThat(itemProductJpaList).isEmpty();
     }
 
+    @AfterEach
+    void tearDown() {
+        itemProductRepository.delete(itemProductJpa1);
+        itemProductRepository.delete(itemProductJpa2);
+        itemProductRepository.delete(itemProductJpa3);
+        productJpaRepository.delete(productJpa1);
+        productJpaRepository.delete(productJpa2);
+        productJpaRepository.delete(productJpa3);
+        itemJpaRepository.delete(itemJpa);
+    }
 }

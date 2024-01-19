@@ -1,7 +1,7 @@
 package com.fiap.restaurant.external.db.product;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,23 +46,26 @@ public class ProductJpaRepositoryTest {
         productJpaRepository.save(productJpa3);
     }
 
-    @Nested
-    class FindProduct {
+    @Test
+    void mustFindAllProductsByCategory() {
+        List<ProductJpa> productJpaList = productJpaRepository.findAllByCategory("DRINK");
+        assertThat(productJpaList).isNotEmpty().hasSize(2);
 
-        @Test
-        void mustFindAllProductsByCategory() {
-            List<ProductJpa> productJpaList = productJpaRepository.findAllByCategory("DRINK");
-            assertThat(productJpaList).isNotEmpty().hasSize(2);
+        productJpaList = productJpaRepository.findAllByCategory("SNACK");
+        assertThat(productJpaList).isNotEmpty().hasSize(1);
+        assertThat(productJpaList.get(0).getId()).isEqualTo(productJpa3.getId());
+        assertThat(productJpaList.get(0).getName()).isEqualTo(productJpa3.getName());
+        assertThat(productJpaList.get(0).getDescription()).isEqualTo(productJpa3.getDescription());
+        assertThat(productJpaList.get(0).getPrice()).isEqualTo(productJpa3.getPrice());
 
-            productJpaList = productJpaRepository.findAllByCategory("SNACK");
-            assertThat(productJpaList).isNotEmpty().hasSize(1);
-            assertThat(productJpaList.get(0).getId()).isEqualTo(productJpa3.getId());
-            assertThat(productJpaList.get(0).getName()).isEqualTo(productJpa3.getName());
-            assertThat(productJpaList.get(0).getDescription()).isEqualTo(productJpa3.getDescription());
-            assertThat(productJpaList.get(0).getPrice()).isEqualTo(productJpa3.getPrice());
+        productJpaList = productJpaRepository.findAllByCategory("DESSERT");
+        assertThat(productJpaList).isEmpty();
+    }
 
-            productJpaList = productJpaRepository.findAllByCategory("DESSERT");
-            assertThat(productJpaList).isEmpty();
-        }
+    @AfterEach
+    void tearDown() {
+        productJpaRepository.delete(productJpa1);
+        productJpaRepository.delete(productJpa2);
+        productJpaRepository.delete(productJpa3);
     }
 }
