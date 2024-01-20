@@ -11,6 +11,14 @@ public class OrderItem {
 
     private String observation;
 
+    public OrderItem() {}
+
+    public OrderItem(Order order, Item item, String observation) {
+        this.order = order;
+        this.item = item;
+        this.observation = observation;
+    }
+
     public Order getOrder() {
         return order;
     }

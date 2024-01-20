@@ -9,6 +9,13 @@ public class ItemProduct {
     private Item item;
     private Product product;
 
+    public ItemProduct() {}
+
+    public ItemProduct(Item item, Product product) {
+        this.item = item;
+        this.product = product;
+    }
+
     public Long getId() {
         return id;
     }
