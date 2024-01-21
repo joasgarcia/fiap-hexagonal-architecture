@@ -11,6 +11,7 @@ public class OrderItemJpaConnection implements OrderItemDatabaseConnection {
     public OrderItemJpaConnection(OrderItemJpaRepository orderItemJpaRepository) {
         this.orderItemJpaRepository = orderItemJpaRepository;
     }
+
     @Override
     public Object save(OrderItemJpa orderItemJpa) {
         return this.orderItemJpaRepository.save(orderItemJpa);
