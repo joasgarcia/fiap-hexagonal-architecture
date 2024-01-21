@@ -43,3 +43,11 @@ Para usar a _collection_ com `localhost`, é preciso mapear as requisições na 
 kubectl port-forward service/app-restaurant-service 8080:8080;
 ```
 
+## Como rodar os testes da aplicação
+
+### Via linha de comando
+Dentro do diretório do projeto, executar o comando abaixo:
+
+```shell
+.\gradlew test
+```
