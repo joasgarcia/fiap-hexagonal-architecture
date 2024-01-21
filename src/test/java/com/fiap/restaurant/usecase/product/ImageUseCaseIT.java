@@ -138,7 +138,7 @@ public class ImageUseCaseIT {
             ImageUseCase.delete(image.getId(), imageGateway);
 
             Optional<ImageJpa> optionalImage = imageJpaRepository.findById(image.getId());
-            assertThat(optionalImage).isEmpty();
+            assertThat(optionalImage).isNotPresent();
         }
 
         @Test
