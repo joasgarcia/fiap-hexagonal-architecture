@@ -9,6 +9,7 @@ import com.fiap.restaurant.presenter.product.ImagePresenter;
 import com.fiap.restaurant.types.dto.product.ImagePresenterDTO;
 import com.fiap.restaurant.types.dto.product.SaveProductImageDTO;
 import com.fiap.restaurant.types.dto.product.UpdateImageDTO;
+import com.fiap.restaurant.types.interfaces.db.order.ItemDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.product.ImageDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.product.ProductDatabaseConnection;
 import com.fiap.restaurant.usecase.product.ImageUseCase;
@@ -17,14 +18,14 @@ import java.util.List;
 
 public class ImageController {
 
-    public static Image saveProductImage(SaveProductImageDTO saveProductImageDTO, ImageDatabaseConnection imageDatabaseConnection, ProductDatabaseConnection productDatabaseConnection) {
-        IImageGateway imageGateway = new ImageGateway(imageDatabaseConnection, productDatabaseConnection);
+    public static Image saveProductImage(SaveProductImageDTO saveProductImageDTO, ImageDatabaseConnection imageDatabaseConnection, ProductDatabaseConnection productDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection) {
+        IImageGateway imageGateway = new ImageGateway(imageDatabaseConnection, productDatabaseConnection, itemDatabaseConnection);
         IProductGateway productGateway = new ProductGateway(productDatabaseConnection);
         return ImageUseCase.saveProductImage(saveProductImageDTO, imageGateway, productGateway);
     }
 
-    public static Image update(Long id, UpdateImageDTO updateImageDTO, ImageDatabaseConnection imageDataBaseConnection, ProductDatabaseConnection productDatabaseConnection) {
-        IImageGateway imageGateway = new ImageGateway(imageDataBaseConnection, productDatabaseConnection);
+    public static Image update(Long id, UpdateImageDTO updateImageDTO, ImageDatabaseConnection imageDataBaseConnection, ProductDatabaseConnection productDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection) {
+        IImageGateway imageGateway = new ImageGateway(imageDataBaseConnection, productDatabaseConnection, itemDatabaseConnection);
         return ImageUseCase.update(id, updateImageDTO, imageGateway);
     }
 

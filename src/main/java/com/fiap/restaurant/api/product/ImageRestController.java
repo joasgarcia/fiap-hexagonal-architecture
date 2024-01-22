@@ -6,6 +6,7 @@ import com.fiap.restaurant.types.dto.product.ImagePresenterDTO;
 import com.fiap.restaurant.types.dto.product.SaveProductImageDTO;
 import com.fiap.restaurant.types.dto.product.UpdateImageDTO;
 import com.fiap.restaurant.types.exception.ResourceNotFoundException;
+import com.fiap.restaurant.types.interfaces.db.order.ItemDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.product.ImageDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.product.ProductDatabaseConnection;
 import org.springframework.http.HttpStatus;
@@ -20,21 +21,23 @@ public class ImageRestController {
 
     private final ImageDatabaseConnection imageDatabaseConnection;
     private final ProductDatabaseConnection productDatabaseConnection;
+    private final ItemDatabaseConnection itemDatabaseConnection;
 
-    public ImageRestController(ImageDatabaseConnection imageDatabaseConnection, ProductDatabaseConnection productDatabaseConnection) {
+    public ImageRestController(ImageDatabaseConnection imageDatabaseConnection, ProductDatabaseConnection productDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection) {
         this.imageDatabaseConnection = imageDatabaseConnection;
         this.productDatabaseConnection = productDatabaseConnection;
+        this.itemDatabaseConnection = itemDatabaseConnection;
     }
 
     @PostMapping(path = "/")
     public Image saveProductImage(@RequestBody SaveProductImageDTO saveProductImageDTO) {
-        return ImageController.saveProductImage(saveProductImageDTO, this.imageDatabaseConnection, this.productDatabaseConnection);
+        return ImageController.saveProductImage(saveProductImageDTO, this.imageDatabaseConnection, this.productDatabaseConnection, itemDatabaseConnection);
     }
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody UpdateImageDTO updateImageDTO) {
         try {
-            Image image = ImageController.update(id, updateImageDTO, this.imageDatabaseConnection, this.productDatabaseConnection);
+            Image image = ImageController.update(id, updateImageDTO, this.imageDatabaseConnection, this.productDatabaseConnection, itemDatabaseConnection);
             return ResponseEntity.ok().body(image);
         } catch (ResourceNotFoundException resourceNotFoundException) {
             return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
