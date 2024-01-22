@@ -12,6 +12,7 @@ import com.fiap.restaurant.gateway.product.ProductGateway;
 import com.fiap.restaurant.types.dto.product.SaveProductImageDTO;
 import com.fiap.restaurant.types.dto.product.UpdateImageDTO;
 import com.fiap.restaurant.types.exception.ResourceNotFoundException;
+import com.fiap.restaurant.types.interfaces.db.order.ItemDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.product.ImageDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.product.ProductDatabaseConnection;
 import com.fiap.restaurant.util.ProductTestUtil;
@@ -44,6 +45,9 @@ public class ImageUseCaseIT {
     private ProductDatabaseConnection productDatabaseConnection;
 
     @Autowired
+    private ItemDatabaseConnection itemDatabaseConnection;
+
+    @Autowired
     private ProductJpaRepository productJpaRepository;
 
     @Autowired
@@ -55,7 +59,7 @@ public class ImageUseCaseIT {
     @BeforeEach
     void setup() {
         this.productGateway = new ProductGateway(productDatabaseConnection);
-        this.imageGateway = new ImageGateway(this.imageDatabaseConnection, this.productDatabaseConnection);
+        this.imageGateway = new ImageGateway(this.imageDatabaseConnection, this.productDatabaseConnection, this.itemDatabaseConnection);
     }
 
     @Nested
