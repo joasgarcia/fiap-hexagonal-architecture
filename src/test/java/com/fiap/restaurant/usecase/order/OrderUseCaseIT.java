@@ -52,12 +52,6 @@ public class OrderUseCaseIT {
 
     @Test
     @Rollback
-    void mustSaveOrder() {
-
-    }
-
-    @Test
-    @Rollback
     void mustUpdateOrderStatus() {
         final CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
 
@@ -69,6 +63,21 @@ public class OrderUseCaseIT {
         Order order = OrderUseCase.updateStatus(orderJpa.getId(), orderStatus, orderGateway);
 
         assertThat(order.getStatus()).isEqualTo(orderStatus);
+    }
+
+    @Test
+    @Rollback
+    void mustUpdateOrderPaymentStatus() {
+        final CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+
+        OrderPaymentStatus orderPaymentStatus = OrderPaymentStatus.PENDING;
+        final OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, OrderStatus.RECEIVED, orderPaymentStatus, new Date()));
+        assertThat(orderJpa.getPaymentStatus()).isEqualTo(orderPaymentStatus);
+
+        orderPaymentStatus = OrderPaymentStatus.APPROVED;
+        Order order = OrderUseCase.updatePaymentStatus(orderJpa.getId(), orderPaymentStatus, orderGateway);
+
+        assertThat(order.getPaymentStatus()).isEqualTo(orderPaymentStatus);
     }
 
     @Test
