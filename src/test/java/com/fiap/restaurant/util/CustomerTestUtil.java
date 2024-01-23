@@ -1,8 +1,7 @@
 package com.fiap.restaurant.util;
 
 import com.fiap.restaurant.external.db.customer.CustomerJpa;
-
-import java.util.UUID;
+import com.fiap.restaurant.types.dto.customer.SaveCustomerDTO;
 
 public class CustomerTestUtil {
 
@@ -13,5 +12,14 @@ public class CustomerTestUtil {
         customerJpa.setCpf(cpf);
 
         return customerJpa;
+    }
+
+    public static SaveCustomerDTO generateSaveCustomerDTO(String name, String email, String cpf) {
+        SaveCustomerDTO saveCustomerDTO = new SaveCustomerDTO();
+        saveCustomerDTO.setName(name);
+        saveCustomerDTO.setEmail(email);
+        saveCustomerDTO.setCpf(cpf);
+
+        return saveCustomerDTO;
     }
 }
