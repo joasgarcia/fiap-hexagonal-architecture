@@ -4,6 +4,7 @@ import com.fiap.restaurant.entity.customer.Customer;
 import com.fiap.restaurant.external.db.customer.CustomerJpa;
 import com.fiap.restaurant.external.db.customer.CustomerJpaRepository;
 import com.fiap.restaurant.types.dto.customer.SaveCustomerDTO;
+import com.fiap.restaurant.types.exception.ResourceNotFoundException;
 import com.fiap.restaurant.types.interfaces.db.customer.CustomerDatabaseConnection;
 import com.fiap.restaurant.util.CustomerTestUtil;
 import jakarta.transaction.Transactional;
@@ -17,6 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
@@ -48,17 +50,25 @@ public class CustomerControllerIT {
     @Rollback
     void mustFindCustomerByCpf() {
         final String customerCpf = "71841727016";
-        final CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", customerCpf);
+        final String customerName = "John Doe";
+        final String customerEmail = "johndoe@email.com";
+        final CustomerJpa customerJpa = CustomerTestUtil.generateJpa(customerName, customerEmail, customerCpf);
         customerJpaRepository.save(customerJpa);
 
         Customer customer = CustomerController.findByCpf(customerCpf, customerDatabaseConnection);
-
+        assertThat(customer).isNotNull();
+        assertThat(customer.getName()).isEqualTo(customerName);
+        assertThat(customer.getCpf()).isEqualTo(customerEmail);
+        assertThat(customer.getEmail()).isEqualTo(customerCpf);
     }
 
     @Test
     @Rollback
     void mustThrowExceptionCustomerNotFoundOnFindCustomerByCpf() {
+        final String nonexistentCustomerCpf = "71841727016";
 
+        assertThatThrownBy(() -> CustomerController.findByCpf(nonexistentCustomerCpf, customerDatabaseConnection))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessage("Cliente não encontrado");
     }
-
 }
