@@ -83,8 +83,16 @@ public class ProductJpaRepositoryIT {
             assertThat(productJpaList.get(0).getName()).isEqualTo(productJpa3.getName());
             assertThat(productJpaList.get(0).getDescription()).isEqualTo(productJpa3.getDescription());
             assertThat(productJpaList.get(0).getPrice()).isEqualTo(productJpa3.getPrice());
+        }
 
-            productJpaList = productJpaRepository.findAllByCategory("DESSERT");
+        @Test
+        @Rollback
+        void mustFindAnyProductsByCategory() {
+            productJpaRepository.save(ProductTestUtil.generateJpa("Drink 1", "Description 1", "DRINK", 7.5));
+            productJpaRepository.save(ProductTestUtil.generateJpa("Drink 2", "Description 2", "DRINK", 5.5));
+            productJpaRepository.save(ProductTestUtil.generateJpa("Snack 1", "Description 3", "SNACK", 5.5));
+
+            List<ProductJpa> productJpaList = productJpaRepository.findAllByCategory("DESSERT");
             assertThat(productJpaList).isEmpty();
         }
 

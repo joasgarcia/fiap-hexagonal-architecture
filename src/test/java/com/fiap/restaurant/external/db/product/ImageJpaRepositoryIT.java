@@ -106,7 +106,7 @@ public class ImageJpaRepositoryIT {
 
         @Test
         @Rollback
-        void mustNotFindAllImagesByProductId() {
+        void mustNotFindAnyImagesByProductId() {
             List<ImageJpa> imageJpaList = imageJpaRepository.findAllByProductId(0L);
             assertThat(imageJpaList).isEmpty();
         }
@@ -125,7 +125,8 @@ public class ImageJpaRepositoryIT {
         }
 
         @Test
-        void mustNotFindAllImagesByItemId() {
+        @Rollback
+        void mustNotFindAnyImagesByItemId() {
             List<ImageJpa> imageJpaList = imageJpaRepository.findAllByItemId(0L);
             assertThat(imageJpaList).isEmpty();
         }
@@ -142,7 +143,11 @@ public class ImageJpaRepositoryIT {
             ImageJpa imageItemJpa = imageJpaRepository.save(ImageTestUtil.generateJpa(itemJpa, "http://image2.test"));
             Optional<ImageJpa> optionalItemImageJpa = imageJpaRepository.findById(imageItemJpa.getId());
             assertThat(optionalItemImageJpa).isPresent();
+        }
 
+        @Test
+        @Rollback
+        void mustNotFindImageById() {
             Optional<ImageJpa> optionalProductJpa = imageJpaRepository.findById(0L);
             assertThat(optionalProductJpa).isEmpty();
         }

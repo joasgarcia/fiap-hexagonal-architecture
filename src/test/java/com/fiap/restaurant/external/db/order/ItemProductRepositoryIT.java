@@ -93,7 +93,11 @@ public class ItemProductRepositoryIT {
             ProductJpa productJpa2 = productJpaRepository.save(ProductTestUtil.generateJpa("Drink 2", "Description 2", "DRINK", 5.5));
             Optional<ProductJpa> optionalProductJpa2 = productJpaRepository.findById(productJpa2.getId());
             assertThat(optionalProductJpa2).isPresent();
+        }
 
+        @Test
+        @Rollback
+        void mustNotFindProductById() {
             Optional<ProductJpa> optionalProductJpa3 = productJpaRepository.findById(0L);
             assertThat(optionalProductJpa3).isEmpty();
         }
@@ -127,7 +131,7 @@ public class ItemProductRepositoryIT {
 
         @Test
         @Rollback
-        void mustNotFindAllItemProductByItemId() {
+        void mustNotFindAnyItemProductByItemId() {
             List<ItemProductJpa> itemProductJpaList = itemProductRepository.findAllByItemId(0L);
             assertThat(itemProductJpaList).isEmpty();
         }

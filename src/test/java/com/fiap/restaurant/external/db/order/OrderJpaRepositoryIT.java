@@ -63,7 +63,11 @@ public class OrderJpaRepositoryIT {
 
             Optional<OrderJpa> optionalOrderJpa2 = orderJpaRepository.findById(persistedOrderJpa2.getId());
             assertThat(optionalOrderJpa2).isPresent();
+        }
 
+        @Test
+        @Rollback
+        void mustNotFindOrderById() {
             Optional<OrderJpa> optionalOrderJpa3 = orderJpaRepository.findById(0L);
             assertThat(optionalOrderJpa3).isNotPresent();
         }
