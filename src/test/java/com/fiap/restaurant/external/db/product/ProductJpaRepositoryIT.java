@@ -44,7 +44,6 @@ public class ProductJpaRepositoryIT {
         @Rollback
         void mustDeleteProduct() {
             ProductJpa productJpa = productJpaRepository.save(ProductTestUtil.generateJpa("Drink 1", "Description 1", "DRINK", 7.5));
-            assertThat(productJpa).isNotNull();
 
             productJpaRepository.delete(productJpa);
 
@@ -74,15 +73,15 @@ public class ProductJpaRepositoryIT {
             ProductJpa productJpa2 = productJpaRepository.save(ProductTestUtil.generateJpa("Drink 2", "Description 2", "DRINK", 5.5));
             ProductJpa productJpa3 = productJpaRepository.save(ProductTestUtil.generateJpa("Snack 1", "Description 3", "SNACK", 5.5));
 
-            List<ProductJpa> productJpaList = productJpaRepository.findAllByCategory("DRINK");
-            assertThat(productJpaList).isNotEmpty().hasSize(2);
+            List<ProductJpa> productJpaDrinkList = productJpaRepository.findAllByCategory("DRINK");
+            List<ProductJpa> productJpaSnackList = productJpaRepository.findAllByCategory("SNACK");
 
-            productJpaList = productJpaRepository.findAllByCategory("SNACK");
-            assertThat(productJpaList).isNotEmpty().hasSize(1);
-            assertThat(productJpaList.get(0).getId()).isEqualTo(productJpa3.getId());
-            assertThat(productJpaList.get(0).getName()).isEqualTo(productJpa3.getName());
-            assertThat(productJpaList.get(0).getDescription()).isEqualTo(productJpa3.getDescription());
-            assertThat(productJpaList.get(0).getPrice()).isEqualTo(productJpa3.getPrice());
+            assertThat(productJpaDrinkList).isNotEmpty().hasSize(2);
+            assertThat(productJpaSnackList).isNotEmpty().hasSize(1);
+            assertThat(productJpaSnackList.get(0).getId()).isEqualTo(productJpa3.getId());
+            assertThat(productJpaSnackList.get(0).getName()).isEqualTo(productJpa3.getName());
+            assertThat(productJpaSnackList.get(0).getDescription()).isEqualTo(productJpa3.getDescription());
+            assertThat(productJpaSnackList.get(0).getPrice()).isEqualTo(productJpa3.getPrice());
         }
 
         @Test
@@ -103,19 +102,24 @@ public class ProductJpaRepositoryIT {
             ProductJpa productJpa2 = productJpaRepository.save(ProductTestUtil.generateJpa("Drink 2", "Description 2", "DRINK", 5.5));
 
             Optional<ProductJpa> optionalProductJpa1 = productJpaRepository.findById(productJpa1.getId());
+            Optional<ProductJpa> optionalProductJpa2 = productJpaRepository.findById(productJpa2.getId());
+
             assertThat(optionalProductJpa1).isPresent();
             assertThat(optionalProductJpa1.get().getId()).isEqualTo(productJpa1.getId());
             assertThat(optionalProductJpa1.get().getName()).isEqualTo(productJpa1.getName());
             assertThat(optionalProductJpa1.get().getDescription()).isEqualTo(productJpa1.getDescription());
             assertThat(optionalProductJpa1.get().getPrice()).isEqualTo(productJpa1.getPrice());
 
-            Optional<ProductJpa> optionalProductJpa2 = productJpaRepository.findById(productJpa2.getId());
             assertThat(optionalProductJpa2).isPresent();
             assertThat(optionalProductJpa2.get().getId()).isEqualTo(productJpa2.getId());
             assertThat(optionalProductJpa2.get().getName()).isEqualTo(productJpa2.getName());
             assertThat(optionalProductJpa2.get().getDescription()).isEqualTo(productJpa2.getDescription());
             assertThat(optionalProductJpa2.get().getPrice()).isEqualTo(productJpa2.getPrice());
+        }
 
+        @Test
+        @Rollback
+        void mustNotFindProductById() {
             Optional<ProductJpa> optionalProductJpa3 = productJpaRepository.findById(0L);
             assertThat(optionalProductJpa3).isEmpty();
         }
@@ -124,11 +128,10 @@ public class ProductJpaRepositoryIT {
         @Rollback
         void mustVerifyIfProductExistsById() {
             ProductJpa productJpa1 = productJpaRepository.save(ProductTestUtil.generateJpa("Drink 1", "Description 1", "DRINK", 7.5));
-            assertThat(productJpaRepository.existsById(productJpa1.getId())).isTrue();
-
             ProductJpa productJpa2 = productJpaRepository.save(ProductTestUtil.generateJpa("Drink 2", "Description 2", "DRINK", 5.5));
-            assertThat(productJpaRepository.existsById(productJpa2.getId())).isTrue();
 
+            assertThat(productJpaRepository.existsById(productJpa1.getId())).isTrue();
+            assertThat(productJpaRepository.existsById(productJpa2.getId())).isTrue();
             assertThat(productJpaRepository.existsById(0L)).isFalse();
         }
     }

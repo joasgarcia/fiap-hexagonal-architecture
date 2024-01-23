@@ -42,8 +42,7 @@ public class ItemJpaRepositoryIT {
         void mustDeleteItem() {
             ItemJpa itemJpa = ItemTestUtil.generateJpa("Item 1", "Description 1", 17.5);
             ItemJpa persistedItemJpa = itemJpaRepository.save(itemJpa);
-
-            itemJpaRepository.delete(itemJpa);
+            itemJpaRepository.delete(persistedItemJpa);
 
             Optional<ItemJpa> optionalItemJpa = itemJpaRepository.findById(itemJpa.getId());
             assertThat(optionalItemJpa).isNotPresent();
@@ -61,6 +60,8 @@ public class ItemJpaRepositoryIT {
 
             ItemJpa itemJpa2 = itemJpaRepository.save(ItemTestUtil.generateJpa("Item 2", "Description 2", 12.5));
             Optional<ItemJpa> optionalItemJpa2 = itemJpaRepository.findById(itemJpa2.getId());
+
+            assertThat(optionalItemJpa1).isPresent();
             assertThat(optionalItemJpa2).isPresent();
         }
 
@@ -75,11 +76,10 @@ public class ItemJpaRepositoryIT {
         @Rollback
         void mustVerifyIfItemExistsById() {
             ItemJpa itemJpa1 = itemJpaRepository.save(ItemTestUtil.generateJpa("Item 1", "Description 1", 17.5));
-            assertThat(itemJpaRepository.existsById(itemJpa1.getId())).isTrue();
-
             ItemJpa itemJpa2 = itemJpaRepository.save(ItemTestUtil.generateJpa("Item 2", "Description 2", 12.5));
-            assertThat(itemJpaRepository.existsById(itemJpa2.getId())).isTrue();
 
+            assertThat(itemJpaRepository.existsById(itemJpa1.getId())).isTrue();
+            assertThat(itemJpaRepository.existsById(itemJpa2.getId())).isTrue();
             assertThat(itemJpaRepository.existsById(0L)).isFalse();
         }
     }

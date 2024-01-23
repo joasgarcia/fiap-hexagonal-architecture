@@ -59,9 +59,9 @@ public class OrderJpaRepositoryIT {
             OrderJpa persistedOrderJpa2 = orderJpaRepository.save(orderJpa2);
 
             Optional<OrderJpa> optionalOrderJpa1 = orderJpaRepository.findById(persistedOrderJpa1.getId());
-            assertThat(optionalOrderJpa1).isPresent();
-
             Optional<OrderJpa> optionalOrderJpa2 = orderJpaRepository.findById(persistedOrderJpa2.getId());
+
+            assertThat(optionalOrderJpa1).isPresent();
             assertThat(optionalOrderJpa2).isPresent();
         }
 

@@ -68,7 +68,6 @@ public class ImageJpaRepositoryIT {
         void mustDeleteProductImage() {
             ProductJpa productJpa = productJpaRepository.save(ProductTestUtil.generateJpa("Drink 1", "Description 1", "DRINK", 7.5));
             ImageJpa imageProductJpa = imageJpaRepository.save(ImageTestUtil.generateJpa(productJpa, "http://image1.test"));
-            assertThat(imageProductJpa).isNotNull();
 
             imageJpaRepository.delete(imageProductJpa);
 
@@ -81,7 +80,6 @@ public class ImageJpaRepositoryIT {
         void mustDeleteItemImage() {
             ItemJpa itemJpa = itemJpaRepository.save(ItemTestUtil.generateJpa("Item 1", "Description 1", 19.9));
             ImageJpa imageItemJpa = imageJpaRepository.save(ImageTestUtil.generateJpa(itemJpa, "http://image2.test"));
-            assertThat(imageItemJpa).isNotNull();
 
             imageJpaRepository.delete(imageItemJpa);
 
@@ -137,11 +135,12 @@ public class ImageJpaRepositoryIT {
             ProductJpa productJpa = productJpaRepository.save(ProductTestUtil.generateJpa("Drink 1", "Description 1", "DRINK", 7.5));
             ImageJpa imageProductJpa = imageJpaRepository.save(ImageTestUtil.generateJpa(productJpa, "http://image1.test"));
             Optional<ImageJpa> optionalProductImageJpa = imageJpaRepository.findById(imageProductJpa.getId());
-            assertThat(optionalProductImageJpa).isPresent();
 
             ItemJpa itemJpa = itemJpaRepository.save(ItemTestUtil.generateJpa("Item 1", "Description 1", 19.9));
             ImageJpa imageItemJpa = imageJpaRepository.save(ImageTestUtil.generateJpa(itemJpa, "http://image2.test"));
             Optional<ImageJpa> optionalItemImageJpa = imageJpaRepository.findById(imageItemJpa.getId());
+
+            assertThat(optionalProductImageJpa).isPresent();
             assertThat(optionalItemImageJpa).isPresent();
         }
 
@@ -157,12 +156,12 @@ public class ImageJpaRepositoryIT {
         void mustVerifyIfImageExistsById() {
             ProductJpa productJpa = productJpaRepository.save(ProductTestUtil.generateJpa("Drink 1", "Description 1", "DRINK", 7.5));
             ImageJpa imageProductJpa = imageJpaRepository.save(ImageTestUtil.generateJpa(productJpa, "http://image1.test"));
-            assertThat(imageJpaRepository.existsById(imageProductJpa.getId())).isTrue();
 
             ItemJpa itemJpa = itemJpaRepository.save(ItemTestUtil.generateJpa("Item 1", "Description 1", 19.9));
             ImageJpa imageItemJpa = imageJpaRepository.save(ImageTestUtil.generateJpa(itemJpa, "http://image2.test"));
-            assertThat(imageJpaRepository.existsById(imageItemJpa.getId())).isTrue();
 
+            assertThat(imageJpaRepository.existsById(imageProductJpa.getId())).isTrue();
+            assertThat(imageJpaRepository.existsById(imageItemJpa.getId())).isTrue();
             assertThat(imageJpaRepository.existsById(0L)).isFalse();
         }
     }
