@@ -58,8 +58,8 @@ public class CustomerControllerIT {
         Customer customer = CustomerController.findByCpf(customerCpf, customerDatabaseConnection);
         assertThat(customer).isNotNull();
         assertThat(customer.getName()).isEqualTo(customerName);
-        assertThat(customer.getCpf()).isEqualTo(customerEmail);
-        assertThat(customer.getEmail()).isEqualTo(customerCpf);
+        assertThat(customer.getCpf()).isEqualTo(customerCpf);
+        assertThat(customer.getEmail()).isEqualTo(customerEmail);
     }
 
     @Test
