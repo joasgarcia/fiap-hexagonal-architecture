@@ -6,6 +6,8 @@ import com.fiap.restaurant.entity.product.Product;
 import com.fiap.restaurant.external.db.order.ItemJpa;
 import com.fiap.restaurant.external.db.product.ImageJpa;
 import com.fiap.restaurant.external.db.product.ProductJpa;
+import com.fiap.restaurant.types.dto.product.SaveProductImageDTO;
+import com.fiap.restaurant.types.dto.product.UpdateImageDTO;
 
 public class ImageTestUtil {
 
@@ -39,5 +41,20 @@ public class ImageTestUtil {
         image.setSrc(src);
 
         return image;
+    }
+
+    public static SaveProductImageDTO generateSaveProductImageDTO(Long productId, String src) {
+        SaveProductImageDTO saveProductImageDTO = new SaveProductImageDTO();
+        saveProductImageDTO.setProductId(productId);
+        saveProductImageDTO.setSrc(src);
+
+        return saveProductImageDTO;
+    }
+
+    public static UpdateImageDTO generateUpdateImageDTO(String src) {
+        UpdateImageDTO updateImageDTO = new UpdateImageDTO();
+        updateImageDTO.setSrc(src);
+
+        return updateImageDTO;
     }
 }
