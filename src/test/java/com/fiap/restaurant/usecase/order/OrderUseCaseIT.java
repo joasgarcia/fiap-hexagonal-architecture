@@ -80,7 +80,7 @@ public class OrderUseCaseIT {
 
     @Test
     @Rollback
-    void testFindOrderById() {
+    void mustFindOrderById() {
         CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
         OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new Date()));
 
@@ -96,7 +96,7 @@ public class OrderUseCaseIT {
 
     @Test
     @Rollback
-    void testThrowExceptionOrderIdNotFound() {
+    void mustThrowExceptionOrderIdNotFound() {
         final Long nonexistentOrderId = 1L;
         assertThatThrownBy(() -> OrderUseCase.findById(nonexistentOrderId, orderGateway))
                 .isInstanceOf(ResourceNotFoundException.class)
