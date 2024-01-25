@@ -5,6 +5,8 @@ import com.fiap.restaurant.types.dto.customer.SaveCustomerDTO;
 
 public class CustomerTestUtil {
 
+    public static final String CNPJ = "71841727016";
+
     public static CustomerJpa generateJpa(String name, String email, String cpf) {
         CustomerJpa customerJpa = new CustomerJpa();
         customerJpa.setName(name);
