@@ -10,6 +10,7 @@ import com.fiap.restaurant.gateway.payment.IPaymentGateway;
 import com.fiap.restaurant.types.dto.order.OrderItemDTO;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
 import com.fiap.restaurant.types.exception.BusinessException;
+import com.fiap.restaurant.util.CustomerTestUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,7 +58,7 @@ public class OrderUseCaseTest {
 
     @Test
     void mustSaveOrder() {
-        Customer customer = new Customer("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+        Customer customer = new Customer("John Doe", "johndoe@email.com", CustomerTestUtil.CPF);
         Item item = new Item("Item 1", "Item Description 1", 17.5);
 
         Order order = new Order(customer, new Date(), OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new ArrayList<>());
