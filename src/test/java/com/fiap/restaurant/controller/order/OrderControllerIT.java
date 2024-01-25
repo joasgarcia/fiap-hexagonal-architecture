@@ -46,7 +46,7 @@ public class OrderControllerIT {
     @Test
     @Rollback
     void mustUpdateOrderStatus() {
-        CustomerJpa customerJpa = customerJpaRepository.save(CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CNPJ));
+        CustomerJpa customerJpa = customerJpaRepository.save(CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CPF));
         OrderStatus initialOrderStatus = OrderStatus.RECEIVED;
         OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, initialOrderStatus, OrderPaymentStatus.PENDING, new Date()));
 
@@ -60,7 +60,7 @@ public class OrderControllerIT {
     @Test
     @Rollback
     void mustUpdateOrderPaymentStatus() {
-        CustomerJpa customerJpa = customerJpaRepository.save(CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CNPJ));
+        CustomerJpa customerJpa = customerJpaRepository.save(CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CPF));
         OrderPaymentStatus initialOrderPaymentStatus = OrderPaymentStatus.PENDING;
         OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, OrderStatus.RECEIVED, initialOrderPaymentStatus, new Date()));
 
@@ -74,7 +74,7 @@ public class OrderControllerIT {
     @Test
     @Rollback
     void mustFindOrderById() {
-        CustomerJpa customerJpa = customerJpaRepository.save(CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CNPJ));
+        CustomerJpa customerJpa = customerJpaRepository.save(CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CPF));
         OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new Date()));
 
         Order order = OrderController.findById(orderJpa.getId(), orderDatabaseConnection, customerDatabaseConnection);
