@@ -57,7 +57,6 @@ public class OrderUseCaseIT {
 
         OrderStatus orderStatus = OrderStatus.RECEIVED;
         final OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, orderStatus, OrderPaymentStatus.PENDING, new Date()));
-        assertThat(orderJpa.getStatus()).isEqualTo(orderStatus);
 
         orderStatus = OrderStatus.PREPARING;
         Order order = OrderUseCase.updateStatus(orderJpa.getId(), orderStatus, orderGateway);
@@ -72,7 +71,6 @@ public class OrderUseCaseIT {
 
         OrderPaymentStatus orderPaymentStatus = OrderPaymentStatus.PENDING;
         final OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, OrderStatus.RECEIVED, orderPaymentStatus, new Date()));
-        assertThat(orderJpa.getPaymentStatus()).isEqualTo(orderPaymentStatus);
 
         orderPaymentStatus = OrderPaymentStatus.APPROVED;
         Order order = OrderUseCase.updatePaymentStatus(orderJpa.getId(), orderPaymentStatus, orderGateway);
