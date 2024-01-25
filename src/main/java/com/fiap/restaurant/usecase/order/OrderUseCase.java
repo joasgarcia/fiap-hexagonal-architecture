@@ -50,6 +50,7 @@ public class OrderUseCase {
         return order;
     }
 
+    @Deprecated
     public static List<Order> listOrderedByStatus(IOrderGateway orderGateway) {
         return orderGateway.listOrderedByStatusAndId();
     }
