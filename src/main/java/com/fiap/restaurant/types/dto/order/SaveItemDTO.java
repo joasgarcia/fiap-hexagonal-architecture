@@ -47,7 +47,15 @@ public class SaveItemDTO {
         return imageSrcList;
     }
 
+    public void setImageSrcList(List<ImageSrcDTO> imageSrcList) {
+        this.imageSrcList = imageSrcList;
+    }
+
     public List<IdDTO> getProductIdList() {
         return productIdList;
+    }
+
+    public void setProductIdList(List<IdDTO> productIdList) {
+        this.productIdList = productIdList;
     }
 }
