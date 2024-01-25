@@ -49,11 +49,10 @@ public class CustomerUseCaseIT {
             SaveCustomerDTO saveCustomerDTO = CustomerRequestHelper.buildSaveRequest();
 
             Customer customer = CustomerUseCase.save(saveCustomerDTO, customerGateway);
-            assertThat(customer).isNotNull();
 
             SaveCustomerDTO secondSaveCustomerDTO = new SaveCustomerDTO();
             saveCustomerDTO.setName("User Test");
-            saveCustomerDTO.setEmail(saveCustomerDTO.getEmail());
+            saveCustomerDTO.setEmail(customer.getEmail());
             saveCustomerDTO.setCpf("71841727016");
             secondSaveCustomerDTO.setEmail(saveCustomerDTO.getEmail());
 
@@ -71,12 +70,11 @@ public class CustomerUseCaseIT {
             SaveCustomerDTO saveCustomerDTO = CustomerRequestHelper.buildSaveRequest();
 
             Customer customer = CustomerUseCase.save(saveCustomerDTO, customerGateway);
-            assertThat(customer).isNotNull();
 
             SaveCustomerDTO secondSaveCustomerDTO = new SaveCustomerDTO();
             secondSaveCustomerDTO.setName("User Test");
             secondSaveCustomerDTO.setEmail("user.test@email.com");
-            secondSaveCustomerDTO.setCpf(saveCustomerDTO.getCpf());
+            secondSaveCustomerDTO.setCpf(customer.getCpf());
 
             assertThatThrownBy(() -> CustomerUseCase.save(secondSaveCustomerDTO, customerGateway))
                     .isInstanceOf(BusinessException.class)

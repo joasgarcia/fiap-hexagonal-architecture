@@ -65,7 +65,6 @@ public class ProductUseCaseIT {
         void mustUpdateProduct() {
             ProductDTO productDTO = ProductTestUtil.generateDTO("Drink 1", "Description 1", "DRINK", 7.5);
             Product product = ProductUseCase.save(productDTO, productGateway);
-            assertThat(product).isNotNull();
 
             final String productDescription = "Product Description Update";
             productDTO.setDescription(productDescription);
@@ -82,8 +81,7 @@ public class ProductUseCaseIT {
         @Rollback
         void mustThrowExceptionIdNotFoundOnUpdateProduct() {
             ProductDTO productDTO = ProductTestUtil.generateDTO("Drink 1", "Description 1", "DRINK", 7.5);
-            Product product = ProductUseCase.save(productDTO, productGateway);
-            assertThat(product).isNotNull();
+            ProductUseCase.save(productDTO, productGateway);
 
             final Long nonexistentProductId = 0L;
             final String productDescription = "Product Description Update";
@@ -99,7 +97,6 @@ public class ProductUseCaseIT {
         void mustDeleteProduct() {
             ProductDTO productDTO = ProductTestUtil.generateDTO("Drink 1", "Description 1", "DRINK", 7.5);
             Product product = ProductUseCase.save(productDTO, productGateway);
-            assertThat(product).isNotNull();
 
             ProductUseCase.delete(product.getId(), productGateway);
 
@@ -112,7 +109,6 @@ public class ProductUseCaseIT {
         void mustThrowExceptionIdNotFoundOnDeleteProduct() {
             ProductDTO productDTO = ProductTestUtil.generateDTO("Drink 1", "Description 1", "DRINK", 7.5);
             Product product = ProductUseCase.save(productDTO, productGateway);
-            assertThat(product).isNotNull();
 
             final Long nonexistentProductId = 0L;
             assertThatThrownBy(() -> ProductUseCase.delete(nonexistentProductId, productGateway))
@@ -142,14 +138,13 @@ public class ProductUseCaseIT {
             ProductUseCase.save(ProductTestUtil.generateDTO("Drink 2", "Description 2", "DRINK", 5.5), productGateway);
             ProductUseCase.save(ProductTestUtil.generateDTO("Snack 1", "Description 3", "SNACK", 10.5), productGateway);
 
-            List<Product> productList = ProductUseCase.findAllByCategory("DRINK", productGateway);
-            assertThat(productList).isNotEmpty().hasSize(2);
+            List<Product> productDrinkList = ProductUseCase.findAllByCategory("DRINK", productGateway);
+            List<Product> productSnackList = ProductUseCase.findAllByCategory("SNACK", productGateway);
+            List<Product> productDessertList = ProductUseCase.findAllByCategory("DESSERT", productGateway);
 
-            productList = ProductUseCase.findAllByCategory("SNACK", productGateway);
-            assertThat(productList).isNotEmpty().hasSize(1);
-
-            productList = ProductUseCase.findAllByCategory("DESSERT", productGateway);
-            assertThat(productList).isEmpty();
+            assertThat(productDrinkList).isNotEmpty().hasSize(2);
+            assertThat(productSnackList).isNotEmpty().hasSize(1);
+            assertThat(productDessertList).isEmpty();
         }
     }
 }
