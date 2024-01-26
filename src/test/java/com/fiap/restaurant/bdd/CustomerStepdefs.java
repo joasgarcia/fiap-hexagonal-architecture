@@ -1,15 +1,11 @@
 package com.fiap.restaurant.bdd;
 
-import com.fiap.restaurant.external.db.customer.CustomerJpaRepository;
 import com.fiap.restaurant.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.util.CustomerTestUtil;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.pt.Dado;
-import io.cucumber.java.pt.Então;
-import io.cucumber.java.pt.Quando;
 import io.restassured.response.Response;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import java.util.UUID;
@@ -24,9 +20,6 @@ public class CustomerStepdefs {
 
     private static final String ENDPOINT = ENDPOINT_HOST + "/customer";
     private static final String SCHEMA_LOCATION = "./schemas/api/customer";
-
-    @Autowired
-    private CustomerJpaRepository customerJpaRepository;
 
     private SaveCustomerDTO saveCustomerDTO;
     private Response response;
@@ -51,18 +44,18 @@ public class CustomerStepdefs {
                 .body(equalTo("true"));
     }
 
-    @Dado("the customer already registered")
+    @Given("the customer already registered")
     public void theCustomerAlreadyRegistered() {
         saveANewCustomer();
     }
 
-    @Quando("do a search by CPF")
+    @When("do a search by CPF")
     public void doASearchByCPF() {
         response = given().contentType(DEFAULT_CONTENT_TYPE)
                 .when().get(ENDPOINT + "/{cpf}", saveCustomerDTO.getCpf());
     }
 
-    @Então("the customer is displayed")
+    @Then("the customer is displayed")
     public void theCustomerIsDisplayed() {
         response.then()
                 .statusCode(HttpStatus.OK.value())
@@ -96,10 +89,4 @@ public class CustomerStepdefs {
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body(equalTo("Cliente já cadastrado com o CPF informado"));
     }
-
-//    @After
-//    void tearDown() {
-//        CustomerJpa customerJpa = customerJpaRepository.findByCpf(customerCpf);
-//        customerJpaRepository.delete(customerJpa);
-//    }
 }
