@@ -1,8 +1,10 @@
 package com.fiap.restaurant.gateway.product;
 
 import com.fiap.restaurant.entity.product.Image;
+import com.fiap.restaurant.external.db.order.ItemJpa;
 import com.fiap.restaurant.external.db.product.ImageJpa;
 import com.fiap.restaurant.external.db.product.ProductJpa;
+import com.fiap.restaurant.types.interfaces.db.order.ItemDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.product.ImageDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.product.ProductDatabaseConnection;
 import com.fiap.restaurant.types.mapper.product.ImageMapper;
@@ -15,14 +17,16 @@ public class ImageGateway implements IImageGateway {
 
     private final ImageDatabaseConnection imageDatabaseConnection;
     private final ProductDatabaseConnection productDatabaseConnection;
+    private final ItemDatabaseConnection itemDatabaseConnection;
 
     public ImageGateway(ImageDatabaseConnection imageDatabaseConnection) {
-        this(imageDatabaseConnection, null);
+        this(imageDatabaseConnection, null, null);
     }
 
-    public ImageGateway(ImageDatabaseConnection imageDatabaseConnection, ProductDatabaseConnection productDatabaseConnection) {
+    public ImageGateway(ImageDatabaseConnection imageDatabaseConnection, ProductDatabaseConnection productDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection) {
         this.imageDatabaseConnection = imageDatabaseConnection;
         this.productDatabaseConnection = productDatabaseConnection;
+        this.itemDatabaseConnection = itemDatabaseConnection;
     }
 
     @Override
@@ -33,6 +37,11 @@ public class ImageGateway implements IImageGateway {
         if (image.getProduct() != null) {
             ProductJpa productJpa = (ProductJpa) this.productDatabaseConnection.getById(image.getProduct().getId()).get();
             imageJpa.setProduct(productJpa);
+        }
+
+        if (image.getItem() != null) {
+            ItemJpa itemJpa = (ItemJpa) this.itemDatabaseConnection.getById(image.getItem().getId()).get();
+            imageJpa.setItem(itemJpa);
         }
 
         imageJpa = (ImageJpa) this.imageDatabaseConnection.save(imageJpa);
