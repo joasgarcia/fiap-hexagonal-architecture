@@ -35,7 +35,7 @@ public class CustomerControllerIT {
     @Test
     @Rollback
     void mustSaveCustomer() {
-        final SaveCustomerDTO saveCustomerDTO = CustomerTestUtil.generateSaveCustomerDTO("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+        final SaveCustomerDTO saveCustomerDTO = CustomerTestUtil.generateSaveCustomerDTO("John Doe", "johndoe@email.com", CustomerTestUtil.CPF);
 
         CustomerController.save(saveCustomerDTO, customerDatabaseConnection);
 
@@ -49,7 +49,7 @@ public class CustomerControllerIT {
     @Test
     @Rollback
     void mustFindCustomerByCpf() {
-        final String customerCpf = "71841727016";
+        final String customerCpf = CustomerTestUtil.CPF;
         final String customerName = "John Doe";
         final String customerEmail = "johndoe@email.com";
         final CustomerJpa customerJpa = CustomerTestUtil.generateJpa(customerName, customerEmail, customerCpf);
@@ -65,7 +65,7 @@ public class CustomerControllerIT {
     @Test
     @Rollback
     void mustThrowExceptionCustomerNotFoundOnFindCustomerByCpf() {
-        final String nonexistentCustomerCpf = "71841727016";
+        final String nonexistentCustomerCpf = CustomerTestUtil.CPF;
 
         assertThatThrownBy(() -> CustomerController.findByCpf(nonexistentCustomerCpf, customerDatabaseConnection))
                 .isInstanceOf(ResourceNotFoundException.class)

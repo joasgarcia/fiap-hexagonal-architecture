@@ -12,16 +12,12 @@ import com.fiap.restaurant.gateway.order.OrderGateway;
 import com.fiap.restaurant.gateway.order.OrderItemGateway;
 import com.fiap.restaurant.gateway.payment.IPaymentGateway;
 import com.fiap.restaurant.gateway.payment.MercadoPagoGateway;
-import com.fiap.restaurant.presenter.order.OrderPresenter;
-import com.fiap.restaurant.types.dto.order.OrderScreenPresenterDTO;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
 import com.fiap.restaurant.types.interfaces.db.customer.CustomerDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.order.ItemDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.order.OrderDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.order.OrderItemDatabaseConnection;
 import com.fiap.restaurant.usecase.order.OrderUseCase;
-
-import java.util.List;
 
 public class OrderController {
 
@@ -40,13 +36,6 @@ public class OrderController {
         OrderGateway orderGateway = new OrderGateway(orderDatabaseConnection, customerDatabaseConnection);
         OrderStatus statusParsed = OrderStatus.valueOf(status);
         return OrderUseCase.updateStatus(id, statusParsed, orderGateway);
-    }
-
-    public static List<OrderScreenPresenterDTO> listOrderedByStatus(OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
-        OrderGateway orderGateway = new OrderGateway(orderDatabaseConnection, customerDatabaseConnection);
-        List<Order> orderList = OrderUseCase.listOrderedByStatus(orderGateway);
-
-        return OrderPresenter.buildOrderScreen(orderList);
     }
 
     public static Order save(SaveOrderDTO saveOrderDTO, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection, OrderItemDatabaseConnection orderItemDatabaseConnection) {

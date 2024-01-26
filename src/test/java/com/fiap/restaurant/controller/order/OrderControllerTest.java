@@ -66,7 +66,7 @@ public class OrderControllerTest {
 
     @Test
     void mustSaveOrder() {
-        CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+        CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CPF);
         ItemJpa itemJpa = ItemTestUtil.generateJpa("Item 1", "Item Description 1", 17.5);
         itemJpa.setId(1L);
 
@@ -106,7 +106,7 @@ public class OrderControllerTest {
         orderItemDTOList.add(orderItemDTO);
 
         SaveOrderDTO saveOrderDTO = new SaveOrderDTO();
-        saveOrderDTO.setCustomerCpf("71841727016");
+        saveOrderDTO.setCustomerCpf(CustomerTestUtil.CPF);
         saveOrderDTO.setItems(orderItemDTOList);
 
         Order savedOrder = OrderController.save(saveOrderDTO, orderDatabaseConnection, customerDatabaseConnection, itemDatabaseConnection, orderItemDatabaseConnection);

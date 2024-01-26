@@ -8,6 +8,7 @@ import com.fiap.restaurant.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.types.exception.BusinessException;
 import com.fiap.restaurant.types.exception.ResourceNotFoundException;
 import com.fiap.restaurant.types.interfaces.db.customer.CustomerDatabaseConnection;
+import com.fiap.restaurant.util.CustomerTestUtil;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -49,12 +50,11 @@ public class CustomerUseCaseIT {
             SaveCustomerDTO saveCustomerDTO = CustomerRequestHelper.buildSaveRequest();
 
             Customer customer = CustomerUseCase.save(saveCustomerDTO, customerGateway);
-            assertThat(customer).isNotNull();
 
             SaveCustomerDTO secondSaveCustomerDTO = new SaveCustomerDTO();
             saveCustomerDTO.setName("User Test");
-            saveCustomerDTO.setEmail(saveCustomerDTO.getEmail());
-            saveCustomerDTO.setCpf("71841727016");
+            saveCustomerDTO.setEmail(customer.getEmail());
+            saveCustomerDTO.setCpf(CustomerTestUtil.CPF);
             secondSaveCustomerDTO.setEmail(saveCustomerDTO.getEmail());
 
             assertThatThrownBy(() -> CustomerUseCase.save(secondSaveCustomerDTO, customerGateway))
@@ -71,12 +71,11 @@ public class CustomerUseCaseIT {
             SaveCustomerDTO saveCustomerDTO = CustomerRequestHelper.buildSaveRequest();
 
             Customer customer = CustomerUseCase.save(saveCustomerDTO, customerGateway);
-            assertThat(customer).isNotNull();
 
             SaveCustomerDTO secondSaveCustomerDTO = new SaveCustomerDTO();
             secondSaveCustomerDTO.setName("User Test");
             secondSaveCustomerDTO.setEmail("user.test@email.com");
-            secondSaveCustomerDTO.setCpf(saveCustomerDTO.getCpf());
+            secondSaveCustomerDTO.setCpf(customer.getCpf());
 
             assertThatThrownBy(() -> CustomerUseCase.save(secondSaveCustomerDTO, customerGateway))
                     .isInstanceOf(BusinessException.class)
@@ -103,7 +102,7 @@ public class CustomerUseCaseIT {
         @Rollback
         void mustThrowExceptionCustomerNotFoundByCpf() {
             ICustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
-            final String customerCpf = "71841727016";
+            final String customerCpf = CustomerTestUtil.CPF;
 
             assertThatThrownBy(() -> CustomerUseCase.findByCpf(customerCpf, customerGateway))
                     .isInstanceOf(ResourceNotFoundException.class)

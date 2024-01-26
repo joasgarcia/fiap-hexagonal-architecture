@@ -42,7 +42,7 @@ public class OrderItemJpaRepositoryIT {
     @Test
     @Rollback
     void mustSaveOrderItem() {
-        final CustomerJpa customerJpa = customerJpaRepository.save(CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString()));
+        final CustomerJpa customerJpa = customerJpaRepository.save(CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CPF));
         final OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new Date()));
         final ItemJpa itemJpa = itemJpaRepository.save(ItemTestUtil.generateJpa("Item 1", "Description 1", 12.5));
 

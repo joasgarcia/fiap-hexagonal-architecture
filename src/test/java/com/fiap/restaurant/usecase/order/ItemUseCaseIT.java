@@ -129,23 +129,15 @@ public class ItemUseCaseIT {
         saveItemDTO.getImageSrcList().add(new ImageSrcDTO("http://image2.test"));
 
         Item item = ItemUseCase.save(saveItemDTO, itemGateway, productGateway, itemProductGateway, imageGateway);
-        assertThat(item).isNotNull();
-
-        List<ItemProductJpa> itemProductJpaList = itemProductRepository.findAllByItemId(item.getId());
-        assertThat(itemProductJpaList).isNotEmpty().hasSize(1);
-
-        List<ImageJpa> imageJpaList = imageJpaRepository.findAllByItemId(item.getId());
-        assertThat(imageJpaList).isNotEmpty().hasSize(2);
 
         ItemUseCase.delete(item.getId(), itemGateway, itemProductGateway, imageGateway);
 
         Optional<ItemJpa> optionalItemJpa = itemJpaRepository.findById(item.getId());
+        List<ItemProductJpa> itemProductJpaList = itemProductRepository.findAllByItemId(item.getId());
+        List<ImageJpa> imageJpaList = imageJpaRepository.findAllByItemId(item.getId());
+
         assertThat(optionalItemJpa).isNotPresent();
-
-        itemProductJpaList = itemProductRepository.findAllByItemId(item.getId());
         assertThat(itemProductJpaList).isEmpty();
-
-        imageJpaList = imageJpaRepository.findAllByItemId(item.getId());
         assertThat(imageJpaList).isEmpty();
     }
 

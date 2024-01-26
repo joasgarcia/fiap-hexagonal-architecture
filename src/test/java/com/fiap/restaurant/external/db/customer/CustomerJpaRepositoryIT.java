@@ -29,7 +29,7 @@ public class CustomerJpaRepositoryIT {
         @Test
         @Rollback
         void mustSaveCustomer() {
-            CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+            CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CPF);
             CustomerJpa savedCustomer = customerJpaRepository.save(customerJpa);
             assertThat(savedCustomer).isEqualTo(customerJpa);
         }
@@ -41,7 +41,7 @@ public class CustomerJpaRepositoryIT {
         @Test
         @Rollback
         void mustFindCustomerByCpf() {
-            CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+            CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CPF);
             CustomerJpa savedCustomer = customerJpaRepository.save(customerJpa);
             CustomerJpa foundCustomer = customerJpaRepository.findByCpf(customerJpa.getCpf());
             assertThat(foundCustomer.getCpf()).isNotEmpty().isEqualTo(savedCustomer.getCpf());
@@ -50,7 +50,7 @@ public class CustomerJpaRepositoryIT {
         @Test
         @Rollback
         void mustNotFindCustomerByCpf() {
-            CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+            CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CPF);
             CustomerJpa customer = customerJpaRepository.findByCpf(customerJpa.getCpf());
             assertThat(customer).isNull();
         }
