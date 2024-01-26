@@ -1,14 +1,18 @@
 package com.fiap.restaurant.bdd;
 
-import com.fiap.restaurant.api.customer.CustomerRequestHelper;
+import com.fiap.restaurant.external.db.customer.CustomerJpaRepository;
 import com.fiap.restaurant.types.dto.customer.SaveCustomerDTO;
+import com.fiap.restaurant.util.CustomerTestUtil;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
+import java.util.UUID;
 
 import static com.fiap.restaurant.api.RequestHelper.DEFAULT_CONTENT_TYPE;
 import static com.fiap.restaurant.api.RequestHelper.ENDPOINT_HOST;
@@ -21,40 +25,81 @@ public class CustomerStepdefs {
     private static final String ENDPOINT = ENDPOINT_HOST + "/customer";
     private static final String SCHEMA_LOCATION = "./schemas/api/customer";
 
+    @Autowired
+    private CustomerJpaRepository customerJpaRepository;
+
     private SaveCustomerDTO saveCustomerDTO;
     private Response response;
+    private String customerCpf;
+    private String customerEmail;
 
-    @Quando("registrar um novo cliente")
-    public void registrarUmNovoCliente() {
-        saveCustomerDTO = CustomerRequestHelper.buildSaveRequest();
+    @When("save a new customer")
+    public void saveANewCustomer() {
+        customerCpf = UUID.randomUUID().toString();
+        customerEmail = customerCpf + "@email.com";
+
+        saveCustomerDTO = CustomerTestUtil.generateSaveCustomerDTO("John Doe", customerEmail, customerCpf);
         response = given().contentType(DEFAULT_CONTENT_TYPE).body(saveCustomerDTO)
                 .when().post(ENDPOINT + "/");
     }
 
-    @Então("o cliente é registrado com sucesso")
-    public void oClienteÉRegistradoComSucesso() {
+    @Then("the customer is successfully saved")
+    public void theCustomerIsSuccessfullySaved() {
         response.then()
                 .statusCode(HttpStatus.OK.value())
                 .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/CustomerSaveSchema.json"))
                 .body(equalTo("true"));
     }
 
-    @Dado("que o cliente já foi registrado")
-    public void queOClienteJáFoiRegistrado() {
-        registrarUmNovoCliente();
+    @Dado("the customer already registered")
+    public void theCustomerAlreadyRegistered() {
+        saveANewCustomer();
     }
 
-    @Quando("realizar uma busca por CPF")
-    public void realizarUmaBuscaPorCPF() {
+    @Quando("do a search by CPF")
+    public void doASearchByCPF() {
         response = given().contentType(DEFAULT_CONTENT_TYPE)
                 .when().get(ENDPOINT + "/{cpf}", saveCustomerDTO.getCpf());
     }
 
-    @Então("o cliente é exibido")
-    public void oClienteÉExibido() {
+    @Então("the customer is displayed")
+    public void theCustomerIsDisplayed() {
         response.then()
                 .statusCode(HttpStatus.OK.value())
                 .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/CustomerFindByCpfSchema.json"));
-
     }
+
+    @When("save another customer with same e-mail")
+    public void saveAnotherCustomerWithSameEMail() {
+        saveCustomerDTO = CustomerTestUtil.generateSaveCustomerDTO("John Doe", customerEmail, CustomerTestUtil.CPF);
+        response = given().contentType(DEFAULT_CONTENT_TYPE).body(saveCustomerDTO)
+                .when().post(ENDPOINT + "/");
+    }
+
+    @Then("an error is displayed indicating that e-mail already registered")
+    public void anErrorIsDisplayedIndicatingThatEMailAlreadyRegistered() {
+        response.then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body(equalTo("Cliente já cadastrado com o e-mail informado"));
+    }
+
+    @When("save another customer with same CPF")
+    public void saveAnotherCustomerWithSameCPF() {
+        saveCustomerDTO = CustomerTestUtil.generateSaveCustomerDTO("John Doe", "johndoe@test.com", CustomerTestUtil.CPF);
+        response = given().contentType(DEFAULT_CONTENT_TYPE).body(saveCustomerDTO)
+                .when().post(ENDPOINT + "/");
+    }
+
+    @Then("an error is displayed indicating that CPF already registered")
+    public void anErrorIsDisplayedIndicatingThatCPFAlreadyRegistered() {
+        response.then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body(equalTo("Cliente já cadastrado com o CPF informado"));
+    }
+
+//    @After
+//    void tearDown() {
+//        CustomerJpa customerJpa = customerJpaRepository.findByCpf(customerCpf);
+//        customerJpaRepository.delete(customerJpa);
+//    }
 }
