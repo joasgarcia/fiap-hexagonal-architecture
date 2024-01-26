@@ -78,7 +78,7 @@ public class CustomerStepdefs {
 
     @When("save another customer with same CPF")
     public void saveAnotherCustomerWithSameCPF() {
-        saveCustomerDTO = CustomerTestUtil.generateSaveCustomerDTO("John Doe", "johndoe@test.com", CustomerTestUtil.CPF);
+        saveCustomerDTO = CustomerTestUtil.generateSaveCustomerDTO("John Doe", "johndoe@test.com", customerCpf);
         response = given().contentType(DEFAULT_CONTENT_TYPE).body(saveCustomerDTO)
                 .when().post(ENDPOINT + "/");
     }
