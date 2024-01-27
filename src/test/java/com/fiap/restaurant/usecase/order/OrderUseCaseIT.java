@@ -96,7 +96,7 @@ public class OrderUseCaseIT {
     @Test
     @Rollback
     void mustThrowExceptionOrderIdNotFound() {
-        final Long nonexistentOrderId = 1L;
+        final Long nonexistentOrderId = 0L;
         assertThatThrownBy(() -> OrderUseCase.findById(nonexistentOrderId, orderGateway))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("Pedido não encontrado");
