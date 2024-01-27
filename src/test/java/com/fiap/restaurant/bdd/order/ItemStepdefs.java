@@ -3,7 +3,6 @@ package com.fiap.restaurant.bdd.order;
 import com.fiap.restaurant.bdd.product.ProductStepdefs;
 import com.fiap.restaurant.types.dto.IdDTO;
 import com.fiap.restaurant.types.dto.order.SaveItemDTO;
-import com.fiap.restaurant.types.dto.product.ImageSrcDTO;
 import com.fiap.restaurant.types.dto.product.ProductDTO;
 import com.fiap.restaurant.util.ItemTestUtil;
 import com.fiap.restaurant.util.ProductTestUtil;
@@ -25,7 +24,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class ItemStepdefs {
 
-    private static final String ENDPOINT = ENDPOINT_HOST + "/item";
+    public static final String ENDPOINT = ENDPOINT_HOST + "/item";
     private static final String SCHEMA_LOCATION = "./schemas/api/order";
 
     private Response response;

@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class CustomerStepdefs {
 
-    private static final String ENDPOINT = ENDPOINT_HOST + "/customer";
+    public static final String ENDPOINT = ENDPOINT_HOST + "/customer";
     private static final String SCHEMA_LOCATION = "./schemas/api/customer";
 
     private SaveCustomerDTO saveCustomerDTO;
