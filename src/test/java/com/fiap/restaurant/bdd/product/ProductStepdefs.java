@@ -60,7 +60,7 @@ public class ProductStepdefs {
     }
 
     @When("update a nonexistent product")
-    public void updateAnInexistentProduct() {
+    public void updateANonexistentProduct() {
         final Long nonexistentProductId = 0L;
         productDTO = ProductTestUtil.generateDTO("Product 1", "Description 1", "DRINK", 12.5);
         response = given().contentType(DEFAULT_CONTENT_TYPE).body(productDTO)
