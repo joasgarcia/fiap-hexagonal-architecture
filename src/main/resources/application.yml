@@ -10,3 +10,11 @@ spring:
     hibernate:
       ddl-auto: update
     defer-datasource-initialization: true
+---
+fiap:
+  payment:
+    #url: http://localhost:8081
+    url: ${PAYMENT_BASE_URL}
+  production:
+    #url: http://localhost:8082
+    url: ${PRODUCTION_BASE_URL}
