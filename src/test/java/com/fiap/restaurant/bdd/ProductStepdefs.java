@@ -2,6 +2,7 @@ package com.fiap.restaurant.bdd;
 
 import com.fiap.restaurant.types.dto.product.ProductDTO;
 import com.fiap.restaurant.util.ProductTestUtil;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -37,8 +38,6 @@ public class ProductStepdefs {
         response.then()
                 .statusCode(HttpStatus.OK.value())
                 .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/ProductSaveSchema.json"));
-
-//        savedProductId = response.getBody().jsonPath().get("id");
     }
 
     @Given("the product already registered")
@@ -74,4 +73,51 @@ public class ProductStepdefs {
                 .statusCode(HttpStatus.NOT_FOUND.value())
                 .body(equalTo("Produto não encontrado"));
     }
+
+    @When("delete a product")
+    public void deleteAProduct() {
+        response = given().contentType(DEFAULT_CONTENT_TYPE)
+                .when().delete(ENDPOINT + "/{id}", savedProductId);
+    }
+
+    @Then("the product is successfully deleted")
+    public void theProductIsSuccessfullyDeleted() {
+        response.then()
+                .statusCode(HttpStatus.OK.value())
+                .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/ProductDeleteSchema.json"))
+                .body(equalTo("true"));
+    }
+
+    @When("delete a nonexistent product")
+    public void deleteANonexistentProduct() {
+        final Long nonexistentProductId = 0L;
+        response = given().contentType(DEFAULT_CONTENT_TYPE)
+                .when().delete(ENDPOINT + "/{id}", nonexistentProductId);
+    }
+
+    @And("a another product is saved")
+    public void aAnotherProductIsSaved() {
+        saveANewProduct();
+    }
+
+    @When("a product list is requested")
+    public void aProductListIsRequested() {
+        response = given().contentType(DEFAULT_CONTENT_TYPE)
+                .when().get(ENDPOINT + "/");
+    }
+
+    @Then("the product list is displayed")
+    public void theProductListIsDisplayed() {
+        response.then()
+                .statusCode(HttpStatus.OK.value())
+                .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/ProductListSchema.json"));
+    }
+
+    @When("all products by category is requested")
+    public void allProductsByCategoryIsRequested() {
+        final String category = "DRINK";
+        response = given().contentType(DEFAULT_CONTENT_TYPE)
+                .when().get(ENDPOINT + "/listByCategory/${category}", category);
+    }
+
 }
