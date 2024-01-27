@@ -29,7 +29,7 @@ public class ImageStepdefs {
     private Integer savedImageId;
     private Integer savedProductId;
 
-    @Given("the product is already registered")
+    @Given("the product image is already registered")
     public void theProductIsAlreadyRegistered() {
         ProductDTO productDTO = ProductTestUtil.generateDTO("Product 1", "Description 1", "DRINK", 7.5);
         response = given().contentType(DEFAULT_CONTENT_TYPE).body(productDTO)
