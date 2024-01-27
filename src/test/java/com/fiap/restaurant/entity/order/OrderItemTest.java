@@ -1,6 +1,7 @@
 package com.fiap.restaurant.entity.order;
 
 import com.fiap.restaurant.entity.customer.Customer;
+import com.fiap.restaurant.util.CustomerTestUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class OrderItemTest {
     void mustInstantiateCorrectly() {
         final String customerName = "Customer name";
         final String customerEmail = "customer@teste.com";
-        final String customerCpf = "71841727016";
+        final String customerCpf = CustomerTestUtil.CPF;
         final Customer customer = new Customer(customerName, customerEmail, customerCpf);
 
         final Date orderDateCreated = new Date();

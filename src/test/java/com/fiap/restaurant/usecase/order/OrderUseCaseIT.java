@@ -53,7 +53,7 @@ public class OrderUseCaseIT {
     @Test
     @Rollback
     void mustUpdateOrderStatus() {
-        final CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+        final CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CPF);
 
         OrderStatus orderStatus = OrderStatus.RECEIVED;
         final OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, orderStatus, OrderPaymentStatus.PENDING, new Date()));
@@ -67,7 +67,7 @@ public class OrderUseCaseIT {
     @Test
     @Rollback
     void mustUpdateOrderPaymentStatus() {
-        final CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+        final CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CPF);
 
         OrderPaymentStatus orderPaymentStatus = OrderPaymentStatus.PENDING;
         final OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, OrderStatus.RECEIVED, orderPaymentStatus, new Date()));
@@ -81,7 +81,7 @@ public class OrderUseCaseIT {
     @Test
     @Rollback
     void mustFindOrderById() {
-        CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+        CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CPF);
         OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new Date()));
 
         Order order = OrderUseCase.findById(orderJpa.getId(), orderGateway);

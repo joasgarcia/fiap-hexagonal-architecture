@@ -1,5 +1,6 @@
 package com.fiap.restaurant.entity.customer;
 
+import com.fiap.restaurant.util.CustomerTestUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,7 +11,7 @@ public class CustomerTest {
     void mustInstantiateCorrectly() {
         final String name = "Customer name";
         final String email = "customer@teste.com";
-        final String cpf = "71841727016";
+        final String cpf = CustomerTestUtil.CPF;
 
         Customer customer = new Customer(name, email, cpf);
         assertThat(customer).isNotNull();

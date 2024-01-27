@@ -35,7 +35,7 @@ public class OrderJpaRepositoryIT {
         @Test
         @Rollback
         void mustSaveOrder() {
-            CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+            CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CPF);
             OrderJpa orderJpa = OrderTestUtil.generateJpa(customerJpa, OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new Date());
             OrderJpa persistedOrderJpa = orderJpaRepository.save(orderJpa);
             assertThat(persistedOrderJpa).isNotNull();
