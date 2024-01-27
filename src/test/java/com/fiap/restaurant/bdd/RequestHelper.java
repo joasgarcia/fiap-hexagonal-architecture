@@ -1,4 +1,4 @@
-package com.fiap.restaurant.api;
+package com.fiap.restaurant.bdd;
 
 import io.restassured.http.ContentType;
 
