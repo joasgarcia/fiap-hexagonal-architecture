@@ -4,7 +4,6 @@ import com.fiap.restaurant.entity.customer.Customer;
 import com.fiap.restaurant.entity.order.*;
 import com.fiap.restaurant.gateway.customer.ICustomerGateway;
 import com.fiap.restaurant.gateway.order.*;
-import com.fiap.restaurant.gateway.payment.IPaymentGateway;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
 import com.fiap.restaurant.types.dto.order.payment.OrderPaymentResponseDTO;
 import com.fiap.restaurant.types.exception.BusinessException;
@@ -29,9 +28,6 @@ public class OrderUseCaseTest {
 
     @Mock
     private ICustomerGateway customerGateway;
-
-    @Mock
-    private IPaymentGateway paymentGateway;
 
     @Mock
     private IOrderGateway orderGateway;
@@ -89,9 +85,6 @@ public class OrderUseCaseTest {
 
         when(orderItemGateway.save(any(OrderItem.class)))
                 .thenAnswer(i -> i.getArgument(0));
-
-        when(paymentGateway.processPayment(any(Long.class)))
-                .thenReturn(true);
 
         when(orderPaymentGateway.registerOrder(any(Long.class), any(Double.class)))
                 .thenReturn(orderPaymentResponseDTO);
