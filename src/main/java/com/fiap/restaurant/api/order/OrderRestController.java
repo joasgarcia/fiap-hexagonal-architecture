@@ -6,11 +6,11 @@ import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
 import com.fiap.restaurant.types.dto.order.UpdateOrderStatusDTO;
 import com.fiap.restaurant.types.dto.order.UpdatePaymentStatusDTO;
 import com.fiap.restaurant.types.exception.BusinessException;
+import com.fiap.restaurant.types.exception.ResourceNotFoundException;
 import com.fiap.restaurant.types.interfaces.db.customer.CustomerDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.order.ItemDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.order.OrderDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.order.OrderItemDatabaseConnection;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,10 +39,9 @@ public class OrderRestController {
     public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
         try {
             Order order = OrderController.findById(id, orderDatabaseConnection, customerDatabaseConnection);
-
             return ResponseEntity.ok().body(order);
-        } catch (EntityNotFoundException resourceNotFoundException) {
-            return new ResponseEntity<>("Pedido não encontrado", HttpStatus.NOT_FOUND);
+        } catch (ResourceNotFoundException resourceNotFoundException) {
+            return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -53,8 +52,8 @@ public class OrderRestController {
             return ResponseEntity.ok().body(true);
         } catch (BusinessException businessException) {
             return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (EntityNotFoundException resourceNotFoundException) {
-            return new ResponseEntity<>("Pedido não encontrado", HttpStatus.NOT_FOUND);
+        } catch (ResourceNotFoundException resourceNotFoundException) {
+            return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -65,8 +64,8 @@ public class OrderRestController {
             return ResponseEntity.ok().body(true);
         } catch (BusinessException businessException) {
             return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (EntityNotFoundException resourceNotFoundException) {
-            return new ResponseEntity<>("Pedido não encontrado", HttpStatus.NOT_FOUND);
+        } catch (ResourceNotFoundException resourceNotFoundException) {
+            return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
