@@ -5,11 +5,7 @@ import com.fiap.restaurant.entity.order.OrderPaymentStatus;
 import com.fiap.restaurant.entity.order.OrderStatus;
 import com.fiap.restaurant.gateway.customer.CustomerGateway;
 import com.fiap.restaurant.gateway.customer.ICustomerGateway;
-import com.fiap.restaurant.gateway.order.IItemGateway;
-import com.fiap.restaurant.gateway.order.IOrderItemGateway;
-import com.fiap.restaurant.gateway.order.ItemGateway;
-import com.fiap.restaurant.gateway.order.OrderGateway;
-import com.fiap.restaurant.gateway.order.OrderItemGateway;
+import com.fiap.restaurant.gateway.order.*;
 import com.fiap.restaurant.gateway.payment.IPaymentGateway;
 import com.fiap.restaurant.gateway.payment.MercadoPagoGateway;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
@@ -42,10 +38,11 @@ public class OrderController {
         OrderGateway orderGateway = new OrderGateway(orderDatabaseConnection, customerDatabaseConnection);
 
         IPaymentGateway mercadoPagoGateway = new MercadoPagoGateway();
+        IOrderPaymentGateway orderPaymentGateway = new OrderPaymentGateway();
         ICustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
         IItemGateway itemGateway = new ItemGateway(itemDatabaseConnection);
         IOrderItemGateway orderItemGateway = new OrderItemGateway(orderItemDatabaseConnection, itemDatabaseConnection, orderDatabaseConnection);
 
-        return OrderUseCase.save(saveOrderDTO, orderGateway, mercadoPagoGateway, customerGateway, itemGateway, orderItemGateway);
+        return OrderUseCase.save(saveOrderDTO, orderGateway, mercadoPagoGateway, customerGateway, itemGateway, orderItemGateway, orderPaymentGateway);
     }
 }

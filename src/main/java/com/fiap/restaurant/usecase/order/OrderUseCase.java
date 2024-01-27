@@ -10,8 +10,10 @@ import com.fiap.restaurant.gateway.customer.ICustomerGateway;
 import com.fiap.restaurant.gateway.order.IItemGateway;
 import com.fiap.restaurant.gateway.order.IOrderGateway;
 import com.fiap.restaurant.gateway.order.IOrderItemGateway;
+import com.fiap.restaurant.gateway.order.IOrderPaymentGateway;
 import com.fiap.restaurant.gateway.payment.IPaymentGateway;
 import com.fiap.restaurant.types.dto.order.OrderItemDTO;
+import com.fiap.restaurant.types.dto.order.OrderPaymentRestResponseDTO;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
 import com.fiap.restaurant.types.exception.BusinessException;
 import com.fiap.restaurant.types.exception.ResourceNotFoundException;
@@ -55,7 +57,7 @@ public class OrderUseCase {
         return orderGateway.listOrderedByStatusAndId();
     }
 
-    public static Order save(SaveOrderDTO saveOrderDTO, IOrderGateway orderGateway, IPaymentGateway paymentGateway, ICustomerGateway customerGateway, IItemGateway itemGateway, IOrderItemGateway orderItemGateway) {
+    public static Order save(SaveOrderDTO saveOrderDTO, IOrderGateway orderGateway, IPaymentGateway paymentGateway, ICustomerGateway customerGateway, IItemGateway itemGateway, IOrderItemGateway orderItemGateway, IOrderPaymentGateway orderPaymentGateway) {
         Customer customer = customerGateway.findByCpf(saveOrderDTO.getCustomerCpf());
 
         Order order = new Order();
@@ -79,6 +81,8 @@ public class OrderUseCase {
         }
 
         newOrder.setItems(orderItemList);
+
+        OrderPaymentRestResponseDTO orderPaymentRestResponseDTO = orderPaymentGateway.registerOrder(newOrder.getId());
 
         Boolean paymentCreatedSuccessfully = paymentGateway.processPayment(newOrder.getId());
 
