@@ -1,9 +1,9 @@
 package com.fiap.restaurant.gateway.order;
 
-import com.fiap.restaurant.types.dto.order.OrderPaymentRestResponseDTO;
+import com.fiap.restaurant.types.dto.order.payment.OrderPaymentResponseDTO;
 
 public interface IOrderPaymentGateway {
 
-    OrderPaymentRestResponseDTO registerOrder(Long id);
+    OrderPaymentResponseDTO registerOrder(Long customerId, Double value);
 
 }
