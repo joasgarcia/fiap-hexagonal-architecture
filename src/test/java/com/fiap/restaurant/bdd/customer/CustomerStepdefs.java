@@ -1,4 +1,4 @@
-package com.fiap.restaurant.bdd;
+package com.fiap.restaurant.bdd.customer;
 
 import com.fiap.restaurant.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.util.CustomerTestUtil;

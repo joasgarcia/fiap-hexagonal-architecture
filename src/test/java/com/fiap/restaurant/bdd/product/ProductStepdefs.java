@@ -1,4 +1,4 @@
-package com.fiap.restaurant.bdd;
+package com.fiap.restaurant.bdd.product;
 
 import com.fiap.restaurant.types.dto.product.ProductDTO;
 import com.fiap.restaurant.util.ProductTestUtil;
