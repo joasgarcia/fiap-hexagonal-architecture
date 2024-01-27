@@ -19,7 +19,15 @@ public class Order {
     private OrderPaymentStatus paymentStatus;
 
     public Order() {
-        this.setItems(new ArrayList<>());
+        this(null, null, null, null, new ArrayList<>());
+    }
+
+    public Order(Customer customer, Date dateCreated, OrderStatus status, OrderPaymentStatus paymentStatus, List<OrderItem> items) {
+        this.customer = customer;
+        this.dateCreated = dateCreated;
+        this.status = status;
+        this.paymentStatus = paymentStatus;
+        this.items = items;
     }
 
     public Long getId() {
@@ -60,11 +68,6 @@ public class Order {
 
     public List<OrderItem> getItems() {
         return this.items;
-    }
-
-    public void addItem(OrderItem orderItem) {
-        this.items.add(orderItem);
-        orderItem.setOrder(this);
     }
 
     public OrderPaymentStatus getPaymentStatus() {
