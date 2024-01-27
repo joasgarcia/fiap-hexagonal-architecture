@@ -21,10 +21,9 @@ import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-import static com.fiap.restaurant.api.RequestHelper.DEFAULT_CONTENT_TYPE;
-import static com.fiap.restaurant.api.RequestHelper.ENDPOINT_HOST;
+import static com.fiap.restaurant.bdd.RequestHelper.DEFAULT_CONTENT_TYPE;
+import static com.fiap.restaurant.bdd.RequestHelper.ENDPOINT_HOST;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
@@ -42,7 +41,7 @@ public class OrderStepdefs {
 
     @Given("the customer is already registered")
     public void theCustomerIsAlreadyRegistered() {
-        String customerCpf = UUID.randomUUID().toString();
+        String customerCpf = CustomerTestUtil.randomCpf();
         String customerEmail = customerCpf + "@email.com";
 
         saveCustomerDTO = CustomerTestUtil.generateSaveCustomerDTO("John Doe", customerEmail, customerCpf);

@@ -20,7 +20,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -91,7 +90,7 @@ public class OrderUseCaseTest {
 
     @Test
     void mustThrowExceptionPaymentNotProcessed() {
-        Customer customer = new Customer("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+        Customer customer = new Customer("John Doe", "johndoe@email.com", CustomerTestUtil.randomCpf());
         Item item = new Item("Item 1", "Item Description 1", 17.5);
 
         Order order = new Order(customer, new Date(), OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new ArrayList<>());

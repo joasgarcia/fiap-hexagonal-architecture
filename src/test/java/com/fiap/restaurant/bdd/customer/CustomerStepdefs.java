@@ -8,10 +8,8 @@ import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import org.springframework.http.HttpStatus;
 
-import java.util.UUID;
-
-import static com.fiap.restaurant.api.RequestHelper.DEFAULT_CONTENT_TYPE;
-import static com.fiap.restaurant.api.RequestHelper.ENDPOINT_HOST;
+import static com.fiap.restaurant.bdd.RequestHelper.DEFAULT_CONTENT_TYPE;
+import static com.fiap.restaurant.bdd.RequestHelper.ENDPOINT_HOST;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
@@ -28,7 +26,7 @@ public class CustomerStepdefs {
 
     @When("save a new customer")
     public void saveANewCustomer() {
-        customerCpf = UUID.randomUUID().toString();
+        customerCpf = CustomerTestUtil.randomCpf();
         customerEmail = customerCpf + "@email.com";
 
         saveCustomerDTO = CustomerTestUtil.generateSaveCustomerDTO("John Doe", customerEmail, customerCpf);

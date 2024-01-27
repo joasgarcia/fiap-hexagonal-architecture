@@ -16,7 +16,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Date;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -51,7 +50,7 @@ public class OrderJpaRepositoryIT {
         @Test
         @Rollback
         void mustFindOrderById() {
-            CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+            CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", CustomerTestUtil.CPF);
             OrderJpa orderJpa1 = OrderTestUtil.generateJpa(customerJpa, OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new Date());
             OrderJpa persistedOrderJpa1 = orderJpaRepository.save(orderJpa1);
 
