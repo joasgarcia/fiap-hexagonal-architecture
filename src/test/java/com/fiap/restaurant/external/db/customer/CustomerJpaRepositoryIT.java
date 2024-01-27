@@ -1,10 +1,13 @@
 package com.fiap.restaurant.external.db.customer;
 
-import org.junit.jupiter.api.BeforeEach;
+import com.fiap.restaurant.util.CustomerTestUtil;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.UUID;
@@ -12,42 +15,42 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@AutoConfigureTestDatabase
+@Transactional
 @ActiveProfiles("test")
-public class CustomerJpaRepositoryTest {
+public class CustomerJpaRepositoryIT {
 
     @Autowired
     private CustomerJpaRepository customerJpaRepository;
 
-    private CustomerJpa customerJpa;
-
-    @BeforeEach
-    void setup() {
-        customerJpa = new CustomerJpa();
-        customerJpa.setName("John Doe");
-        customerJpa.setEmail("johndoe@email.com");
-        customerJpa.setCpf(UUID.randomUUID().toString());
-    }
-
     @Nested
-    class SaveCustomer {
+    class Write {
+
         @Test
+        @Rollback
         void mustSaveCustomer() {
+            CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
             CustomerJpa savedCustomer = customerJpaRepository.save(customerJpa);
             assertThat(savedCustomer).isEqualTo(customerJpa);
         }
     }
 
     @Nested
-    class FindCustomer {
+    class Read {
+
         @Test
+        @Rollback
         void mustFindCustomerByCpf() {
+            CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
             CustomerJpa savedCustomer = customerJpaRepository.save(customerJpa);
             CustomerJpa foundCustomer = customerJpaRepository.findByCpf(customerJpa.getCpf());
             assertThat(foundCustomer.getCpf()).isNotEmpty().isEqualTo(savedCustomer.getCpf());
         }
 
         @Test
+        @Rollback
         void mustNotFindCustomerByCpf() {
+            CustomerJpa customerJpa = CustomerTestUtil.generateJpa("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
             CustomerJpa customer = customerJpaRepository.findByCpf(customerJpa.getCpf());
             assertThat(customer).isNull();
         }
