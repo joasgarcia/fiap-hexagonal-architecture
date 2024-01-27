@@ -90,7 +90,7 @@ public class OrderControllerIT {
     @Test
     @Rollback
     void mustThrowExceptionOrderIdNotFound() {
-        final Long nonexistentOrderId = 1L;
+        final Long nonexistentOrderId = 0L;
 
         assertThatThrownBy(() -> OrderController.findById(nonexistentOrderId, orderDatabaseConnection, customerDatabaseConnection))
                 .isInstanceOf(ResourceNotFoundException.class)

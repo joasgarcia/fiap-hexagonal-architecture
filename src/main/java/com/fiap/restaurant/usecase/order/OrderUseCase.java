@@ -35,6 +35,8 @@ public class OrderUseCase {
     public static Order updatePaymentStatus(Long id, OrderPaymentStatus paymentStatus, IOrderGateway orderGateway) {
         Order order = orderGateway.getById(id);
 
+        if (order == null) throw new ResourceNotFoundException("Pedido não encontrado");
+
         order.setPaymentStatus(paymentStatus);
 
         orderGateway.update(order);
@@ -44,6 +46,8 @@ public class OrderUseCase {
 
     public static Order updateStatus(Long id, OrderStatus status, IOrderGateway orderGateway) {
         Order order = orderGateway.getById(id);
+
+        if (order == null) throw new ResourceNotFoundException("Pedido não encontrado");
 
         order.setStatus(status);
 

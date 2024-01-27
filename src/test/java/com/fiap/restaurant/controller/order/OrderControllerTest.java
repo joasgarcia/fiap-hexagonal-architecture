@@ -10,7 +10,6 @@ import com.fiap.restaurant.external.db.order.OrderItemJpa;
 import com.fiap.restaurant.external.db.order.OrderJpa;
 import com.fiap.restaurant.gateway.order.IOrderItemGateway;
 import com.fiap.restaurant.gateway.payment.IPaymentGateway;
-import com.fiap.restaurant.types.dto.order.OrderItemDTO;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
 import com.fiap.restaurant.types.interfaces.db.customer.CustomerDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.order.ItemDatabaseConnection;
@@ -26,7 +25,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.*;
+import java.util.Date;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -97,17 +97,7 @@ public class OrderControllerTest {
         when(paymentGateway.processPayment(any(Long.class)))
                 .thenReturn(false);
 
-        List<OrderItemDTO> orderItemDTOList = new ArrayList<>();
-
-        OrderItemDTO orderItemDTO = new OrderItemDTO();
-        orderItemDTO.setItemId(1L);
-        orderItemDTO.setObservation("Observation Item 1");
-
-        orderItemDTOList.add(orderItemDTO);
-
-        SaveOrderDTO saveOrderDTO = new SaveOrderDTO();
-        saveOrderDTO.setCustomerCpf(CustomerTestUtil.CPF);
-        saveOrderDTO.setItems(orderItemDTOList);
+        SaveOrderDTO saveOrderDTO = OrderTestUtil.generateSaveDTO(CustomerTestUtil.CPF, OrderItemTestUtil.generateDTO(1L, "Observation Item 1"));
 
         Order savedOrder = OrderController.save(saveOrderDTO, orderDatabaseConnection, customerDatabaseConnection, itemDatabaseConnection, orderItemDatabaseConnection);
         assertThat(savedOrder).isNotNull();

@@ -144,7 +144,7 @@ public class ItemUseCaseIT {
     @Test
     @Rollback
     void mustThrowExceptionIdNotFoundOnDeleteItem() {
-        final Long nonexistentItemId = 1L;
+        final Long nonexistentItemId = 0L;
 
         assertThatThrownBy(() -> ItemUseCase.delete(nonexistentItemId, itemGateway, itemProductGateway, imageGateway))
                 .isInstanceOf(ResourceNotFoundException.class)
