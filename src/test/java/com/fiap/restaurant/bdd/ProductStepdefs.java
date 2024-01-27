@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class ProductStepdefs {
 
-    private static final String ENDPOINT = ENDPOINT_HOST + "/product";
+    public static final String ENDPOINT = ENDPOINT_HOST + "/product";
     private static final String SCHEMA_LOCATION = "./schemas/api/product";
 
     private Response response;
@@ -25,12 +25,12 @@ public class ProductStepdefs {
     private Integer savedProductId;
 
     @When("save a new product")
-    public Integer saveANewProduct() {
+    public void saveANewProduct() {
         productDTO = ProductTestUtil.generateDTO("Product 1", "Description 1", "DRINK", 7.5);
         response = given().contentType(DEFAULT_CONTENT_TYPE).body(productDTO)
                 .when().post(ENDPOINT + "/");
 
-        return response.getBody().jsonPath().get("id");
+        savedProductId = response.getBody().jsonPath().get("id");
     }
 
     @Then("the product is successfully saved")
@@ -42,7 +42,7 @@ public class ProductStepdefs {
 
     @Given("the product already registered")
     public void theProductAlreadyRegistered() {
-        savedProductId = saveANewProduct();
+        saveANewProduct();
     }
 
     @When("update a product")
