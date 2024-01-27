@@ -28,6 +28,3 @@ services:
       - "8080:8080"
     volumes:
       - /tmp/fiap-restaurant-app/app:/var/html/fiap-restaurant-app
-    environment:
-      PAYMENT_BASE_URL: http://localhost:8081
-      PRODUCTION_BASE_URL: http://localhost:8082
