@@ -163,7 +163,6 @@ public class OrderStepdefs {
         response.then()
                 .statusCode(HttpStatus.OK.value())
                 .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/OrderUpdatePaymentStatusSchema.json"));
-
     }
 
     @When("the nonexistent order payment status is updated")
