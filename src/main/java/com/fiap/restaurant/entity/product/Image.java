@@ -9,14 +9,6 @@ public class Image {
     private Product product;
     private Item item;
 
-    public Image() {}
-
-    public Image(Product product, Item item, String src) {
-        this.product = product;
-        this.item = item;
-        this.src = src;
-    }
-
     public Long getId() {
         return id;
     }
