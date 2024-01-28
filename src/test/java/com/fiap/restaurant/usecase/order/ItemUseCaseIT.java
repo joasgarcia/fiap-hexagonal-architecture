@@ -110,7 +110,7 @@ public class ItemUseCaseIT {
 
     @Test
     @Rollback
-    void mustThrowExceptionProductListOnSaveItem() {
+    void mustThrowExceptionProductListNotFoundOnSaveItem() {
         SaveItemDTO saveItemDTO = ItemTestUtil.generateSaveItemDTO("Item 1", "Item Description 1", 19.9);
 
         assertThatThrownBy(() -> ItemUseCase.save(saveItemDTO, itemGateway, productGateway, itemProductGateway, imageGateway))
