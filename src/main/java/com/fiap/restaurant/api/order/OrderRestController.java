@@ -54,8 +54,6 @@ public class OrderRestController {
         try {
             OrderController.updatePaymentStatus(updatePaymentStatusDTO.getExternalIdentifier(), updatePaymentStatusDTO.getPaymentStatus(), this.orderDatabaseConnection, this.customerDatabaseConnection);
             return ResponseEntity.ok().body(true);
-        } catch (BusinessException businessException) {
-            return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (ResourceNotFoundException resourceNotFoundException) {
             return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
         }
@@ -66,8 +64,6 @@ public class OrderRestController {
         try {
             OrderController.updateStatus(id, updateOrderStatusDTO.getStatus(), this.orderDatabaseConnection, this.customerDatabaseConnection);
             return ResponseEntity.ok().body(true);
-        } catch (BusinessException businessException) {
-            return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (ResourceNotFoundException resourceNotFoundException) {
             return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
         }
