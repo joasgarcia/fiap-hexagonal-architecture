@@ -23,7 +23,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Date;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -97,7 +96,7 @@ public class OrderUseCaseIT {
     @Test
     @Rollback
     void mustThrowExceptionOrderIdNotFound() {
-        final Long nonexistentOrderId = 1L;
+        final Long nonexistentOrderId = 0L;
         assertThatThrownBy(() -> OrderUseCase.findById(nonexistentOrderId, orderGateway))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("Pedido não encontrado");

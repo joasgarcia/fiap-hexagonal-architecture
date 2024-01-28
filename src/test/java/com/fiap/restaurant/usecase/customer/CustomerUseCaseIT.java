@@ -1,6 +1,5 @@
 package com.fiap.restaurant.usecase.customer;
 
-import com.fiap.restaurant.api.customer.CustomerRequestHelper;
 import com.fiap.restaurant.entity.customer.Customer;
 import com.fiap.restaurant.gateway.customer.CustomerGateway;
 import com.fiap.restaurant.gateway.customer.ICustomerGateway;
@@ -37,7 +36,7 @@ public class CustomerUseCaseIT {
         @Rollback
         void mustSaveCustomer() {
             ICustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
-            SaveCustomerDTO saveCustomerDTO = CustomerRequestHelper.buildSaveRequest();
+            SaveCustomerDTO saveCustomerDTO = CustomerTestUtil.generateSaveCustomerDTO("John Doe", "johndoe@email.com", CustomerTestUtil.randomCpf());
             Customer customer = CustomerUseCase.save(saveCustomerDTO, customerGateway);
 
             assertThat(customer).isNotNull();
@@ -47,7 +46,7 @@ public class CustomerUseCaseIT {
         @Rollback
         void mustThrowExceptionEmailAlreadyInUse() {
             ICustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
-            SaveCustomerDTO saveCustomerDTO = CustomerRequestHelper.buildSaveRequest();
+            SaveCustomerDTO saveCustomerDTO = CustomerTestUtil.generateSaveCustomerDTO("John Doe", "johndoe@email.com", CustomerTestUtil.randomCpf());
 
             Customer customer = CustomerUseCase.save(saveCustomerDTO, customerGateway);
 
@@ -68,7 +67,7 @@ public class CustomerUseCaseIT {
         @Rollback
         void mustThrowExceptionCpfAlreadyInUse() {
             ICustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
-            SaveCustomerDTO saveCustomerDTO = CustomerRequestHelper.buildSaveRequest();
+            SaveCustomerDTO saveCustomerDTO = CustomerTestUtil.generateSaveCustomerDTO("John Doe", "johndoe@email.com", CustomerTestUtil.randomCpf());
 
             Customer customer = CustomerUseCase.save(saveCustomerDTO, customerGateway);
 
@@ -90,7 +89,7 @@ public class CustomerUseCaseIT {
         @Rollback
         void mustFindCustomerByCpf() {
             ICustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
-            SaveCustomerDTO saveCustomerDTO = CustomerRequestHelper.buildSaveRequest();
+            SaveCustomerDTO saveCustomerDTO = CustomerTestUtil.generateSaveCustomerDTO("John Doe", "johndoe@email.com", CustomerTestUtil.randomCpf());
             CustomerUseCase.save(saveCustomerDTO, customerGateway);
 
             Customer customer = CustomerUseCase.findByCpf(saveCustomerDTO.getCpf(), customerGateway);

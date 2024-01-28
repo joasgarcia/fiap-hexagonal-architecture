@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "customer": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "cpf": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "email",
+        "cpf"
+      ]
+    },
+    "dateCreated": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "items": {
+      "type": "array",
+      "items": {}
+    },
+    "paymentStatus": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "customer",
+    "dateCreated",
+    "status",
+    "items",
+    "paymentStatus"
+  ]
+}

@@ -7,10 +7,11 @@ import com.fiap.restaurant.gateway.order.IItemGateway;
 import com.fiap.restaurant.gateway.order.IOrderGateway;
 import com.fiap.restaurant.gateway.order.IOrderItemGateway;
 import com.fiap.restaurant.gateway.payment.IPaymentGateway;
-import com.fiap.restaurant.types.dto.order.OrderItemDTO;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
 import com.fiap.restaurant.types.exception.BusinessException;
 import com.fiap.restaurant.util.CustomerTestUtil;
+import com.fiap.restaurant.util.OrderItemTestUtil;
+import com.fiap.restaurant.util.OrderTestUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +20,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -82,17 +81,7 @@ public class OrderUseCaseTest {
         when(paymentGateway.processPayment(any(Long.class)))
                 .thenReturn(true);
 
-        List<OrderItemDTO> orderItemDTOList = new ArrayList<>();
-
-        OrderItemDTO orderItemDTO = new OrderItemDTO();
-        orderItemDTO.setItemId(1L);
-        orderItemDTO.setObservation("Observation Item 1");
-
-        orderItemDTOList.add(orderItemDTO);
-
-        SaveOrderDTO saveOrderDTO = new SaveOrderDTO();
-        saveOrderDTO.setCustomerCpf("71841727016");
-        saveOrderDTO.setItems(orderItemDTOList);
+        SaveOrderDTO saveOrderDTO = OrderTestUtil.generateSaveDTO(CustomerTestUtil.CPF, OrderItemTestUtil.generateDTO(1L, "Observation Item 1"));
 
         Order savedOrder = OrderUseCase.save(saveOrderDTO, orderGateway, paymentGateway, customerGateway, itemGateway, orderItemGateway);
         assertThat(savedOrder).isNotNull();
@@ -101,7 +90,7 @@ public class OrderUseCaseTest {
 
     @Test
     void mustThrowExceptionPaymentNotProcessed() {
-        Customer customer = new Customer("John Doe", "johndoe@email.com", UUID.randomUUID().toString());
+        Customer customer = new Customer("John Doe", "johndoe@email.com", CustomerTestUtil.randomCpf());
         Item item = new Item("Item 1", "Item Description 1", 17.5);
 
         Order order = new Order(customer, new Date(), OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new ArrayList<>());
@@ -125,17 +114,7 @@ public class OrderUseCaseTest {
         when(paymentGateway.processPayment(any(Long.class)))
                 .thenReturn(false);
 
-        List<OrderItemDTO> orderItemDTOList = new ArrayList<>();
-
-        OrderItemDTO orderItemDTO = new OrderItemDTO();
-        orderItemDTO.setItemId(1L);
-        orderItemDTO.setObservation("Observation Item 1");
-
-        orderItemDTOList.add(orderItemDTO);
-
-        SaveOrderDTO saveOrderDTO = new SaveOrderDTO();
-        saveOrderDTO.setCustomerCpf("71841727016");
-        saveOrderDTO.setItems(orderItemDTOList);
+        SaveOrderDTO saveOrderDTO = OrderTestUtil.generateSaveDTO(CustomerTestUtil.CPF, OrderItemTestUtil.generateDTO(1L, "Observation Item 1"));
 
         assertThatThrownBy(() -> OrderUseCase.save(saveOrderDTO, orderGateway, paymentGateway, customerGateway, itemGateway, orderItemGateway))
                 .isInstanceOf(BusinessException.class)
