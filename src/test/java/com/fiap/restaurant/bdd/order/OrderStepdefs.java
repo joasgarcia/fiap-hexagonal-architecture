@@ -123,8 +123,7 @@ public class OrderStepdefs {
 
     @When("the order status is updated")
     public void theOrderStatusIsUpdated() {
-        UpdateOrderStatusDTO updateOrderStatusDTO = new UpdateOrderStatusDTO();
-        updateOrderStatusDTO.setStatus("READY");
+        UpdateOrderStatusDTO updateOrderStatusDTO = OrderTestUtil.generateUpdateStatusDTO(OrderStatus.READY);
 
         response = given().contentType(DEFAULT_CONTENT_TYPE).body(updateOrderStatusDTO)
                 .when().post(ENDPOINT + "/{id}/status", savedOrderId);
@@ -139,8 +138,7 @@ public class OrderStepdefs {
 
     @When("the nonexistent order status is updated")
     public void theNonexistentOrderStatusIsUpdated() {
-        UpdateOrderStatusDTO updateOrderStatusDTO = new UpdateOrderStatusDTO();
-        updateOrderStatusDTO.setStatus(OrderStatus.READY.toString());
+        UpdateOrderStatusDTO updateOrderStatusDTO = OrderTestUtil.generateUpdateStatusDTO(OrderStatus.READY);
 
         final Long nonexistentOrderId = 0L;
 
@@ -150,9 +148,7 @@ public class OrderStepdefs {
 
     @When("the order payment status is updated")
     public void theOrderPaymentStatusIsUpdated() {
-        UpdatePaymentStatusDTO updatePaymentStatusDTO = new UpdatePaymentStatusDTO();
-        updatePaymentStatusDTO.setPaymentStatus(OrderPaymentStatus.APPROVED.toString());
-        updatePaymentStatusDTO.setExternalIdentifier(savedOrderId.longValue());
+        UpdatePaymentStatusDTO updatePaymentStatusDTO = OrderTestUtil.generateUpdatePaymentStatusDTO(savedOrderId.longValue(), OrderPaymentStatus.APPROVED);
 
         response = given().contentType(DEFAULT_CONTENT_TYPE).body(updatePaymentStatusDTO)
                 .when().post(ENDPOINT + "/webhookPaymentStatus");
