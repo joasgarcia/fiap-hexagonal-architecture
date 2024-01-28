@@ -17,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasKey;
 
@@ -26,6 +27,7 @@ import static org.hamcrest.Matchers.hasKey;
 public class CustomerRestControllerIT {
 
     public static final String PATH = "/customer";
+    private static final String SCHEMA_LOCATION = "./schemas/api/customer";
 
     @Autowired
     private CustomerJpaRepository customerJpaRepository;
@@ -58,7 +60,7 @@ public class CustomerRestControllerIT {
                     .post(PATH + "/")
             .then()
                     .statusCode(HttpStatus.OK.value())
-                    .body(equalTo("true"));
+                    .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/CustomerSaveSchema.json"));
         }
 
         @Test
@@ -113,7 +115,8 @@ public class CustomerRestControllerIT {
                     .body("$", hasKey("id"))
                     .body("$", hasKey("name"))
                     .body("$", hasKey("email"))
-                    .body("$", hasKey("cpf"));
+                    .body("$", hasKey("cpf"))
+                    .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/CustomerFindByCpfSchema.json"));;
         }
 
         @Test
