@@ -77,4 +77,20 @@ public class Order {
     public void setPaymentStatus(OrderPaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
+
+    public Double getTotalValue() {
+        Double totalValue = 0D;
+
+        for (OrderItem orderItem : this.items) {
+            if (orderItem.getItem().getPrice() != null) {
+                totalValue += orderItem.getItem().getPrice();
+            } else {
+                for (ItemProduct itemProduct : orderItem.getItem().getItemProductList()) {
+                    totalValue += itemProduct.getProduct().getPrice();
+                }
+            }
+        }
+
+        return totalValue;
+    }
 }

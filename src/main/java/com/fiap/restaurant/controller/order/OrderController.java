@@ -1,17 +1,12 @@
 package com.fiap.restaurant.controller.order;
 
+import com.fiap.restaurant.ApplicationConfig;
 import com.fiap.restaurant.entity.order.Order;
 import com.fiap.restaurant.entity.order.OrderPaymentStatus;
 import com.fiap.restaurant.entity.order.OrderStatus;
 import com.fiap.restaurant.gateway.customer.CustomerGateway;
 import com.fiap.restaurant.gateway.customer.ICustomerGateway;
-import com.fiap.restaurant.gateway.order.IItemGateway;
-import com.fiap.restaurant.gateway.order.IOrderItemGateway;
-import com.fiap.restaurant.gateway.order.ItemGateway;
-import com.fiap.restaurant.gateway.order.OrderGateway;
-import com.fiap.restaurant.gateway.order.OrderItemGateway;
-import com.fiap.restaurant.gateway.payment.IPaymentGateway;
-import com.fiap.restaurant.gateway.payment.MercadoPagoGateway;
+import com.fiap.restaurant.gateway.order.*;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
 import com.fiap.restaurant.types.interfaces.db.customer.CustomerDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.order.ItemDatabaseConnection;
@@ -38,14 +33,14 @@ public class OrderController {
         return OrderUseCase.updateStatus(id, statusParsed, orderGateway);
     }
 
-    public static Order save(SaveOrderDTO saveOrderDTO, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection, OrderItemDatabaseConnection orderItemDatabaseConnection) {
-        OrderGateway orderGateway = new OrderGateway(orderDatabaseConnection, customerDatabaseConnection);
-
-        IPaymentGateway mercadoPagoGateway = new MercadoPagoGateway();
+    public static Order save(SaveOrderDTO saveOrderDTO, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection, OrderItemDatabaseConnection orderItemDatabaseConnection, ApplicationConfig applicationConfig) {
+        IOrderGateway orderGateway = new OrderGateway(orderDatabaseConnection, customerDatabaseConnection);
         ICustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
         IItemGateway itemGateway = new ItemGateway(itemDatabaseConnection);
         IOrderItemGateway orderItemGateway = new OrderItemGateway(orderItemDatabaseConnection, itemDatabaseConnection, orderDatabaseConnection);
+        IOrderPaymentGateway orderPaymentGateway = new OrderPaymentGateway(applicationConfig);
+        IOrderProductionGateway orderProductionGateway = new OrderProductionGateway(applicationConfig);
 
-        return OrderUseCase.save(saveOrderDTO, orderGateway, mercadoPagoGateway, customerGateway, itemGateway, orderItemGateway);
+        return OrderUseCase.save(saveOrderDTO, orderGateway, customerGateway, itemGateway, orderItemGateway, orderPaymentGateway, orderProductionGateway);
     }
 }

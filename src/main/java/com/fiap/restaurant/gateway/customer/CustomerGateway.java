@@ -3,6 +3,7 @@ package com.fiap.restaurant.gateway.customer;
 import com.fiap.restaurant.external.db.customer.CustomerJpa;
 import com.fiap.restaurant.entity.customer.Customer;
 import com.fiap.restaurant.types.interfaces.db.customer.CustomerDatabaseConnection;
+import com.fiap.restaurant.types.mapper.customer.CustomerMapper;
 
 @SuppressWarnings("unchecked")
 public class CustomerGateway implements ICustomerGateway {
@@ -28,7 +29,7 @@ public class CustomerGateway implements ICustomerGateway {
         CustomerJpa customerJpa = (CustomerJpa) this.customerDatabaseConnection.findByEmail(email);
         if (customerJpa == null) return null;
 
-        return new Customer(customerJpa.getName(), customerJpa.getEmail(), customerJpa.getCpf());
+        return CustomerMapper.INSTANCE.toCustomer(customerJpa);
     }
 
     @Override
@@ -36,6 +37,6 @@ public class CustomerGateway implements ICustomerGateway {
         CustomerJpa customerJpa = (CustomerJpa) this.customerDatabaseConnection.findByCpf(cpf);
         if (customerJpa == null) return null;
 
-        return new Customer(customerJpa.getName(), customerJpa.getEmail(), customerJpa.getCpf());
+        return CustomerMapper.INSTANCE.toCustomer(customerJpa);
     }
 }

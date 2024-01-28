@@ -1,18 +1,12 @@
 package com.fiap.restaurant.usecase.order;
 
 import com.fiap.restaurant.entity.customer.Customer;
-import com.fiap.restaurant.entity.order.Item;
-import com.fiap.restaurant.entity.order.Order;
-import com.fiap.restaurant.entity.order.OrderItem;
-import com.fiap.restaurant.entity.order.OrderPaymentStatus;
-import com.fiap.restaurant.entity.order.OrderStatus;
+import com.fiap.restaurant.entity.order.*;
 import com.fiap.restaurant.gateway.customer.ICustomerGateway;
-import com.fiap.restaurant.gateway.order.IItemGateway;
-import com.fiap.restaurant.gateway.order.IOrderGateway;
-import com.fiap.restaurant.gateway.order.IOrderItemGateway;
-import com.fiap.restaurant.gateway.payment.IPaymentGateway;
+import com.fiap.restaurant.gateway.order.*;
 import com.fiap.restaurant.types.dto.order.OrderItemDTO;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
+import com.fiap.restaurant.types.dto.order.payment.OrderPaymentResponseDTO;
 import com.fiap.restaurant.types.exception.BusinessException;
 import com.fiap.restaurant.types.exception.ResourceNotFoundException;
 
@@ -59,7 +53,7 @@ public class OrderUseCase {
         return orderGateway.listOrderedByStatusAndId();
     }
 
-    public static Order save(SaveOrderDTO saveOrderDTO, IOrderGateway orderGateway, IPaymentGateway paymentGateway, ICustomerGateway customerGateway, IItemGateway itemGateway, IOrderItemGateway orderItemGateway) {
+    public static Order save(SaveOrderDTO saveOrderDTO, IOrderGateway orderGateway, ICustomerGateway customerGateway, IItemGateway itemGateway, IOrderItemGateway orderItemGateway, IOrderPaymentGateway orderPaymentGateway, IOrderProductionGateway orderProductionGateway) {
         Customer customer = customerGateway.findByCpf(saveOrderDTO.getCustomerCpf());
 
         Order order = new Order();
@@ -84,11 +78,13 @@ public class OrderUseCase {
 
         newOrder.setItems(orderItemList);
 
-        Boolean paymentCreatedSuccessfully = paymentGateway.processPayment(newOrder.getId());
+        OrderPaymentResponseDTO orderPaymentRestResponseDTO = orderPaymentGateway.registerOrder(customer.getId(), newOrder.getTotalValue());
+        if (!orderPaymentRestResponseDTO.getSuccess()) throw new BusinessException("Não foi possível registrar o pedido no serviço de pagamentos");
 
-        if (!paymentCreatedSuccessfully) throw new BusinessException("Erro ao processar pagamento");
+        Boolean orderProductionQueued = orderProductionGateway.registerOrder(newOrder.getId());
+        if (!orderProductionQueued) throw new BusinessException("Não foi possível registrar o pedido no serviço da fila de pedidos");
 
-        order.setPaymentStatus(OrderPaymentStatus.PROCESSING);
+        newOrder.setPaymentStatus(OrderPaymentStatus.PROCESSING);
         orderGateway.update(newOrder);
 
         return newOrder;
