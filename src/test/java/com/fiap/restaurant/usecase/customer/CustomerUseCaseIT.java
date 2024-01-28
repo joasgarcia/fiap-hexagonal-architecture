@@ -59,8 +59,6 @@ public class CustomerUseCaseIT {
             assertThatThrownBy(() -> CustomerUseCase.save(secondSaveCustomerDTO, customerGateway))
                     .isInstanceOf(BusinessException.class)
                     .hasMessage("Cliente já cadastrado com o e-mail informado");
-
-
         }
 
         @Test
