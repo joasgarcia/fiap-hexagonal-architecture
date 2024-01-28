@@ -26,7 +26,7 @@ import static org.hamcrest.Matchers.hasKey;
 @ActiveProfiles("test")
 public class CustomerRestControllerIT {
 
-    public static final String PATH = "/customer";
+    private static final String PATH = "/customer";
     private static final String SCHEMA_LOCATION = "./schemas/api/customer";
 
     @Autowired
