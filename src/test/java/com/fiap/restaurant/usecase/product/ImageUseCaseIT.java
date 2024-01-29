@@ -104,7 +104,6 @@ public class ImageUseCaseIT {
             saveProductImageDTO.setSrc("http://image.test");
 
             Image image = ImageUseCase.saveProductImage(saveProductImageDTO, imageGateway, productGateway);
-            assertThat(image).isNotNull();
 
             UpdateImageDTO updateImageDTO = new UpdateImageDTO();
             updateImageDTO.setSrc("http://image2.test");
@@ -117,11 +116,13 @@ public class ImageUseCaseIT {
 
         @Test
         @Rollback
-        void mustThrowExceptionProductNotFoundOnUpdateImage() {
+        void mustThrowExceptionImageNotFoundOnUpdateImage() {
             UpdateImageDTO updateImageDTO = new UpdateImageDTO();
             updateImageDTO.setSrc("http://image2.test");
 
-            assertThatThrownBy(() -> ImageUseCase.update(1L, updateImageDTO, imageGateway))
+            final Long nonexistentImageId = 0L;
+
+            assertThatThrownBy(() -> ImageUseCase.update(nonexistentImageId, updateImageDTO, imageGateway))
                     .isInstanceOf(ResourceNotFoundException.class)
                     .hasMessage("Imagem não encontrada");
         }
@@ -137,8 +138,6 @@ public class ImageUseCaseIT {
             saveProductImageDTO.setSrc("http://image.test");
 
             Image image = ImageUseCase.saveProductImage(saveProductImageDTO, imageGateway, productGateway);
-            assertThat(image).isNotNull();
-
             ImageUseCase.delete(image.getId(), imageGateway);
 
             Optional<ImageJpa> optionalImage = imageJpaRepository.findById(image.getId());
@@ -147,8 +146,10 @@ public class ImageUseCaseIT {
 
         @Test
         @Rollback
-        void mustThrowExceptionProductNotFoundOnDeleteImage() {
-            assertThatThrownBy(() -> ImageUseCase.delete(1L, imageGateway))
+        void mustThrowExceptionImageNotFoundOnDeleteImage() {
+            final Long nonexistentImageId = 0L;
+
+            assertThatThrownBy(() -> ImageUseCase.delete(nonexistentImageId, imageGateway))
                     .isInstanceOf(ResourceNotFoundException.class)
                     .hasMessage("Imagem não encontrada");
         }

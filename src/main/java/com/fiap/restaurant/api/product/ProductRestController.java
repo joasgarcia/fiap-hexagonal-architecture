@@ -3,7 +3,6 @@ package com.fiap.restaurant.api.product;
 import com.fiap.restaurant.controller.product.ProductController;
 import com.fiap.restaurant.entity.product.Product;
 import com.fiap.restaurant.types.dto.product.ProductDTO;
-import com.fiap.restaurant.types.exception.BusinessException;
 import com.fiap.restaurant.types.exception.ResourceNotFoundException;
 import com.fiap.restaurant.types.interfaces.db.product.ProductDatabaseConnection;
 import org.springframework.http.HttpStatus;
@@ -34,12 +33,8 @@ public class ProductRestController {
 
     @PostMapping(path = "/")
     public ResponseEntity<Object> save(@RequestBody ProductDTO productDTO) {
-        try {
-            Product product = ProductController.save(productDTO, this.productDatabaseConnection);
-            return ResponseEntity.ok().body(product);
-        } catch (BusinessException businessException) {
-            return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+        Product product = ProductController.save(productDTO, this.productDatabaseConnection);
+        return ResponseEntity.ok().body(product);
     }
 
     @PutMapping(path = "/{id}")
@@ -49,8 +44,6 @@ public class ProductRestController {
             return ResponseEntity.ok().body(product);
         } catch (ResourceNotFoundException resourceNotFoundException) {
             return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
-        } catch (BusinessException businessException) {
-            return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 

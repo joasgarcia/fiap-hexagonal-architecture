@@ -30,8 +30,13 @@ public class ImageRestController {
     }
 
     @PostMapping(path = "/")
-    public Image saveProductImage(@RequestBody SaveProductImageDTO saveProductImageDTO) {
-        return ImageController.saveProductImage(saveProductImageDTO, this.imageDatabaseConnection, this.productDatabaseConnection, itemDatabaseConnection);
+    public ResponseEntity<Object> saveProductImage(@RequestBody SaveProductImageDTO saveProductImageDTO) {
+        try {
+            Image image = ImageController.saveProductImage(saveProductImageDTO, this.imageDatabaseConnection, this.productDatabaseConnection, itemDatabaseConnection);
+            return ResponseEntity.ok().body(image);
+        } catch (ResourceNotFoundException resourceNotFoundException) {
+            return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping(path = "/{id}")

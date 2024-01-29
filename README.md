@@ -57,3 +57,21 @@ Após a execução do comando, é possível visualizar o relatório de execuçã
 ```shell
 > .\build\reports\tests\test\index.html
 ```
+
+## Cobertura de testes do projeto
+
+Os testes foram construídos, nas diferentes camadas do projeto, utilizando:
+- Testes unitários
+- Testes de integração
+- Testes de comportamento (BDD)
+
+O resumo dos testes de integração e unitários pode ser observado em:
+![tests-summary](https://github.com/richardaltmayer/fiap-hexagonal-architecture/assets/10313123/43658221-1023-4f6d-98c9-9f84713e1e4b)
+
+_Os testes de comportamento não constam no resumo acima._
+
+A cobertura de testes desenvolvidos no projeto pode ser observada em:
+![tests-coverage](https://github.com/richardaltmayer/fiap-hexagonal-architecture/assets/10313123/e70ba972-024b-4e2b-b5ad-c750409ea653)
+
+
+
