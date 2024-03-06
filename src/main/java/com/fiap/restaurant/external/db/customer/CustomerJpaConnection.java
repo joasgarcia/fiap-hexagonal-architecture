@@ -17,6 +17,11 @@ public class CustomerJpaConnection implements CustomerDatabaseConnection<Custome
         this.customerJpaRepository.save(customerJpa);
     }
 
+    @Override
+    public CustomerJpa getById(Long id) {
+        return this.customerJpaRepository.getReferenceById(id);
+    }
+
     public CustomerJpa findByEmail(String email) {
         return this.customerJpaRepository.findByEmail(email);
     }

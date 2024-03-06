@@ -17,4 +17,9 @@ public class CustomerController {
         CustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
         return CustomerUseCase.findByCpf(cpf, customerGateway);
     }
+
+    public static void anonymize(String cpf, CustomerDatabaseConnection customerDatabaseConnection) {
+        CustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
+        CustomerUseCase.anonymize(cpf, customerGateway);
+    }
 }

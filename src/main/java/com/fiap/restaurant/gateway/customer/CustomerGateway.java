@@ -25,6 +25,18 @@ public class CustomerGateway implements ICustomerGateway {
     }
 
     @Override
+    public void update(Customer customer) {
+        CustomerJpa customerJpa = (CustomerJpa) this.customerDatabaseConnection.getById(customer.getId());
+        if (customerJpa == null) return;
+
+        customerJpa.setName(customer.getName());
+        customerJpa.setEmail(customer.getEmail());
+        customerJpa.setCpf(customer.getCpf());
+
+        this.customerDatabaseConnection.save(customerJpa);
+    }
+
+    @Override
     public Customer findByEmail(String email) {
         CustomerJpa customerJpa = (CustomerJpa) this.customerDatabaseConnection.findByEmail(email);
         if (customerJpa == null) return null;

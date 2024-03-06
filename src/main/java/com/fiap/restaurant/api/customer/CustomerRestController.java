@@ -39,4 +39,14 @@ public class CustomerRestController {
             return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
+    @PostMapping(path = "/anonymize/{cpf}")
+    public ResponseEntity<Object> anonymize(@PathVariable String cpf) {
+        try {
+            CustomerController.anonymize(cpf, this.customerDatabaseConnection);
+            return ResponseEntity.ok().body(true);
+        } catch (ResourceNotFoundException resourceNotFoundException) {
+            return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 }
