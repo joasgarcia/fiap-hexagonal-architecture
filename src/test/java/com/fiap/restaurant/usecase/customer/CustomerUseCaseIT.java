@@ -1,6 +1,8 @@
 package com.fiap.restaurant.usecase.customer;
 
 import com.fiap.restaurant.entity.customer.Customer;
+import com.fiap.restaurant.external.db.customer.CustomerJpa;
+import com.fiap.restaurant.external.db.customer.CustomerJpaRepository;
 import com.fiap.restaurant.gateway.customer.CustomerGateway;
 import com.fiap.restaurant.gateway.customer.ICustomerGateway;
 import com.fiap.restaurant.types.dto.customer.SaveCustomerDTO;
@@ -28,6 +30,9 @@ public class CustomerUseCaseIT {
 
     @Autowired
     private CustomerDatabaseConnection customerDatabaseConnection;
+
+    @Autowired
+    private CustomerJpaRepository customerJpaRepository;
 
     @Nested
     class Write {
@@ -77,6 +82,39 @@ public class CustomerUseCaseIT {
             assertThatThrownBy(() -> CustomerUseCase.save(secondSaveCustomerDTO, customerGateway))
                     .isInstanceOf(BusinessException.class)
                     .hasMessage("Cliente já cadastrado com o CPF informado");
+        }
+
+        @Test
+        @Rollback
+        void mustAnonymizeCustomer() {
+            ICustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
+
+            final String customerName = "John Doe";
+            final String customerEmail = "johndoe@email.com";
+            final String customerCpf = CustomerTestUtil.randomCpf();
+
+            CustomerJpa customerJpa = CustomerTestUtil.generateJpa(customerName, customerEmail, customerCpf);
+            customerJpa = customerJpaRepository.save(customerJpa);
+
+            CustomerUseCase.anonymize(customerCpf, customerGateway);
+
+            customerJpa = customerJpaRepository.getReferenceById(customerJpa.getId());
+
+            assertThat(customerJpa).isNotNull();
+            assertThat(customerJpa.getName()).isNotEqualTo(customerName);
+            assertThat(customerJpa.getEmail()).isNotEqualTo(customerEmail);
+            assertThat(customerJpa.getCpf()).isNotEqualTo(customerCpf);
+        }
+
+        @Test
+        @Rollback
+        void mustThrowExceptionCustomerNotFoundOnAnonymizeByCpf() {
+            ICustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
+            final String customerCpf = CustomerTestUtil.CPF;
+
+            assertThatThrownBy(() -> CustomerUseCase.anonymize(customerCpf, customerGateway))
+                    .isInstanceOf(ResourceNotFoundException.class)
+                    .hasMessage("Cliente não encontrado");
         }
     }
 
