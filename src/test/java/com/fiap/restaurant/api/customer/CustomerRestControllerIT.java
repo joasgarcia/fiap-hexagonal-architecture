@@ -96,6 +96,35 @@ public class CustomerRestControllerIT {
                     .statusCode(HttpStatus.BAD_REQUEST.value())
                     .body(equalTo("Cliente já cadastrado com o CPF informado"));
         }
+        
+        @Test
+        void mustAnonymizeCustomer() {
+            final String customerName = "John User";
+            final String customerEmail = "johnuser@email.com";
+            final String customerCpf = CustomerTestUtil.randomCpf();
+            customerJpaRepository.save(CustomerTestUtil.generateJpa(customerName, customerEmail, customerCpf));
+
+            given()
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .when()
+                    .post(PATH + "/anonymize/{cpf}", customerCpf)
+            .then()
+                    .statusCode(HttpStatus.OK.value())
+                    .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/CustomerAnonymizeSchema.json"));
+        }
+
+        @Test
+        void mustThrowExceptionCustomerNotFoundByCpfOnAnonymizeCustomer() {
+            final String customerCpf = CustomerTestUtil.randomCpf();
+
+            given()
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .when()
+                    .post(PATH + "/anonymize/{cpf}", customerCpf)
+            .then()
+                    .statusCode(HttpStatus.NOT_FOUND.value())
+                    .body(equalTo("Cliente não encontrado"));
+        }
     }
 
     @Nested
