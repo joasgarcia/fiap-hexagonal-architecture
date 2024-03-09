@@ -18,3 +18,12 @@ Feature: API - Customer
     Given the customer already registered
     When save another customer with same CPF
     Then an error is displayed indicating that CPF already registered
+
+  Scenario: Anonymize a customer
+    When save a new customer
+    And anonymize the customer
+    Then the customer is successfully anonymized
+
+  Scenario: Anonymize a nonexistent customer
+    When anonymize an nonexistent customer
+    Then an error is displayed indicating that customer is not found
