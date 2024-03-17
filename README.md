@@ -77,3 +77,10 @@ A cobertura de testes desenvolvidos no projeto pode ser observada em:
 
 Para visualizar o Relatório de Impacto de Proteção de Dados consulte esse [link](https://docs.google.com/document/d/1qFt32F8fH0thY0iOhRW_RAAAZw-RYRzcKtixA6_6wHQ/edit?usp=sharing).
 
+## OWASP ZAP (ZAP Scanning Reports)
+
+Os relatórios obtidos a partir da ferramenta mostram que os endpoints abaixo não apresentam vulunerabilidades altas, não sendo necessário realizar adequações na implementação, conforme:
+- [Product List](./src/main/resources/owasp/product-list.html)
+- [Checkout](./src/main/resources/owasp/checkout.html)
+- [Payment](./src/main/resources/owasp/payment.html)
+- [Payment Confirmation (Webhook)](./src/main/resources/owasp/webhook-payment-status.html)
