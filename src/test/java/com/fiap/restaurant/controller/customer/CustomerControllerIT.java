@@ -46,6 +46,34 @@ public class CustomerControllerIT {
 
     @Test
     @Rollback
+    void mustAnonymizeCustomer() {
+        final String customerCpf = CustomerTestUtil.CPF;
+        final String customerName = "John Doe";
+        final String customerEmail = "johndoe@email.com";
+        final CustomerJpa customerJpa = CustomerTestUtil.generateJpa(customerName, customerEmail, customerCpf);
+        customerJpaRepository.save(customerJpa);
+
+        CustomerController.anonymize(customerCpf, customerDatabaseConnection);
+
+        CustomerJpa customerAnonymized = customerJpaRepository.getReferenceById(customerJpa.getId());
+        assertThat(customerAnonymized).isNotNull();
+        assertThat(customerAnonymized.getName()).isNotEqualTo(customerName);
+        assertThat(customerAnonymized.getEmail()).isNotEqualTo(customerEmail);
+        assertThat(customerAnonymized.getCpf()).isNotEqualTo(customerCpf);
+    }
+
+    @Test
+    @Rollback
+    void mustThrowExceptionCustomerNotFoundOnAnonymizeByCpf() {
+        final String nonexistentCustomerCpf = CustomerTestUtil.CPF;
+
+        assertThatThrownBy(() -> CustomerController.anonymize(nonexistentCustomerCpf, customerDatabaseConnection))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessage("Cliente não encontrado");
+    }
+
+    @Test
+    @Rollback
     void mustFindCustomerByCpf() {
         final String customerCpf = CustomerTestUtil.CPF;
         final String customerName = "John Doe";

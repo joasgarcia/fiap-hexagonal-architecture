@@ -2,6 +2,7 @@ package com.fiap.restaurant.bdd.customer;
 
 import com.fiap.restaurant.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.util.CustomerTestUtil;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -86,5 +87,31 @@ public class CustomerStepdefs {
         response.then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body(equalTo("Cliente já cadastrado com o CPF informado"));
+    }
+
+    @And("anonymize the customer")
+    public void anonymizeTheCustomer() {
+        response = given().contentType(DEFAULT_CONTENT_TYPE)
+                .when().post(ENDPOINT + "/anonymize/{cpf}", saveCustomerDTO.getCpf());
+    }
+
+    @Then("the customer is successfully anonymized")
+    public void theCustomerIsSuccessfullyAnonymized() {
+        response.then()
+                .statusCode(HttpStatus.OK.value())
+                .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/CustomerAnonymizeSchema.json"));
+    }
+
+    @When("anonymize an nonexistent customer")
+    public void anonymizeAnNonexistentCustomer() {
+        response = given().contentType(DEFAULT_CONTENT_TYPE)
+                .when().post(ENDPOINT + "/anonymize/{cpf}", CustomerTestUtil.randomCpf());
+    }
+
+    @Then("an error is displayed indicating that customer is not found")
+    public void anErrorIsDisplayedIndicatingThatCustomerIsNotFound() {
+        response.then()
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .body(equalTo("Cliente não encontrado"));
     }
 }

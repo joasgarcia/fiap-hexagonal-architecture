@@ -50,6 +50,27 @@
 					"port": "8080",
 					"path": [
 						"customer",
+						"00000000001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Anonimizar Cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/anonymize/00000000000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"anonymize",
 						"00000000000"
 					]
 				}
