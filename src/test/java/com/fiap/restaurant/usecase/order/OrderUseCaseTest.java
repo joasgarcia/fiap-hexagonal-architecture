@@ -5,7 +5,6 @@ import com.fiap.restaurant.entity.order.*;
 import com.fiap.restaurant.gateway.customer.ICustomerGateway;
 import com.fiap.restaurant.gateway.order.*;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
-import com.fiap.restaurant.types.dto.order.payment.OrderPaymentResponseDTO;
 import com.fiap.restaurant.types.exception.BusinessException;
 import com.fiap.restaurant.util.CustomerTestUtil;
 import com.fiap.restaurant.util.OrderItemTestUtil;
@@ -67,10 +66,6 @@ public class OrderUseCaseTest {
         Order order = new Order(customer, new Date(), OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new ArrayList<>());
         order.setId(1L);
 
-        OrderPaymentResponseDTO orderPaymentResponseDTO = new OrderPaymentResponseDTO();
-        orderPaymentResponseDTO.setSuccess(true);
-        orderPaymentResponseDTO.setMessage("Cobrança registrada com sucesso");
-
         when(customerGateway.findByCpf(any(String.class)))
                 .thenReturn(customer);
 
@@ -87,7 +82,7 @@ public class OrderUseCaseTest {
                 .thenAnswer(i -> i.getArgument(0));
 
         when(orderPaymentGateway.registerOrder(any(Long.class), any(Double.class)))
-                .thenReturn(orderPaymentResponseDTO);
+                .thenReturn(true);
 
         when(orderProductionGateway.registerOrder(any(Long.class)))
                 .thenReturn(true);
@@ -110,10 +105,6 @@ public class OrderUseCaseTest {
         Order order = new Order(customer, new Date(), OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new ArrayList<>());
         order.setId(1L);
 
-        OrderPaymentResponseDTO orderPaymentResponseDTO = new OrderPaymentResponseDTO();
-        orderPaymentResponseDTO.setSuccess(false);
-        orderPaymentResponseDTO.setMessage("Valor não pode ser nulo");
-
         when(customerGateway.findByCpf(any(String.class)))
                 .thenReturn(customer);
 
@@ -127,7 +118,7 @@ public class OrderUseCaseTest {
                 .thenReturn(item);
 
         when(orderPaymentGateway.registerOrder(any(Long.class), any(Double.class)))
-                .thenReturn(orderPaymentResponseDTO);
+                .thenReturn(false);
 
         when(orderProductionGateway.registerOrder(any(Long.class)))
                 .thenReturn(true);
@@ -152,10 +143,6 @@ public class OrderUseCaseTest {
         Order order = new Order(customer, new Date(), OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new ArrayList<>());
         order.setId(1L);
 
-        OrderPaymentResponseDTO orderPaymentResponseDTO = new OrderPaymentResponseDTO();
-        orderPaymentResponseDTO.setSuccess(true);
-        orderPaymentResponseDTO.setMessage("Cobrança registrada com sucesso");
-
         when(customerGateway.findByCpf(any(String.class)))
                 .thenReturn(customer);
 
@@ -169,7 +156,7 @@ public class OrderUseCaseTest {
                 .thenReturn(item);
 
         when(orderPaymentGateway.registerOrder(any(Long.class), any(Double.class)))
-                .thenReturn(orderPaymentResponseDTO);
+                .thenReturn(true);
 
         when(orderProductionGateway.registerOrder(any(Long.class)))
                 .thenReturn(false);

@@ -3,13 +3,13 @@ package com.fiap.restaurant.types.dto.order.payment;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize
-public class OrderPaymentRequestDTO {
+public class OrderPaymentPayloadMessageBrokerDTO {
 
-    private Long customerId;
+    private Long orderId;
     private Double value;
 
-    public OrderPaymentRequestDTO(Long customerId, Double value) {
-        this.customerId = customerId;
+    public OrderPaymentPayloadMessageBrokerDTO(Long orderId, Double value) {
+        this.orderId = orderId;
         this.value = value;
     }
 }

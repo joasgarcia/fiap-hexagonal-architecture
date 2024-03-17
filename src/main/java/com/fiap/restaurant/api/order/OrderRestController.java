@@ -3,6 +3,8 @@ package com.fiap.restaurant.api.order;
 import com.fiap.restaurant.ApplicationConfig;
 import com.fiap.restaurant.controller.order.OrderController;
 import com.fiap.restaurant.entity.order.Order;
+import com.fiap.restaurant.external.messagebroker.MessageBroker;
+import com.fiap.restaurant.external.messagebroker.SqsMessageBroker;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
 import com.fiap.restaurant.types.dto.order.UpdateOrderStatusDTO;
 import com.fiap.restaurant.types.dto.order.UpdatePaymentStatusDTO;
@@ -31,12 +33,15 @@ public class OrderRestController {
 
     private final OrderItemDatabaseConnection orderItemDatabaseConnection;
 
-    public OrderRestController(OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection, OrderItemDatabaseConnection orderItemDatabaseConnection, ApplicationConfig applicationConfig) {
+    private final MessageBroker messageBroker;
+
+    public OrderRestController(ApplicationConfig applicationConfig, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection, OrderItemDatabaseConnection orderItemDatabaseConnection) {
+        this.applicationConfig = applicationConfig;
         this.orderDatabaseConnection = orderDatabaseConnection;
         this.customerDatabaseConnection = customerDatabaseConnection;
         this.itemDatabaseConnection = itemDatabaseConnection;
         this.orderItemDatabaseConnection = orderItemDatabaseConnection;
-        this.applicationConfig = applicationConfig;
+        this.messageBroker = new SqsMessageBroker(applicationConfig.getPaymentQueueUrl());
     }
 
     @GetMapping("/{id}")
@@ -72,7 +77,7 @@ public class OrderRestController {
     @PostMapping(path = "/checkout")
     public ResponseEntity<Object> checkout(@RequestBody SaveOrderDTO saveOrderDTO) {
         try {
-            Order order = OrderController.save(saveOrderDTO, this.orderDatabaseConnection, this.customerDatabaseConnection, this.itemDatabaseConnection, this.orderItemDatabaseConnection, this.applicationConfig);
+            Order order = OrderController.save(saveOrderDTO, this.orderDatabaseConnection, this.customerDatabaseConnection, this.itemDatabaseConnection, this.orderItemDatabaseConnection, this.applicationConfig, this.messageBroker);
             return ResponseEntity.ok(order);
         } catch (BusinessException businessException) {
             return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
