@@ -80,7 +80,7 @@ Para visualizar o Relatório de Impacto de Proteção de Dados consulte esse [li
 ## OWASP ZAP (ZAP Scanning Reports)
 
 Os relatórios obtidos a partir da ferramenta mostram que os endpoints abaixo não apresentam vulunerabilidades altas, não sendo necessário realizar adequações na implementação, conforme:
-- <a href="./src/main/resources/owasp/product-list.html" target="_blank">Product List</a>
-- [Checkout](./src/main/resources/owasp/checkout.html)
-- [Payment](./src/main/resources/owasp/payment.html)
-- [Payment Confirmation (Webhook)](./src/main/resources/owasp/webhook-payment-status.html)
+- [Product List](https://htmlpreview.github.io/?https://github.com/joasgarcia/fiap-hexagonal-architecture/blob/doc-owasp-zap/src/main/resources/owasp/product-list.html)
+- [Checkout](https://htmlpreview.github.io/?https://github.com/joasgarcia/fiap-hexagonal-architecture/blob/doc-owasp-zap/src/main/resources/owasp/checkout.html)
+- [Payment](https://htmlpreview.github.io/?https://github.com/joasgarcia/fiap-hexagonal-architecture/blob/doc-owasp-zap/src/main/resources/owasp/payment.html)
+- [Payment Confirmation (Webhook)](https://htmlpreview.github.io/?https://github.com/joasgarcia/fiap-hexagonal-architecture/blob/doc-owasp-zap/src/main/resources/owasp/webhook-payment-status.html)
