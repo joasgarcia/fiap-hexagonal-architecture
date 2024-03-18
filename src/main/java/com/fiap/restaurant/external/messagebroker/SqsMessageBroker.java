@@ -26,7 +26,7 @@ public class SqsMessageBroker implements MessageBroker {
     private SqsClient buildClient() {
         return SqsClient.builder()
                 .credentialsProvider(DefaultCredentialsProvider.create())
-                .region(Region.SA_EAST_1)
+                .region(Region.US_EAST_1)
                 .build();
     }
 }
