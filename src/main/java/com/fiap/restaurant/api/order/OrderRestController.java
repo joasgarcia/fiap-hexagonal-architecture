@@ -41,7 +41,7 @@ public class OrderRestController {
         this.customerDatabaseConnection = customerDatabaseConnection;
         this.itemDatabaseConnection = itemDatabaseConnection;
         this.orderItemDatabaseConnection = orderItemDatabaseConnection;
-        this.messageBroker = new SqsMessageBroker(applicationConfig.getPaymentQueueUrl());
+        this.messageBroker = new SqsMessageBroker(applicationConfig.getPaymentQueueName());
     }
 
     @GetMapping("/{id}")

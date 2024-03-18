@@ -14,7 +14,7 @@ spring:
 fiap:
   payment:
     queue:
-      url: ${PAYMENT_QUEUE_URL}
+      url: ${PAYMENT_QUEUE_NAME}
   production:
     #url: http://localhost:8082
     url: ${PRODUCTION_BASE_URL}

@@ -8,10 +8,10 @@ import java.net.URI;
 
 public class SqsMessageBroker implements MessageBroker {
 
-    private final String queueUrl;
+    private final String queueName;
 
-    public SqsMessageBroker(String queueUrl) {
-        this.queueUrl = queueUrl;
+    public SqsMessageBroker(String queueName) {
+        this.queueName = queueName;
     }
 
     @Override
@@ -19,7 +19,7 @@ public class SqsMessageBroker implements MessageBroker {
         SqsClient sqsClient = buildClient();
 
         try (sqsClient) {
-            sqsClient.sendMessage(to -> to.queueUrl(this.queueUrl).messageBody(message));
+            sqsClient.sendMessage(to -> to.queueUrl(this.queueName).messageBody(message));
         }
     }
 

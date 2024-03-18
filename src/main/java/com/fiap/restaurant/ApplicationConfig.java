@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 public class ApplicationConfig {
 
     @Value("${fiap.payment.queue.url}")
-    private String paymentQueueUrl;
+    private String paymentQueueName;
 
     @Value("${fiap.production.url}")
     private String productionUrl;
 
-    public String getPaymentQueueUrl() {
-        return paymentQueueUrl;
+    public String getPaymentQueueName() {
+        return paymentQueueName;
     }
 
     public String getProductionUrl() {
