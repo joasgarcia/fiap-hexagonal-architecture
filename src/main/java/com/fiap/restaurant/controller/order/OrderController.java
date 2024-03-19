@@ -22,14 +22,14 @@ public class OrderController {
         return OrderUseCase.findById(id, orderGateway);
     }
 
-    public static void updatePaymentStatus(Long id, OrderPaymentStatus paymentStatus, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
+    public static Order updatePaymentStatus(Long id, OrderPaymentStatus paymentStatus, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
         OrderGateway orderGateway = new OrderGateway(orderDatabaseConnection, customerDatabaseConnection);
-        OrderUseCase.updatePaymentStatus(id, paymentStatus, orderGateway);
+        return OrderUseCase.updatePaymentStatus(id, paymentStatus, orderGateway);
     }
 
-    public static void updateStatus(Long id, OrderStatus status, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
+    public static Order updateStatus(Long id, OrderStatus status, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
         OrderGateway orderGateway = new OrderGateway(orderDatabaseConnection, customerDatabaseConnection);
-        OrderUseCase.updateStatus(id, status, orderGateway);
+        return OrderUseCase.updateStatus(id, status, orderGateway);
     }
 
     public static Order save(SaveOrderDTO saveOrderDTO, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection, OrderItemDatabaseConnection orderItemDatabaseConnection, ApplicationConfig applicationConfig, MessageBroker messageBroker) {

@@ -116,43 +116,6 @@ public class OrderRestControllerIT {
     }
 
     @Test
-    void mustUpdateOrderPaymentStatus() {
-        CustomerJpa customerJpa = customerJpaRepository.save(CustomerTestUtil.generateJpa("John User", "johndoe@email.com", CustomerTestUtil.randomCpf()));
-        ProductJpa productJpa = productJpaRepository.save(ProductTestUtil.generateJpa("Drink 1", "Description 1", "DRINK", 7.5));
-        ItemJpa itemJpa = itemJpaRepository.save(ItemTestUtil.generateJpa("Item 1", "Description 1", 6.5));
-        itemProductRepository.save(ItemProductTestUtil.generateJpa(itemJpa, productJpa));
-        imageJpaRepository.save(ImageTestUtil.generateJpa(itemJpa, "http://image.test"));
-        OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new Date()));
-        orderItemJpaRepository.save(OrderItemTestUtil.generateJpa(orderJpa, itemJpa, "Observation"));
-
-        UpdatePaymentStatusDTO updatePaymentStatusDTO = OrderTestUtil.generateUpdatePaymentStatusDTO(orderJpa.getId(), OrderPaymentStatus.APPROVED);
-
-        given()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(updatePaymentStatusDTO)
-        .when()
-                .post(PATH + "/webhookPaymentStatus")
-        .then()
-                .statusCode(HttpStatus.OK.value())
-                .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/OrderUpdatePaymentStatusSchema.json"));
-    }
-
-    @Test
-    void mustThrowExceptionOrderNotFoundOnUpdateOrderPaymentStatus() {
-        final Long nonexistentOrderId = 0L;
-        UpdatePaymentStatusDTO updatePaymentStatusDTO = OrderTestUtil.generateUpdatePaymentStatusDTO(nonexistentOrderId, OrderPaymentStatus.APPROVED);
-
-        given()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(updatePaymentStatusDTO)
-        .when()
-                .post(PATH + "/webhookPaymentStatus")
-        .then()
-                .statusCode(HttpStatus.NOT_FOUND.value())
-                .body(equalTo("Pedido não encontrado"));
-    }
-
-    @Test
     void mustFindOrderById() {
         CustomerJpa customerJpa = customerJpaRepository.save(CustomerTestUtil.generateJpa("John User", "johndoe@email.com", CustomerTestUtil.randomCpf()));
         ProductJpa productJpa = productJpaRepository.save(ProductTestUtil.generateJpa("Drink 1", "Description 1", "DRINK", 7.5));

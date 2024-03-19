@@ -6,7 +6,6 @@ import com.fiap.restaurant.entity.order.OrderStatus;
 import com.fiap.restaurant.gateway.order.IOrderProductionGateway;
 import com.fiap.restaurant.types.interfaces.db.customer.CustomerDatabaseConnection;
 import com.fiap.restaurant.types.interfaces.db.order.OrderDatabaseConnection;
-import org.springframework.transaction.annotation.Transactional;
 
 public class ServiceResponseUseCase {
 

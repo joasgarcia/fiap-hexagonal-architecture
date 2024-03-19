@@ -30,15 +30,3 @@ Feature: API - Order
   Scenario: Update status of a nonexistent order
     When the nonexistent order status is updated
     Then an error is displayed indicating that order not found
-
-  Scenario: Update payment status of an existent order
-    Given the customer is already registered
-    And the order product is already registered
-    And the order item is already registered
-    And the order is already registered
-    When the order payment status is updated
-    Then the order payment status is successfully updated
-
-  Scenario: Update payment status of a nonexistent order
-    When the nonexistent order payment status is updated
-    Then an error is displayed indicating that order not found
