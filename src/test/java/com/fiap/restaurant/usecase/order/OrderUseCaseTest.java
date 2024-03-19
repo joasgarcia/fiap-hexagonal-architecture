@@ -2,6 +2,8 @@ package com.fiap.restaurant.usecase.order;
 
 import com.fiap.restaurant.entity.customer.Customer;
 import com.fiap.restaurant.entity.order.*;
+import com.fiap.restaurant.external.messagebroker.MessageBroker;
+import com.fiap.restaurant.external.messagebroker.SqsMessageBroker;
 import com.fiap.restaurant.gateway.customer.ICustomerGateway;
 import com.fiap.restaurant.gateway.order.*;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
@@ -89,7 +91,7 @@ public class OrderUseCaseTest {
 
         SaveOrderDTO saveOrderDTO = OrderTestUtil.generateSaveDTO(CustomerTestUtil.CPF, OrderItemTestUtil.generateDTO(1L, "Observation Item 1"));
 
-        Order savedOrder = OrderUseCase.save(saveOrderDTO, orderGateway, customerGateway, itemGateway, orderItemGateway, orderPaymentGateway, orderProductionGateway);
+        Order savedOrder = OrderUseCase.save(saveOrderDTO, orderGateway, customerGateway, itemGateway, orderItemGateway, orderPaymentGateway);
         assertThat(savedOrder).isNotNull();
         verify(orderGateway, times(1)).update(any(Order.class));
     }
@@ -125,7 +127,7 @@ public class OrderUseCaseTest {
 
         SaveOrderDTO saveOrderDTO = OrderTestUtil.generateSaveDTO(CustomerTestUtil.CPF, OrderItemTestUtil.generateDTO(1L, "Observation Item 1"));
 
-        assertThatThrownBy(() -> OrderUseCase.save(saveOrderDTO, orderGateway,  customerGateway, itemGateway, orderItemGateway, orderPaymentGateway, orderProductionGateway))
+        assertThatThrownBy(() -> OrderUseCase.save(saveOrderDTO, orderGateway,  customerGateway, itemGateway, orderItemGateway, orderPaymentGateway))
                 .isInstanceOf(BusinessException.class)
                 .hasMessage("Não foi possível registrar o pedido no serviço de pagamentos");
 
@@ -163,7 +165,7 @@ public class OrderUseCaseTest {
 
         SaveOrderDTO saveOrderDTO = OrderTestUtil.generateSaveDTO(CustomerTestUtil.CPF, OrderItemTestUtil.generateDTO(1L, "Observation Item 1"));
 
-        assertThatThrownBy(() -> OrderUseCase.save(saveOrderDTO, orderGateway,  customerGateway, itemGateway, orderItemGateway, orderPaymentGateway, orderProductionGateway))
+        assertThatThrownBy(() -> OrderUseCase.save(saveOrderDTO, orderGateway,  customerGateway, itemGateway, orderItemGateway, orderPaymentGateway))
                 .isInstanceOf(BusinessException.class)
                 .hasMessage("Não foi possível registrar o pedido no serviço da fila de pedidos");
 

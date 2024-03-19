@@ -1,10 +1,7 @@
 package com.fiap.restaurant.gateway.service;
 
-import com.fiap.restaurant.ApplicationConfig;
-import com.fiap.restaurant.controller.order.OrderController;
-import com.fiap.restaurant.entity.order.OrderPaymentStatus;
-import com.fiap.restaurant.entity.order.OrderStatus;
-import com.fiap.restaurant.gateway.order.IOrderProductionGateway;
+import com.fiap.restaurant.external.messagebroker.MessageBroker;
+import com.fiap.restaurant.external.messagebroker.SqsMessageBroker;
 import com.fiap.restaurant.gateway.order.OrderProductionGateway;
 import com.fiap.restaurant.types.dto.service.ServiceResponseQueueDTO;
 import com.fiap.restaurant.types.interfaces.db.customer.CustomerDatabaseConnection;
@@ -12,7 +9,7 @@ import com.fiap.restaurant.types.interfaces.db.order.OrderDatabaseConnection;
 import com.fiap.restaurant.usecase.ServiceResponseUseCase;
 import io.awspring.cloud.sqs.annotation.SqsListener;
 import org.apache.commons.lang3.NotImplementedException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,12 +20,9 @@ public class ServiceResponseQueueGateway {
 
     private final CustomerDatabaseConnection customerDatabaseConnection;
 
-    private final IOrderProductionGateway orderProductionGateway;
-
-    public ServiceResponseQueueGateway(ApplicationConfig applicationConfig, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
+    public ServiceResponseQueueGateway(OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
         this.orderDatabaseConnection = orderDatabaseConnection;
         this.customerDatabaseConnection = customerDatabaseConnection;
-        this.orderProductionGateway = new OrderProductionGateway(applicationConfig);
     }
 
     @SqsListener(value = "response-q")
@@ -39,6 +33,10 @@ public class ServiceResponseQueueGateway {
                 Long orderId = Long.valueOf(message.data().get("id"));
 
                 System.out.println("Pagamento do pedido " + orderId + " aprovado");
+
+                final MessageBroker messageBroker = new SqsMessageBroker("production-q");
+                final OrderProductionGateway orderProductionGateway = new OrderProductionGateway(messageBroker);
+
                 ServiceResponseUseCase.handlePaymentFinished(orderId, orderDatabaseConnection, customerDatabaseConnection, orderProductionGateway);
                 break;
 
