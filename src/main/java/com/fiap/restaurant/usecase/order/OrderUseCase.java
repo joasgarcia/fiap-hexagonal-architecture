@@ -52,7 +52,7 @@ public class OrderUseCase {
         return orderGateway.listOrderedByStatusAndId();
     }
 
-    public static Order save(SaveOrderDTO saveOrderDTO, IOrderGateway orderGateway, ICustomerGateway customerGateway, IItemGateway itemGateway, IOrderItemGateway orderItemGateway, IOrderPaymentGateway orderPaymentGateway, IOrderProductionGateway orderProductionGateway) {
+    public static Order save(SaveOrderDTO saveOrderDTO, IOrderGateway orderGateway, ICustomerGateway customerGateway, IItemGateway itemGateway, IOrderItemGateway orderItemGateway, IOrderPaymentGateway orderPaymentGateway) {
         Customer customer = customerGateway.findByCpf(saveOrderDTO.getCustomerCpf());
 
         Order order = new Order();
@@ -79,9 +79,6 @@ public class OrderUseCase {
 
         Boolean orderPaymentSuccess = orderPaymentGateway.registerOrder(newOrder.getId(), newOrder.getTotalValue());
         if (!orderPaymentSuccess) throw new BusinessException("Não foi possível registrar o pedido no serviço de pagamentos");
-
-        Boolean orderProductionQueued = orderProductionGateway.registerOrder(newOrder.getId());
-        if (!orderProductionQueued) throw new BusinessException("Não foi possível registrar o pedido no serviço da fila de pedidos");
 
         newOrder.setPaymentStatus(OrderPaymentStatus.PROCESSING);
         orderGateway.update(newOrder);
