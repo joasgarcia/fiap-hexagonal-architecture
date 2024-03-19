@@ -33,7 +33,7 @@ public class ServiceResponseQueueGateway {
 
     @SqsListener(value = "response-q")
     @Transactional
-        public void receiveMessage(ServiceResponseQueueDTO message) {
+    public void receiveMessage(ServiceResponseQueueDTO message) {
         switch (message.type()) {
             case ORDER_PAYMENT_FINISHED:
                 Long orderId = Long.valueOf(message.data().get("id"));
