@@ -3,11 +3,10 @@ package com.fiap.restaurant.api.order;
 import com.fiap.restaurant.ApplicationConfig;
 import com.fiap.restaurant.controller.order.OrderController;
 import com.fiap.restaurant.entity.order.Order;
+import com.fiap.restaurant.entity.order.OrderStatus;
 import com.fiap.restaurant.external.messagebroker.MessageBroker;
 import com.fiap.restaurant.external.messagebroker.SqsMessageBroker;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
-import com.fiap.restaurant.types.dto.order.UpdateOrderStatusDTO;
-import com.fiap.restaurant.types.dto.order.UpdatePaymentStatusDTO;
 import com.fiap.restaurant.types.exception.BusinessException;
 import com.fiap.restaurant.types.exception.ResourceNotFoundException;
 import com.fiap.restaurant.types.interfaces.db.customer.CustomerDatabaseConnection;
@@ -59,6 +58,16 @@ public class OrderRestController {
         try {
             Order order = OrderController.save(saveOrderDTO, this.orderDatabaseConnection, this.customerDatabaseConnection, this.itemDatabaseConnection, this.orderItemDatabaseConnection, this.applicationConfig, this.messageBroker);
             return ResponseEntity.ok(order);
+        } catch (BusinessException businessException) {
+            return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(path = "/finish/{id}")
+    public ResponseEntity<Object> finish(@PathVariable("id") Long id) {
+        try {
+            OrderController.updateStatus(id, OrderStatus.FINISHED, this.orderDatabaseConnection, this.customerDatabaseConnection);
+            return ResponseEntity.ok(true);
         } catch (BusinessException businessException) {
             return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
         }

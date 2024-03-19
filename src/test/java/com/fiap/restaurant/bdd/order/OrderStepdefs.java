@@ -2,14 +2,10 @@ package com.fiap.restaurant.bdd.order;
 
 import com.fiap.restaurant.bdd.customer.CustomerStepdefs;
 import com.fiap.restaurant.bdd.product.ProductStepdefs;
-import com.fiap.restaurant.entity.order.OrderPaymentStatus;
-import com.fiap.restaurant.entity.order.OrderStatus;
 import com.fiap.restaurant.types.dto.IdDTO;
 import com.fiap.restaurant.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.types.dto.order.SaveItemDTO;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
-import com.fiap.restaurant.types.dto.order.UpdateOrderStatusDTO;
-import com.fiap.restaurant.types.dto.order.UpdatePaymentStatusDTO;
 import com.fiap.restaurant.types.dto.product.ProductDTO;
 import com.fiap.restaurant.util.*;
 import io.cucumber.java.en.And;
@@ -119,5 +115,18 @@ public class OrderStepdefs {
         response.then()
                 .statusCode(HttpStatus.NOT_FOUND.value())
                 .body(equalTo("Pedido não encontrado"));
+    }
+
+    @When("finish an order")
+    public void finishAnOrder() {
+        response = given().contentType(DEFAULT_CONTENT_TYPE)
+                .when().post(ENDPOINT + "/finish/{id}", savedOrderId);
+    }
+
+    @Then("the order is successfully finished")
+    public void theOrderIsSuccessfullyFinished() {
+        response.then()
+                .statusCode(HttpStatus.OK.value())
+                .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/OrderSaveSchema.json"));
     }
 }
