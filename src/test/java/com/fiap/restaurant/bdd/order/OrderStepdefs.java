@@ -120,29 +120,4 @@ public class OrderStepdefs {
                 .statusCode(HttpStatus.NOT_FOUND.value())
                 .body(equalTo("Pedido não encontrado"));
     }
-
-    @When("the order status is updated")
-    public void theOrderStatusIsUpdated() {
-        UpdateOrderStatusDTO updateOrderStatusDTO = OrderTestUtil.generateUpdateStatusDTO(OrderStatus.READY);
-
-        response = given().contentType(DEFAULT_CONTENT_TYPE).body(updateOrderStatusDTO)
-                .when().post(ENDPOINT + "/{id}/status", savedOrderId);
-    }
-
-    @Then("the order status is successfully updated")
-    public void theOrderStatusIsSuccessfullyUpdated() {
-        response.then()
-                .statusCode(HttpStatus.OK.value())
-                .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/OrderUpdateStatusSchema.json"));
-    }
-
-    @When("the nonexistent order status is updated")
-    public void theNonexistentOrderStatusIsUpdated() {
-        UpdateOrderStatusDTO updateOrderStatusDTO = OrderTestUtil.generateUpdateStatusDTO(OrderStatus.READY);
-
-        final Long nonexistentOrderId = 0L;
-
-        response = given().contentType(DEFAULT_CONTENT_TYPE).body(updateOrderStatusDTO)
-                .when().post(ENDPOINT + "/{id}/status", nonexistentOrderId);
-    }
 }

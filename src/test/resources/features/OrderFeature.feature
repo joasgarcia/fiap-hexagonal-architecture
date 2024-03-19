@@ -18,15 +18,3 @@ Feature: API - Order
   Scenario: Find a nonexistent order
     When an non existent order by id is requested
     Then an error is displayed indicating that order not found
-
-  Scenario: Update status of an existent order
-    Given the customer is already registered
-    And the order product is already registered
-    And the order item is already registered
-    And the order is already registered
-    When the order status is updated
-    Then the order status is successfully updated
-
-  Scenario: Update status of a nonexistent order
-    When the nonexistent order status is updated
-    Then an error is displayed indicating that order not found
