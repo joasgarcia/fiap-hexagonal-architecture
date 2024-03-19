@@ -402,36 +402,6 @@
 				}
 			},
 			"response": []
-		},
-		{
-			"name": "Atualizar status do pedido",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"status\": \"READY\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/order/1/status",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"order",
-						"1",
-						"status"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }
