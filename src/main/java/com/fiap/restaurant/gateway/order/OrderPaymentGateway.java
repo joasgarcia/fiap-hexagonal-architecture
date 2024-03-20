@@ -2,40 +2,32 @@ package com.fiap.restaurant.gateway.order;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fiap.restaurant.ApplicationConfig;
-import com.fiap.restaurant.types.dto.order.payment.OrderPaymentRequestDTO;
-import com.fiap.restaurant.types.dto.order.payment.OrderPaymentResponseDTO;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+import com.fiap.restaurant.external.messagebroker.MessageBroker;
+import com.fiap.restaurant.types.dto.order.payment.OrderPaymentPayloadMessageBrokerDTO;
 
 public class OrderPaymentGateway implements IOrderPaymentGateway {
 
-    private final ApplicationConfig applicationConfig;
 
-    public OrderPaymentGateway(ApplicationConfig applicationConfig) {
-        this.applicationConfig = applicationConfig;
+    private final MessageBroker messageBroker;
+
+    public OrderPaymentGateway(MessageBroker messageBroker) {
+        this.messageBroker = messageBroker;
     }
 
     @Override
-    public OrderPaymentResponseDTO registerOrder(Long customerId, Double value) {
+    public Boolean registerOrder(Long orderId, Double value) {
         try {
-            OrderPaymentRequestDTO orderPaymentRequestDTO = new OrderPaymentRequestDTO(customerId, value);
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
+            OrderPaymentPayloadMessageBrokerDTO orderPaymentPayloadMessageBrokerDTO = new OrderPaymentPayloadMessageBrokerDTO(orderId, value);
 
             ObjectMapper objectMapper = new ObjectMapper();
-            String requestJson = objectMapper.writeValueAsString(orderPaymentRequestDTO);
-            HttpEntity<String> entity = new HttpEntity<>(requestJson, headers);
+            String requestJson = objectMapper.writeValueAsString(orderPaymentPayloadMessageBrokerDTO);
 
-            ResponseEntity<OrderPaymentResponseDTO> orderPaymentRestResponseDTO = new RestTemplate().postForEntity(applicationConfig.getPaymentUrl() + "/payment", entity, OrderPaymentResponseDTO.class);
-
-            return orderPaymentRestResponseDTO.getBody();
+            this.messageBroker.send(requestJson);
+            return true;
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Falha ao realizar comunicação com o serviço de pagamentos");
+        } catch (Exception exception) {
+            throw new RuntimeException("Ocorreu um erro desconhecido", exception);
         }
     }
 }
