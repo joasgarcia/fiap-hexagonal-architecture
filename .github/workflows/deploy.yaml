@@ -39,20 +39,20 @@ jobs:
 
       - name: Download task definition
         run: |
-          aws ecs describe-task-definition --task-definition restaurant-task --query taskDefinition > task-definition.json
+          aws ecs describe-task-definition --task-definition order-service-task-family --query taskDefinition > task-definition.json
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-definition.json
-          container-name: restaurant-task
+          container-name: order-service-task
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: restaurant-service
-          cluster: restaurant-cluster
+          service: order-service-ecs-service
+          cluster: order-service-cluster
           wait-for-service-stability: true
