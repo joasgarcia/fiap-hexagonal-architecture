@@ -14,4 +14,8 @@ public class ServiceResponseUseCase {
         OrderController.updateStatus(orderId, OrderStatus.PREPARING, orderDatabaseConnection, customerDatabaseConnection);
         orderProductionGateway.registerOrder(orderId);
     }
+
+    public static void handleProductionFinished(Long orderId, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
+        OrderController.updateStatus(orderId, OrderStatus.READY, orderDatabaseConnection, customerDatabaseConnection);
+    }
 }

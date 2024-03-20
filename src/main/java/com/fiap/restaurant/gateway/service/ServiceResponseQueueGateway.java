@@ -42,6 +42,13 @@ public class ServiceResponseQueueGateway {
                 ServiceResponseUseCase.handlePaymentFinished(orderId, orderDatabaseConnection, customerDatabaseConnection, orderProductionGateway);
                 break;
 
+            case ORDER_PRODUCTION_FINISHED:
+                Long orderIdProduction = Long.valueOf(message.data().get("id"));
+
+                System.out.println("Produção do pedido " + orderIdProduction + " finalizada");
+                ServiceResponseUseCase.handleProductionFinished(orderIdProduction, orderDatabaseConnection, customerDatabaseConnection);
+                break;
+
             default:
                 throw new NotImplementedException("ServiceResponseQueueType não implementado: " + message.type());
         }

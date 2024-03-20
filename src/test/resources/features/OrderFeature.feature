@@ -18,3 +18,11 @@ Feature: API - Order
   Scenario: Find a nonexistent order
     When an non existent order by id is requested
     Then an error is displayed indicating that order not found
+
+  Scenario: Finish an order
+    Given the customer is already registered
+    And the order product is already registered
+    And the order item is already registered
+    And the order is already registered
+    When finish an order
+    Then the order is successfully finished
