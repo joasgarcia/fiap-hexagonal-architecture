@@ -1,9 +1,9 @@
 package com.fiap.restaurant.controller.order;
 
-import com.fiap.restaurant.ApplicationConfig;
 import com.fiap.restaurant.entity.order.Order;
 import com.fiap.restaurant.entity.order.OrderPaymentStatus;
 import com.fiap.restaurant.entity.order.OrderStatus;
+import com.fiap.restaurant.external.messagebroker.MessageBroker;
 import com.fiap.restaurant.gateway.customer.CustomerGateway;
 import com.fiap.restaurant.gateway.customer.ICustomerGateway;
 import com.fiap.restaurant.gateway.order.*;
@@ -21,26 +21,23 @@ public class OrderController {
         return OrderUseCase.findById(id, orderGateway);
     }
 
-    public static Order updatePaymentStatus(Long id, String paymentStatus, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
+    public static Order updatePaymentStatus(Long id, OrderPaymentStatus paymentStatus, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
         OrderGateway orderGateway = new OrderGateway(orderDatabaseConnection, customerDatabaseConnection);
-        OrderPaymentStatus paymentStatusParsed = OrderPaymentStatus.valueOf(paymentStatus);
-        return OrderUseCase.updatePaymentStatus(id, paymentStatusParsed, orderGateway);
+        return OrderUseCase.updatePaymentStatus(id, paymentStatus, orderGateway);
     }
 
-    public static Order updateStatus(Long id, String status, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
+    public static Order updateStatus(Long id, OrderStatus status, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
         OrderGateway orderGateway = new OrderGateway(orderDatabaseConnection, customerDatabaseConnection);
-        OrderStatus statusParsed = OrderStatus.valueOf(status);
-        return OrderUseCase.updateStatus(id, statusParsed, orderGateway);
+        return OrderUseCase.updateStatus(id, status, orderGateway);
     }
 
-    public static Order save(SaveOrderDTO saveOrderDTO, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection, OrderItemDatabaseConnection orderItemDatabaseConnection, ApplicationConfig applicationConfig) {
+    public static Order save(SaveOrderDTO saveOrderDTO, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection, OrderItemDatabaseConnection orderItemDatabaseConnection, MessageBroker messageBroker) {
         IOrderGateway orderGateway = new OrderGateway(orderDatabaseConnection, customerDatabaseConnection);
         ICustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
         IItemGateway itemGateway = new ItemGateway(itemDatabaseConnection);
         IOrderItemGateway orderItemGateway = new OrderItemGateway(orderItemDatabaseConnection, itemDatabaseConnection, orderDatabaseConnection);
-        IOrderPaymentGateway orderPaymentGateway = new OrderPaymentGateway(applicationConfig);
-        IOrderProductionGateway orderProductionGateway = new OrderProductionGateway(applicationConfig);
+        IOrderPaymentGateway orderPaymentGateway = new OrderPaymentGateway(messageBroker);
 
-        return OrderUseCase.save(saveOrderDTO, orderGateway, customerGateway, itemGateway, orderItemGateway, orderPaymentGateway, orderProductionGateway);
+        return OrderUseCase.save(saveOrderDTO, orderGateway, customerGateway, itemGateway, orderItemGateway, orderPaymentGateway);
     }
 }

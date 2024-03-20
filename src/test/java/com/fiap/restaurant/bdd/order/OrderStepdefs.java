@@ -2,14 +2,10 @@ package com.fiap.restaurant.bdd.order;
 
 import com.fiap.restaurant.bdd.customer.CustomerStepdefs;
 import com.fiap.restaurant.bdd.product.ProductStepdefs;
-import com.fiap.restaurant.entity.order.OrderPaymentStatus;
-import com.fiap.restaurant.entity.order.OrderStatus;
 import com.fiap.restaurant.types.dto.IdDTO;
 import com.fiap.restaurant.types.dto.customer.SaveCustomerDTO;
 import com.fiap.restaurant.types.dto.order.SaveItemDTO;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
-import com.fiap.restaurant.types.dto.order.UpdateOrderStatusDTO;
-import com.fiap.restaurant.types.dto.order.UpdatePaymentStatusDTO;
 import com.fiap.restaurant.types.dto.product.ProductDTO;
 import com.fiap.restaurant.util.*;
 import io.cucumber.java.en.And;
@@ -121,55 +117,16 @@ public class OrderStepdefs {
                 .body(equalTo("Pedido não encontrado"));
     }
 
-    @When("the order status is updated")
-    public void theOrderStatusIsUpdated() {
-        UpdateOrderStatusDTO updateOrderStatusDTO = OrderTestUtil.generateUpdateStatusDTO(OrderStatus.READY);
-
-        response = given().contentType(DEFAULT_CONTENT_TYPE).body(updateOrderStatusDTO)
-                .when().post(ENDPOINT + "/{id}/status", savedOrderId);
+    @When("finish an order")
+    public void finishAnOrder() {
+        response = given().contentType(DEFAULT_CONTENT_TYPE)
+                .when().post(ENDPOINT + "/finish/{id}", savedOrderId);
     }
 
-    @Then("the order status is successfully updated")
-    public void theOrderStatusIsSuccessfullyUpdated() {
+    @Then("the order is successfully finished")
+    public void theOrderIsSuccessfullyFinished() {
         response.then()
                 .statusCode(HttpStatus.OK.value())
-                .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/OrderUpdateStatusSchema.json"));
-    }
-
-    @When("the nonexistent order status is updated")
-    public void theNonexistentOrderStatusIsUpdated() {
-        UpdateOrderStatusDTO updateOrderStatusDTO = OrderTestUtil.generateUpdateStatusDTO(OrderStatus.READY);
-
-        final Long nonexistentOrderId = 0L;
-
-        response = given().contentType(DEFAULT_CONTENT_TYPE).body(updateOrderStatusDTO)
-                .when().post(ENDPOINT + "/{id}/status", nonexistentOrderId);
-    }
-
-    @When("the order payment status is updated")
-    public void theOrderPaymentStatusIsUpdated() {
-        UpdatePaymentStatusDTO updatePaymentStatusDTO = OrderTestUtil.generateUpdatePaymentStatusDTO(savedOrderId.longValue(), OrderPaymentStatus.APPROVED);
-
-        response = given().contentType(DEFAULT_CONTENT_TYPE).body(updatePaymentStatusDTO)
-                .when().post(ENDPOINT + "/webhookPaymentStatus");
-    }
-
-    @Then("the order payment status is successfully updated")
-    public void theOrderPaymentStatusIsSuccessfullyUpdated() {
-        response.then()
-                .statusCode(HttpStatus.OK.value())
-                .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/OrderUpdatePaymentStatusSchema.json"));
-    }
-
-    @When("the nonexistent order payment status is updated")
-    public void theNonexistentOrderPaymentStatusIsUpdated() {
-        final Long nonexistentOrderId = 0L;
-
-        UpdatePaymentStatusDTO updatePaymentStatusDTO = new UpdatePaymentStatusDTO();
-        updatePaymentStatusDTO.setPaymentStatus(OrderPaymentStatus.APPROVED.toString());
-        updatePaymentStatusDTO.setExternalIdentifier(nonexistentOrderId);
-
-        response = given().contentType(DEFAULT_CONTENT_TYPE).body(updatePaymentStatusDTO)
-                .when().post(ENDPOINT + "/webhookPaymentStatus");
+                .body(matchesJsonSchemaInClasspath(SCHEMA_LOCATION + "/OrderSaveSchema.json"));
     }
 }

@@ -6,7 +6,6 @@ import com.fiap.restaurant.gateway.customer.ICustomerGateway;
 import com.fiap.restaurant.gateway.order.*;
 import com.fiap.restaurant.types.dto.order.OrderItemDTO;
 import com.fiap.restaurant.types.dto.order.SaveOrderDTO;
-import com.fiap.restaurant.types.dto.order.payment.OrderPaymentResponseDTO;
 import com.fiap.restaurant.types.exception.BusinessException;
 import com.fiap.restaurant.types.exception.ResourceNotFoundException;
 
@@ -53,7 +52,7 @@ public class OrderUseCase {
         return orderGateway.listOrderedByStatusAndId();
     }
 
-    public static Order save(SaveOrderDTO saveOrderDTO, IOrderGateway orderGateway, ICustomerGateway customerGateway, IItemGateway itemGateway, IOrderItemGateway orderItemGateway, IOrderPaymentGateway orderPaymentGateway, IOrderProductionGateway orderProductionGateway) {
+    public static Order save(SaveOrderDTO saveOrderDTO, IOrderGateway orderGateway, ICustomerGateway customerGateway, IItemGateway itemGateway, IOrderItemGateway orderItemGateway, IOrderPaymentGateway orderPaymentGateway) {
         Customer customer = customerGateway.findByCpf(saveOrderDTO.getCustomerCpf());
 
         Order order = new Order();
@@ -78,11 +77,8 @@ public class OrderUseCase {
 
         newOrder.setItems(orderItemList);
 
-        OrderPaymentResponseDTO orderPaymentRestResponseDTO = orderPaymentGateway.registerOrder(customer.getId(), newOrder.getTotalValue());
-        if (!orderPaymentRestResponseDTO.getSuccess()) throw new BusinessException("Não foi possível registrar o pedido no serviço de pagamentos");
-
-        Boolean orderProductionQueued = orderProductionGateway.registerOrder(newOrder.getId());
-        if (!orderProductionQueued) throw new BusinessException("Não foi possível registrar o pedido no serviço da fila de pedidos");
+        Boolean orderPaymentSuccess = orderPaymentGateway.registerOrder(newOrder.getId(), newOrder.getTotalValue());
+        if (!orderPaymentSuccess) throw new BusinessException("Não foi possível registrar o pedido no serviço de pagamentos");
 
         newOrder.setPaymentStatus(OrderPaymentStatus.PROCESSING);
         orderGateway.update(newOrder);

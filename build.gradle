@@ -38,6 +38,8 @@ dependencies {
 
     runtimeOnly 'com.mysql:mysql-connector-j:8.0.33'
 
+    implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs:3.0.4'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.assertj:assertj-core:3.25.1'
     testImplementation 'com.h2database:h2:2.2.224'
