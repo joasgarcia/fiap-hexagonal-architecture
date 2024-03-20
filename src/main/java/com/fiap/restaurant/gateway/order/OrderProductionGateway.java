@@ -1,16 +1,25 @@
 package com.fiap.restaurant.gateway.order;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fiap.restaurant.controller.order.OrderController;
 import com.fiap.restaurant.external.messagebroker.MessageBroker;
+import com.fiap.restaurant.external.messagebroker.SqsMessageBroker;
 import com.fiap.restaurant.types.dto.order.production.OrderProductionRequestDTO;
+import com.fiap.restaurant.types.interfaces.db.customer.CustomerDatabaseConnection;
+import com.fiap.restaurant.types.interfaces.db.order.OrderDatabaseConnection;
+import com.fiap.restaurant.usecase.order.OrderUseCase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 public class OrderProductionGateway implements IOrderProductionGateway {
 
-    private final MessageBroker messageBroker;
+    private final OrderDatabaseConnection orderDatabaseConnection;
 
-    public OrderProductionGateway(MessageBroker messageBroker) {
-        this.messageBroker = messageBroker;
+    private final CustomerDatabaseConnection customerDatabaseConnection;
+
+    public OrderProductionGateway(OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
+        this.orderDatabaseConnection = orderDatabaseConnection;
+        this.customerDatabaseConnection = customerDatabaseConnection;
     }
 
     @Override
@@ -21,13 +30,13 @@ public class OrderProductionGateway implements IOrderProductionGateway {
             ObjectMapper objectMapper = new ObjectMapper();
             String requestJson = objectMapper.writeValueAsString(orderProductionRequestDTO);
 
-            this.messageBroker.send(requestJson);
+            MessageBroker messageBroker = new SqsMessageBroker("production-q");
+            messageBroker.send(requestJson);
 
             return true;
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Falha ao realizar comunicação com o serviço de produção de pedidos");
         } catch (Exception exception) {
-            throw new RuntimeException("Ocorreu um erro desconhecido", exception);
+            OrderController.refund(orderId, orderDatabaseConnection, customerDatabaseConnection);
+            return false;
         }
     }
 }

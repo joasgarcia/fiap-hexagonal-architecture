@@ -49,9 +49,7 @@ public class OrderRestController {
     @PostMapping(path = "/checkout")
     public ResponseEntity<Object> checkout(@RequestBody SaveOrderDTO saveOrderDTO) {
         try {
-            final MessageBroker messageBroker = new SqsMessageBroker("payment-q");
-
-            Order order = OrderController.save(saveOrderDTO, this.orderDatabaseConnection, this.customerDatabaseConnection, this.itemDatabaseConnection, this.orderItemDatabaseConnection, messageBroker);
+            Order order = OrderController.save(saveOrderDTO, this.orderDatabaseConnection, this.customerDatabaseConnection, this.itemDatabaseConnection, this.orderItemDatabaseConnection);
             return ResponseEntity.ok(order);
         } catch (BusinessException businessException) {
             return new ResponseEntity<>(businessException.getMessage(), HttpStatus.BAD_REQUEST);
