@@ -29,6 +29,14 @@ public class ServiceResponseQueueGateway {
     @Transactional
         public void receiveMessage(ServiceResponseQueueDTO message) {
         switch (message.type()) {
+            case ORDER_PAYMENT_FAILED:
+                Long orderIdFailed = Long.valueOf(message.data().get("id"));
+
+                System.out.println("Pagamento do pedido " + orderIdFailed + " falhou");
+
+                ServiceResponseUseCase.handlePaymentFailed(orderIdFailed, orderDatabaseConnection, customerDatabaseConnection);
+                break;
+
             case ORDER_PAYMENT_FINISHED:
                 Long orderId = Long.valueOf(message.data().get("id"));
 
