@@ -54,26 +54,6 @@ public class OrderRestController {
         }
     }
 
-    @PostMapping(path = "/webhookPaymentStatus")
-    public ResponseEntity<Object> updatePaymentStatus(@RequestBody UpdatePaymentStatusDTO updatePaymentStatusDTO) {
-        try {
-            OrderController.updatePaymentStatus(updatePaymentStatusDTO.getExternalIdentifier(), updatePaymentStatusDTO.getPaymentStatus(), this.orderDatabaseConnection, this.customerDatabaseConnection);
-            return ResponseEntity.ok().body(true);
-        } catch (ResourceNotFoundException resourceNotFoundException) {
-            return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @PostMapping(path = "/{id}/status")
-    public ResponseEntity<Object> updateStatus(@PathVariable Long id, @RequestBody UpdateOrderStatusDTO updateOrderStatusDTO) {
-        try {
-            OrderController.updateStatus(id, updateOrderStatusDTO.getStatus(), this.orderDatabaseConnection, this.customerDatabaseConnection);
-            return ResponseEntity.ok().body(true);
-        } catch (ResourceNotFoundException resourceNotFoundException) {
-            return new ResponseEntity<>(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
-        }
-    }
-
     @PostMapping(path = "/checkout")
     public ResponseEntity<Object> checkout(@RequestBody SaveOrderDTO saveOrderDTO) {
         try {

@@ -51,7 +51,7 @@ public class OrderControllerIT {
         OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, initialOrderStatus, OrderPaymentStatus.PENDING, new Date()));
 
         OrderStatus orderStatus = OrderStatus.PREPARING;
-        Order order = OrderController.updateStatus(orderJpa.getId(), orderStatus.toString(), orderDatabaseConnection, customerDatabaseConnection);
+        Order order = OrderController.updateStatus(orderJpa.getId(), orderStatus, orderDatabaseConnection, customerDatabaseConnection);
 
         assertThat(order.getStatus()).isEqualTo(orderStatus);
         assertThat(order.getStatus()).isNotEqualTo(initialOrderStatus);
@@ -65,7 +65,7 @@ public class OrderControllerIT {
         OrderJpa orderJpa = orderJpaRepository.save(OrderTestUtil.generateJpa(customerJpa, OrderStatus.RECEIVED, initialOrderPaymentStatus, new Date()));
 
         OrderPaymentStatus orderPaymentStatus = OrderPaymentStatus.APPROVED;
-        Order order = OrderController.updatePaymentStatus(orderJpa.getId(), orderPaymentStatus.toString(), orderDatabaseConnection, customerDatabaseConnection);
+        Order order = OrderController.updatePaymentStatus(orderJpa.getId(), orderPaymentStatus, orderDatabaseConnection, customerDatabaseConnection);
 
         assertThat(order.getPaymentStatus()).isEqualTo(orderPaymentStatus);
         assertThat(order.getPaymentStatus()).isNotEqualTo(initialOrderPaymentStatus);
