@@ -9,6 +9,7 @@ import java.util.TimeZone;
 public class RestaurantApplication {
 
 	public static void main(String[] args) {
+		System.out.println("Serviço de pedido");
 		TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
 
 		SpringApplication.run(RestaurantApplication.class, args);
