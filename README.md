@@ -73,5 +73,7 @@ _Os testes de comportamento não constam no resumo acima._
 A cobertura de testes desenvolvidos no projeto pode ser observada em:
 ![tests-coverage](https://github.com/richardaltmayer/fiap-hexagonal-architecture/assets/10313123/e70ba972-024b-4e2b-b5ad-c750409ea653)
 
+## Relatório de Impacto de Proteção de Dados
 
+Para visualizar o Relatório de Impacto de Proteção de Dados consulte esse [link](https://docs.google.com/document/d/1qFt32F8fH0thY0iOhRW_RAAAZw-RYRzcKtixA6_6wHQ/edit?usp=sharing).
 
