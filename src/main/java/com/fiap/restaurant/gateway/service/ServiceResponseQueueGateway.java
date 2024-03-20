@@ -50,8 +50,7 @@ public class ServiceResponseQueueGateway {
 
                 System.out.println("Pagamento do pedido " + orderId + " aprovado");
 
-                final MessageBroker messageBroker = new SqsMessageBroker("production-q");
-                final OrderProductionGateway orderProductionGateway = new OrderProductionGateway(messageBroker);
+                final OrderProductionGateway orderProductionGateway = new OrderProductionGateway(orderDatabaseConnection, customerDatabaseConnection);
 
                 ServiceResponseUseCase.handlePaymentFinished(orderId, orderDatabaseConnection, customerDatabaseConnection, orderProductionGateway);
                 break;
