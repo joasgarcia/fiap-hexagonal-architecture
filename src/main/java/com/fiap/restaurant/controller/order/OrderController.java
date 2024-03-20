@@ -1,6 +1,5 @@
 package com.fiap.restaurant.controller.order;
 
-import com.fiap.restaurant.ApplicationConfig;
 import com.fiap.restaurant.entity.order.Order;
 import com.fiap.restaurant.entity.order.OrderPaymentStatus;
 import com.fiap.restaurant.entity.order.OrderStatus;
@@ -32,14 +31,13 @@ public class OrderController {
         return OrderUseCase.updateStatus(id, status, orderGateway);
     }
 
-    public static Order save(SaveOrderDTO saveOrderDTO, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection, OrderItemDatabaseConnection orderItemDatabaseConnection, ApplicationConfig applicationConfig, MessageBroker messageBroker) {
+    public static Order save(SaveOrderDTO saveOrderDTO, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection, ItemDatabaseConnection itemDatabaseConnection, OrderItemDatabaseConnection orderItemDatabaseConnection, MessageBroker messageBroker) {
         IOrderGateway orderGateway = new OrderGateway(orderDatabaseConnection, customerDatabaseConnection);
         ICustomerGateway customerGateway = new CustomerGateway(customerDatabaseConnection);
         IItemGateway itemGateway = new ItemGateway(itemDatabaseConnection);
         IOrderItemGateway orderItemGateway = new OrderItemGateway(orderItemDatabaseConnection, itemDatabaseConnection, orderDatabaseConnection);
         IOrderPaymentGateway orderPaymentGateway = new OrderPaymentGateway(messageBroker);
-        IOrderProductionGateway orderProductionGateway = new OrderProductionGateway(applicationConfig);
 
-        return OrderUseCase.save(saveOrderDTO, orderGateway, customerGateway, itemGateway, orderItemGateway, orderPaymentGateway, orderProductionGateway);
+        return OrderUseCase.save(saveOrderDTO, orderGateway, customerGateway, itemGateway, orderItemGateway, orderPaymentGateway);
     }
 }
