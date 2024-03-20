@@ -20,6 +20,11 @@ public class ServiceResponseUseCase {
         OrderController.updateStatus(orderId, OrderStatus.CANCELLED, orderDatabaseConnection, customerDatabaseConnection);
     }
 
+    public static void handlePaymentRefunded(Long orderId, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
+        OrderController.updatePaymentStatus(orderId, OrderPaymentStatus.REFUNDED, orderDatabaseConnection, customerDatabaseConnection);
+        OrderController.updateStatus(orderId, OrderStatus.CANCELLED, orderDatabaseConnection, customerDatabaseConnection);
+    }
+
     public static void handleProductionFinished(Long orderId, OrderDatabaseConnection orderDatabaseConnection, CustomerDatabaseConnection customerDatabaseConnection) {
         OrderController.updateStatus(orderId, OrderStatus.READY, orderDatabaseConnection, customerDatabaseConnection);
     }
