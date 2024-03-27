@@ -5,5 +5,6 @@ public enum OrderPaymentStatus {
     PENDING,
     PROCESSING,
     APPROVED,
-    REJECTED
+    REJECTED,
+    REFUNDED
 }
