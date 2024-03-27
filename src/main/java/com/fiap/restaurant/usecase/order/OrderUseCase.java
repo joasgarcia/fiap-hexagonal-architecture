@@ -85,4 +85,8 @@ public class OrderUseCase {
 
         return newOrder;
     }
+
+    public static Boolean refund(Order order, IOrderPaymentGateway orderPaymentGateway) {
+        return orderPaymentGateway.refund(order);
+    }
 }

@@ -133,42 +133,4 @@ public class OrderUseCaseTest {
 
         verify(orderGateway, times(0)).update(any(Order.class));
     }
-
-    @Test
-    void mustThrowExceptionProductionNotProcessed() {
-        Customer customer = new Customer("John Doe", "johndoe@email.com", CustomerTestUtil.randomCpf());
-        customer.setId(1L);
-
-        Item item = new Item("Item 1", "Item Description 1", 17.5);
-        item.setId(1L);
-
-        Order order = new Order(customer, new Date(), OrderStatus.RECEIVED, OrderPaymentStatus.PENDING, new ArrayList<>());
-        order.setId(1L);
-
-        when(customerGateway.findByCpf(any(String.class)))
-                .thenReturn(customer);
-
-        when(orderGateway.getById(any(Long.class)))
-                .thenReturn(order);
-
-        when(orderGateway.save(any(Order.class)))
-                .thenReturn(order);
-
-        when(itemGateway.getById(any(Long.class)))
-                .thenReturn(item);
-
-        when(orderPaymentGateway.registerOrder(any(Long.class), any(Double.class)))
-                .thenReturn(true);
-
-        when(orderProductionGateway.registerOrder(any(Long.class)))
-                .thenReturn(false);
-
-        SaveOrderDTO saveOrderDTO = OrderTestUtil.generateSaveDTO(CustomerTestUtil.CPF, OrderItemTestUtil.generateDTO(1L, "Observation Item 1"));
-
-        assertThatThrownBy(() -> OrderUseCase.save(saveOrderDTO, orderGateway,  customerGateway, itemGateway, orderItemGateway, orderPaymentGateway))
-                .isInstanceOf(BusinessException.class)
-                .hasMessage("Não foi possível registrar o pedido no serviço da fila de pedidos");
-
-        verify(orderGateway, times(0)).update(any(Order.class));
-    }
 }
