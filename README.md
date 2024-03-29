@@ -1,8 +1,40 @@
-# fiap-hexagonal-architecture
+# Aplicação para gerir pedidos de um restaurante
 Projeto prático desenvolvido durante a Postech FIAP (Software Architecture).
 
 [Link para o repositório do Github](https://github.com/richardaltmayer/fiap-hexagonal-architecture)
 
+## Arquitetura
+
+![image](./docs/diagrama-de-arquitetura.jpg)
+
+### Microsserviços relacionados
+- Pedidos (atual)
+- [Pagamentos](https://github.com/joasgarcia/fiap-pagamento/)
+- [Produção](https://github.com/joasgarcia/fiap-producao/)
+
+### Padrão SAGA
+
+O projeto roda seguindo o modelo de orquestração do padrão SAGA, onde o sistema de principal (pedidos) assume a responsabilidade pelo fluxo inteiro, assim como pelas compensações em caso de falha.
+
+No caso de um pedido de um restaurante, a ordem correta das operações precisa ser estritamente seguida e cada passo depende de um anterior para que ocorra de forma bem sucedida. Da mesma forma, em caso de falha num passo posterior, é preciso desfazer os passos anteriores.
+
+Assim, o orquestrador age muito melhor que uma coreografia, concentrando as verificações necessárias, mantendo uma visão centralizada do processo e simplificando a adição de eventuais novas etapas no futuro, como um serviço de entrega, por exemplo.
+
+A orquestração funciona da seguinte forma:
+
+1. Um novo pedido é registrado;
+1. Uma nova cobrança é solicitada via mensageria;
+1. O serviço de cobrança recebe a mensagem e processa:
+      1. Caso a cobrança falhe, o fluxo é interrompido e uma mensagem de falha é retornada para a mensageria;
+      1. Em caso de sucesso, o fluxo continua normalmente e uma mensagem de sucesos é postada na mensageria.
+1. O orquestrador verifica a resposta e cancela o pedido ou não;
+1. Caso continue, é registrada uma mensagem na fila de produção para preparar o pedido;
+1. O serviço de produção recebe a mensagem e processa:
+   1. Caso ocorra alguma falha, a produção é interrompida e uma mensagem de falha é postada na mensageria;
+   1. Caso tudo ocorra dentro do esperado, uma mensagem de sucesso é retornada.
+1. O orquestrador verifica a resposta do serviço de produção e decide:
+   1. Caso falhe, é feita uma ação compensatória de estorno, realizada via mensageria e processada pelo serviço de pagamento;
+   1. Em caso de sucesso, o pedido fica pronto para ser retirado pelo cliente.
 
 ## Evento Storming
 https://www.figma.com/file/ad4YsYUo9lsNxWB75KuXWH/Event-Storm---Sistema-para-lanchonete?type=whiteboard&node-id=0%3A1&t=NtciJNRj0z2uN9YQ-1
