@@ -39,6 +39,7 @@ services:
       - /tmp/fiap-restaurant-app/app:/var/html/fiap-restaurant-app
 
   localstack:
+    container_name: localstack
     image: localstack/localstack:latest
     environment:
       - AWS_DEFAULT_REGION=US-EAST-1
