@@ -22,9 +22,31 @@ services:
     container_name: fiap-restaurant-app
     depends_on:
       - database
+      - localstack
     build:
       dockerfile: ./Dockerfile
+    environment:
+      DB_URL: jdbc:mysql://database/techchallenge?useSsl=false
+      DB_USERNAME: root
+      DB_PASSWORD: senha
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      SQS_ENDPOINT: http://localstack:4566
+
     ports:
       - "8080:8080"
     volumes:
       - /tmp/fiap-restaurant-app/app:/var/html/fiap-restaurant-app
+
+  localstack:
+    container_name: localstack
+    image: localstack/localstack:latest
+    environment:
+      - AWS_DEFAULT_REGION=US-EAST-1
+      - EDGE_PORT=4566
+      - SERVICES=sqs
+    ports:
+      - '4566:4566'
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/var/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
