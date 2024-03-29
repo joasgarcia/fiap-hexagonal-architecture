@@ -5,6 +5,8 @@ Projeto prático desenvolvido durante a Postech FIAP (Software Architecture).
 
 ## Arquitetura
 
+[Vídeo explicativo da arquitetura](<./docs/1. Arquitetura de Comunicação entre Serviços.mp4>)
+
 ![image](./docs/diagrama-de-arquitetura.jpg)
 
 ### Microsserviços relacionados
@@ -35,6 +37,8 @@ A orquestração funciona da seguinte forma:
 1. O orquestrador verifica a resposta do serviço de produção e decide:
    1. Caso falhe, é feita uma ação compensatória de estorno, realizada via mensageria e processada pelo serviço de pagamento;
    1. Em caso de sucesso, o pedido fica pronto para ser retirado pelo cliente.
+  
+[Exemplo em vídeo de ação compensatória](<./docs/2. Exemplo de ação compensatória.mp4>)
 
 ## Evento Storming
 https://www.figma.com/file/ad4YsYUo9lsNxWB75KuXWH/Event-Storm---Sistema-para-lanchonete?type=whiteboard&node-id=0%3A1&t=NtciJNRj0z2uN9YQ-1
