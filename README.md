@@ -58,22 +58,32 @@ A lista de endpoints com o payload já configurado basta baixar a [_collection_]
 Primeiro, é necessário subir o banco de dados em MySQL:
 
 ```shell
-kubectl apply -f k8s-mysql.yaml;
+docker compose up database -d
 ```
 
-Em seguida, é possível subir os pods da aplicação Spring Boot:
+Em seguida, é possível subir a aplicação Spring Boot:
 
 ```shell
-kubectl apply -f k8s-app.yaml;
+# A primeira execução deve passar por um processo de build
+docker compose build
+
+# Depois, basta rodar o comando abaixo
+docker compose up app 
 ```
 
-É necessário esperar cerca de 30s até a aplicação fazer o _build_ e rodar. Para acompanhar o progresso, basta executar um `kubectl logs` em algum dos pods e verificar se o log `Started RestaurantApplication...` apareceu.
-
-Para usar a _collection_ com `localhost`, é preciso mapear as requisições na porta 8080.
+Para testes em ambiente local, é recomendado usar o Localstack. Inicialize a ferramenta com:
 
 ```shell
-kubectl port-forward service/app-restaurant-service 8080:8080;
+docker compose up localstack --build
 ```
+
+Então, crie as seguintes filas no SQS, se não houver:
+- `payment-q`;
+- `payment-refund-q`;
+- `production-q`; e
+- `response-q`.
+
+Recomenda-se criar e acompanhar as filas pela própria interface do Localstack [neste link](https://app.localstack.cloud/inst/default/resources).
 
 ## Como rodar os testes da aplicação
 
